@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TimeCoach — Maîtrise ton temps, transforme ta vie</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e17;
+    --ink-light: #2d2b3d;
+    --accent: #4f46e5;
+    --accent-2: #7c3aed;
+    --gold: #f59e0b;
+    --surface: #f8f7ff;
+    --surface-2: #eef0ff;
+    --text: #2d2b3d;
+    --text-muted: #6b6880;
+    --white: #ffffff;
+    --radius: 20px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    background: var(--white);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, #e0e7ff 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, #ede9fe 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface-2);
+    border: 1.5px solid #c7d2fe;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 8px 18px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 8vw, 80px);
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.1s ease both;
+    max-width: 800px;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 48px;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-wrap {
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .countdown-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .countdown {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--surface);
+    border: 1.5px solid #e0e7ff;
+    border-radius: 16px;
+    padding: 16px 24px;
+    min-width: 80px;
+    box-shadow: 0 4px 20px rgba(79,70,229,0.08);
+  }
+
+  .countdown-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .countdown-unit {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* ── FORM ── */
+  .form-wrap {
+    width: 100%;
+    max-width: 480px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    background: var(--surface);
+    border: 2px solid #e0e7ff;
+    border-radius: 100px;
+    padding: 6px 6px 6px 20px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-row:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(79,70,229,0.12);
+  }
+
+  .form-row input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .form-row input::placeholder { color: var(--text-muted); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 100px;
+    padding: 14px 24px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(79,70,229,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(79,70,229,0.4);
+  }
+
+  .form-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  .success-msg {
+    display: none;
+    background: #d1fae5;
+    border: 1.5px solid #6ee7b7;
+    color: #065f46;
+    border-radius: 100px;
+    padding: 14px 24px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  /* ── MOCKUP ── */
+  .mockup-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px 24px 80px;
+    position: relative;
+  }
+
+  .phone-frame {
+    width: 260px;
+    height: 520px;
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    border-radius: 40px;
+    box-shadow: 
+      0 40px 80px rgba(79,70,229,0.25),
+      0 0 0 8px #e0e7ff,
+      0 0 0 10px #c7d2fe;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px 20px;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 16px;
+    width: 80px; height: 20px;
+    background: #312e81;
+    border-radius: 100px;
+  }
+
+  .phone-screen {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .screen-header {
+    text-align: center;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .screen-sub {
+    text-align: center;
+    color: #a5b4fc;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .screen-card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 10px 12px;
+    backdrop-filter: blur(10px);
+  }
+
+  .screen-card-title {
+    color: #e0e7ff;
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .xp-bar-wrap {
+    background: rgba(255,255,255,0.1);
+    border-radius: 100px;
+    height: 6px;
+    overflow: hidden;
+  }
+
+  .xp-bar {
+    height: 100%;
+    width: 65%;
+    background: linear-gradient(90deg, #818cf8, #c084fc);
+    border-radius: 100px;
+  }
+
+  .screen-stats {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-val {
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .stat-lbl {
+    color: #a5b4fc;
+    font-size: 9px;
+  }
+
+  .task-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .task-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .task-text {
+    color: #e0e7ff;
+    font-size: 10px;
+    flex: 1;
+  }
+
+  .task-xp {
+    color: #a5b4fc;
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+  /* ── FEATURES ── */
+  .features {
+    padding: 80px 24px;
+    background: var(--surface);
+  }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.15;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1.5px solid #e0e7ff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(79,70,229,0.12);
+  }
+
+  .feature-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .feature-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── CTA BOTTOM ── */
+  .cta-bottom {
+    padding: 80px 24px;
+    text-align: center;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-bottom::before {
+    content: '⏱';
+    position: absolute;
+    font-size: 300px;
+    opacity: 0.05;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-bottom h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .cta-bottom p {
+    color: #c7d2fe;
+    font-size: 16px;
+    margin-bottom: 40px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-wrap-dark {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .form-row-dark {
+    display: flex;
+    gap: 10px;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 6px 6px 6px 20px;
+    transition: border-color 0.2s;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-row-dark:focus-within {
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .form-row-dark input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: white;
+    outline: none;
+  }
+
+  .form-row-dark input::placeholder { color: rgba(255,255,255,0.5); }
+
+  .btn-white {
+    background: white;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 100px;
+    padding: 14px 24px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 24px;
+    text-align: center;
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+  }
+
+  footer span { color: rgba(255,255,255,0.7); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .form-row, .form-row-dark {
+      flex-direction: column;
+      border-radius: 20px;
+      padding: 12px;
+    }
+    .btn-primary, .btn-white {
+      width: 100%;
+      text-align: center;
+    }
+    .countdown { gap: 10px; }
+    .countdown-item { min-width: 64px; padding: 12px 16px; }
+    .countdown-num { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Lancement le 1er Mai 2026 🎉
+  </div>
+
+  <h1>Maîtrise ton temps,<br><span>transforme ta vie</span></h1>
+
+  <p class="hero-sub">
+    L'app de productivité gamifiée qui te motive chaque jour — 
+    XP, streaks, Coach IA personnel et bien plus.
+  </p>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-wrap">
+    <p class="countdown-label">Lancement dans</p>
+    <div class="countdown">
+      <div class="countdown-item">
+        <span class="countdown-num" id="days">00</span>
+        <span class="countdown-unit">Jours</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-num" id="hours">00</span>
+        <span class="countdown-unit">Heures</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-num" id="minutes">00</span>
+        <span class="countdown-unit">Minutes</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-num" id="seconds">00</span>
+        <span class="countdown-unit">Secondes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap">
+    <div class="form-row" id="formRow1">
+      <input type="email" id="email1" placeholder="Ton adresse email..." />
+      <button class="btn-primary" onclick="subscribe('email1', 'formRow1', 'success1')">
+        Je veux être notifié →
+      </button>
+    </div>
+    <div class="success-msg" id="success1">🎉 Super ! On te prévient dès le lancement !</div>
+    <p class="form-note">🔒 Aucun spam. Juste un email le jour du lancement.</p>
+  </div>
+</section>
+
+<!-- ── MOCKUP ── -->
+<section class="mockup-section">
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+      <div class="screen-header">⏱ TimeCoach</div>
+      <div class="screen-sub">Bonjour ! Prêt à conquérir ta journée ? 🌅</div>
+
+      <div class="screen-card">
+        <div class="screen-card-title">PROGRESSION — Niveau Efficace 🚀</div>
+        <div class="xp-bar-wrap">
+          <div class="xp-bar"></div>
+        </div>
+      </div>
+
+      <div class="screen-card">
+        <div class="screen-stats">
+          <div class="stat-item">
+            <div class="stat-val">520</div>
+            <div class="stat-lbl">XP Total</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">3 🔥</div>
+            <div class="stat-lbl">Streak</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">100%</div>
+            <div class="stat-lbl">Score jour</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-card">
+        <div class="screen-card-title">TÂCHES DU JOUR</div>
+        <div class="task-item">
+          <div class="task-dot" style="background:#6ee7b7"></div>
+          <span class="task-text">✓ Réviser le projet Talib</span>
+          <span class="task-xp">+50 XP</span>
+        </div>
+        <div class="task-item">
+          <div class="task-dot" style="background:#fbbf24"></div>
+          <span class="task-text">Préparer la réunion client</span>
+          <span class="task-xp">+30 XP</span>
+        </div>
+        <div class="task-item" style="border:none">
+          <div class="task-dot" style="background:#818cf8"></div>
+          <span class="task-text">🔁 Paiement loyer</span>
+          <span class="task-xp">+15 XP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="features">
+  <p class="section-label">Fonctionnalités</p>
+  <h2 class="section-title">Tout ce dont tu as besoin<br>pour rester dans la zone</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🎮</span>
+      <div class="feature-title">Productivité gamifiée</div>
+      <p class="feature-desc">Gagne des XP, monte de niveau et débloque des badges en accomplissant tes tâches. La discipline devient addictive.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🤖</span>
+      <div class="feature-title">Coach IA personnel</div>
+      <p class="feature-desc">Un coach propulsé par Claude AI, adapté à ton profil et tes objectifs. Disponible 24h/24 pour te guider.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔥</span>
+      <div class="feature-title">Système de streak</div>
+      <p class="feature-desc">Maintiens ta série de jours actifs et gagne des bonus XP. Plus tu es régulier, plus tu es récompensé.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔁</span>
+      <div class="feature-title">Tâches récurrentes</div>
+      <p class="feature-desc">Programme tes habitudes quotidiennes, hebdomadaires ou mensuelles. Elles se réinitialisent automatiquement.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🍅</span>
+      <div class="feature-title">Timer Pomodoro</div>
+      <p class="feature-desc">Mode focus intégré avec suggestions intelligentes. Travaille en blocs, repose-toi bien, performe mieux.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📊</span>
+      <div class="feature-title">Analyse & progression</div>
+      <p class="feature-desc">Visualise tes performances semaine par semaine. Identifie tes patterns et améliore ta productivité.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BOTTOM ── -->
+<section class="cta-bottom">
+  <h2>Sois parmi les premiers<br>à découvrir TimeCoach</h2>
+  <p>Inscris-toi maintenant et reçois une notification dès le lancement le 1er Mai.</p>
+
+  <div class="form-wrap-dark">
+    <div class="form-row-dark" id="formRow2">
+      <input type="email" id="email2" placeholder="Ton adresse email..." />
+      <button class="btn-white" onclick="subscribe('email2', 'formRow2', 'success2')">
+        Je veux être notifié →
+      </button>
+    </div>
+    <div class="success-msg" id="success2" style="background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);color:white;">
+      🎉 Super ! On te prévient dès le lancement !
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 <span>TimeCoach</span> — Fait avec ❤️ — Lancement <span>1er Mai 2026</span></p>
+</footer>
+
+<script>
+  // ── COUNTDOWN ──
+  function updateCountdown() {
+    const launch = new Date('2026-05-01T00:00:00');
+    const now = new Date();
+    const diff = launch - now;
+
+    if (diff <= 0) {
+      document.querySelector('.countdown-wrap').innerHTML = 
+        '<p style="font-family:Syne,sans-serif;font-size:24px;font-weight:800;color:#4f46e5">🚀 C\'est lancé !</p>';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('days').textContent = String(d).padStart(2, '0');
+    document.getElementById('hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── FORM ──
+  function subscribe(inputId, rowId, successId) {
+    const email = document.getElementById(inputId).value.trim();
+    const row = document.getElementById(rowId);
+    const success = document.getElementById(successId);
+
+    if (!email || !email.includes('@')) {
+      document.getElementById(inputId).style.outline = '2px solid #ef4444';
+      setTimeout(() => document.getElementById(inputId).style.outline = '', 2000);
+      return;
+    }
+
+    // Ouvre mailto avec l'email pré-rempli
+    const subject = encodeURIComponent('Inscription lancement TimeCoach');
+    const body = encodeURIComponent(`Bonjour,\n\nJe souhaite être notifié du lancement de TimeCoach.\n\nMon email : ${email}`);
+    window.location.href = `mailto:contact@timecoach.app?subject=${subject}&body=${body}`;
+
+    row.style.display = 'none';
+    success.style.display = 'block';
+  }
+
+  // ── SCROLL ANIMATIONS ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.6s ease both';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
