@@ -421,7 +421,21 @@
   }
 
   @media (max-width: 480px) {
-    .form-row, .form-row-dark {
+    .form-row {
+      flex-direction: column;
+      background: transparent;
+      border: none;
+      padding: 0;
+      gap: 8px;
+    }
+    .form-row input {
+      background: var(--surface);
+      border: 2px solid #e0e7ff;
+      border-radius: 100px;
+      padding: 14px 20px;
+      width: 100%;
+    }
+    .form-row-dark {
       flex-direction: column;
       border-radius: 20px;
       padding: 12px;
