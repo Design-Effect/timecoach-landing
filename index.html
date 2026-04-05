@@ -259,14 +259,14 @@
   <div class="badge"><span class="badge-dot"></span>Lancement Android — 1er Mai 2026</div>
   <h1>Maîtrise ton temps,<br><em>transforme ta vie</em></h1>
   <p class="hero-sub">Le seul Coach IA qui te connaît vraiment — conseils d'experts reconnus, système XP motivant et profil adapté à ta vie.</p>
-  <div class="countdown">
-    <div class="countdown-item"><div class="countdown-num" id="days">00</div><div class="countdown-label">Jours</div></div>
+  <div class="countdown" id="countdown-wrap">
+    <div class="countdown-item"><div class="countdown-num" id="tc-days">25</div><div class="countdown-label">Jours</div></div>
     <div class="countdown-sep">:</div>
-    <div class="countdown-item"><div class="countdown-num" id="hours">00</div><div class="countdown-label">Heures</div></div>
+    <div class="countdown-item"><div class="countdown-num" id="tc-hours">00</div><div class="countdown-label">Heures</div></div>
     <div class="countdown-sep">:</div>
-    <div class="countdown-item"><div class="countdown-num" id="minutes">00</div><div class="countdown-label">Minutes</div></div>
+    <div class="countdown-item"><div class="countdown-num" id="tc-minutes">00</div><div class="countdown-label">Minutes</div></div>
     <div class="countdown-sep">:</div>
-    <div class="countdown-item"><div class="countdown-num" id="seconds">00</div><div class="countdown-label">Secondes</div></div>
+    <div class="countdown-item"><div class="countdown-num" id="tc-seconds">00</div><div class="countdown-label">Secondes</div></div>
   </div>
   <a href="https://tally.so/r/obdvbV" target="_blank" class="btn-primary">Être notifié au lancement →</a>
   <p class="hero-note">🔒 Aucun spam · <strong>30 jours Premium offerts</strong> à l'inscription</p>
@@ -548,16 +548,16 @@
     var now = new Date();
     var diff = launch.getTime() - now.getTime();
     if (diff <= 0) {
-      document.getElementById('days').textContent = '00';
-      document.getElementById('hours').textContent = '00';
-      document.getElementById('minutes').textContent = '00';
-      document.getElementById('seconds').textContent = '00';
+      document.getElementById('tc-days').textContent = '00';
+      document.getElementById('tc-hours').textContent = '00';
+      document.getElementById('tc-minutes').textContent = '00';
+      document.getElementById('tc-seconds').textContent = '00';
       return;
     }
-    document.getElementById('days').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
-    document.getElementById('hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
-    document.getElementById('minutes').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-    document.getElementById('seconds').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    document.getElementById('tc-days').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+    document.getElementById('tc-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('tc-minutes').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    document.getElementById('tc-seconds').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
