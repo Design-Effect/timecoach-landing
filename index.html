@@ -269,36 +269,12 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-dots"></div>
-  <div class="badge"><span class="dot"></span>Lancement Android — 1er Mai 2026</div>
+  <div class="badge"><span class="dot"></span>Bientôt disponible — Android &amp; iOS</div>
   <h1>Maîtrise ton temps,<br><em>transforme ta vie</em></h1>
   <p class="hero-sub">Le seul Coach IA qui te connaît vraiment — conseils d'experts reconnus, système XP motivant et profil adapté à ta vie.</p>
 
-  <div class="countdown">
-    <div class="cd-item"><div class="cd-num" id="tc-d">25</div><div class="cd-label">Jours</div></div>
-    <div class="cd-sep">:</div>
-    <div class="cd-item"><div class="cd-num" id="tc-h">00</div><div class="cd-label">Heures</div></div>
-    <div class="cd-sep">:</div>
-    <div class="cd-item"><div class="cd-num" id="tc-m">00</div><div class="cd-label">Minutes</div></div>
-    <div class="cd-sep">:</div>
-    <div class="cd-item"><div class="cd-num" id="tc-s">00</div><div class="cd-label">Secondes</div></div>
-  </div>
-
-  <script>
-    (function(){
-      function tick(){
-        var t=new Date(2026,4,1)-new Date();
-        if(t<0)t=0;
-        document.getElementById('tc-d').textContent=String(Math.floor(t/864e5)).padStart(2,'0');
-        document.getElementById('tc-h').textContent=String(Math.floor(t%864e5/36e5)).padStart(2,'0');
-        document.getElementById('tc-m').textContent=String(Math.floor(t%36e5/6e4)).padStart(2,'0');
-        document.getElementById('tc-s').textContent=String(Math.floor(t%6e4/1e3)).padStart(2,'0');
-      }
-      tick(); setInterval(tick,1000);
-    })();
-  </script>
-
   <a href="https://tally.so/r/obdvbV" target="_blank" class="btn-primary">Être notifié au lancement →</a>
-  <p class="hero-note">🔒 Aucun spam · <strong>30 jours Premium offerts</strong> à l'inscription</p>
+  <p class="hero-note">🔒 Aucun spam · <strong>30 jours Premium offerts</strong> à l'installation</p>
 </section>
 
 <!-- STATS -->
@@ -454,6 +430,13 @@
     <span class="tag">Tarifs</span>
     <h2>Simple,<br><em>transparent</em></h2>
     <p class="section-sub">Commence gratuitement. 30 jours Premium offerts sans carte bancaire.</p>
+
+    <!-- TOGGLE MENSUEL / ANNUEL -->
+    <div style="display:inline-flex;background:#e0e7ff;border-radius:50px;padding:4px;margin:32px 0;gap:4px;">
+      <button id="btn-m" onclick="switchP('mensuel')" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:10px 24px;border-radius:50px;border:none;cursor:pointer;background:var(--purple);color:white;transition:all 0.2s;">Mensuel</button>
+      <button id="btn-a" onclick="switchP('annuel')" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:10px 24px;border-radius:50px;border:none;cursor:pointer;background:transparent;color:var(--purple);transition:all 0.2s;">Annuel &nbsp;<span style="background:var(--green);color:white;font-size:11px;padding:2px 8px;border-radius:20px;">-15%</span></button>
+    </div>
+
     <div class="pricing-grid fade-up">
       <div class="price-card">
         <div class="price-name">Gratuit</div>
@@ -471,7 +454,8 @@
       <div class="price-card pop">
         <div class="pop-badge">⭐ Le plus populaire</div>
         <div class="price-name">Premium</div>
-        <div class="price-amount">5,99€ <span>/mois</span></div>
+        <div id="prix-p" class="price-amount">5,99€ <span>/mois</span></div>
+        <div id="annuel-p" style="display:none;font-size:13px;color:var(--green);font-weight:700;margin-bottom:8px;">soit 40,79€/an · <span style="text-decoration:line-through;color:var(--gray);">47,99€</span></div>
         <div class="price-desc">L'expérience complète</div>
         <ul class="price-features">
           <li><span class="ok">✓</span> Tâches illimitées</li>
@@ -484,7 +468,8 @@
       </div>
       <div class="price-card">
         <div class="price-name">Clé Personnelle</div>
-        <div class="price-amount">2,39€ <span>/mois</span></div>
+        <div id="prix-c" class="price-amount">2,39€ <span>/mois</span></div>
+        <div id="annuel-c" style="display:none;font-size:13px;color:var(--green);font-weight:700;margin-bottom:8px;">soit 15,29€/an · <span style="text-decoration:line-through;color:var(--gray);">17,99€</span></div>
         <div class="price-desc">Ta propre clé API Anthropic</div>
         <ul class="price-features">
           <li><span class="ok">✓</span> Tout du Premium</li>
@@ -498,11 +483,32 @@
   </section>
 </div>
 
+<script>
+  function switchP(p) {
+    var bm=document.getElementById('btn-m'), ba=document.getElementById('btn-a');
+    var pp=document.getElementById('prix-p'), pc=document.getElementById('prix-c');
+    var ap=document.getElementById('annuel-p'), ac=document.getElementById('annuel-c');
+    if(p==='annuel'){
+      ba.style.background='var(--purple)'; ba.style.color='white';
+      bm.style.background='transparent'; bm.style.color='var(--purple)';
+      pp.innerHTML='3,40€ <span>/mois</span>';
+      pc.innerHTML='1,27€ <span>/mois</span>';
+      ap.style.display='block'; ac.style.display='block';
+    } else {
+      bm.style.background='var(--purple)'; bm.style.color='white';
+      ba.style.background='transparent'; ba.style.color='var(--purple)';
+      pp.innerHTML='5,99€ <span>/mois</span>';
+      pc.innerHTML='2,39€ <span>/mois</span>';
+      ap.style.display='none'; ac.style.display='none';
+    }
+  }
+</script>
+
 <!-- CTA FINAL -->
 <section class="cta-section">
   <div class="cta-bg"></div>
   <h2>Prêt à maîtriser<br>ton temps ?</h2>
-  <p>Lancement le 1er Mai 2026 sur Android. 30 jours Premium offerts.</p>
+  <p>Bientôt disponible sur Android &amp; iOS. 30 jours Premium offerts.</p>
   <a href="https://tally.so/r/obdvbV" target="_blank" class="btn-primary" style="font-size:18px;padding:20px 52px;position:relative;">Je veux être notifié →</a>
   <p style="margin-top:18px;font-size:13px;color:#64748b;position:relative;">🎁 <strong style="color:#94a3b8">30 jours Premium offerts</strong> pour les premiers inscrits</p>
 </section>
@@ -512,13 +518,13 @@
   <div class="footer-logo">⏱ Time<span>Coach</span></div>
   <div class="footer-links">
     <a href="privacy-policy.html">Confidentialité</a>
-    <a href="mailto:Contact@designeffect3d.com">Contact</a>
+    <a href="/cdn-cgi/l/email-protection#40032f2e342123340024253329272e25262625233473246e232f2d">Contact</a>
     <a href="https://tally.so/r/obdvbV" target="_blank">S'inscrire</a>
   </div>
   <p class="footer-copy">© 2026 Design Effect · Belgique</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   var screens = [
     'https://design-effect.github.io/timecoach-landing/screen-entrepreneur.png',
     'https://design-effect.github.io/timecoach-landing/screen-coach.png',
@@ -542,10 +548,4 @@
     });
   });
   var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
-  },{threshold:0.1});
-  document.querySelectorAll('.fade-up').forEach(function(el){ obs.observe(el); });
-</script>
-
-</body>
-</html>
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.class
