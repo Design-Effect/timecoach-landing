@@ -144,7 +144,7 @@
 <header>
   <h1>⏱ TimeCoach</h1>
   <p>Politique de Confidentialité</p>
-  <div class="date">Dernière mise à jour : Avril 2026</div>
+  <div class="date">Dernière mise à jour : 19 avril 2026</div>
 </header>
 
 <div class="container">
@@ -171,7 +171,7 @@
       <li>Votre clé API personnelle (chiffrée via expo-secure-store)</li>
     </ul>
     <div class="highlight">
-      <p>✅ Toutes ces données sont stockées exclusivement sur votre appareil. Elles ne sont jamais transmises à nos serveurs sans votre accord.</p>
+      <p>✅ Toutes ces données sont stockées localement sur votre appareil. Une copie de sauvegarde peut également être créée automatiquement par Google sur votre compte Google personnel via le service <strong>Android Auto Backup</strong> (voir section 3). Aucune donnée n'est transmise à nos serveurs sans votre accord.</p>
     </div>
     <p><strong>Données transmises à des services tiers :</strong></p>
     <ul>
@@ -203,14 +203,20 @@
     <p>Gestion des achats et abonnements. Nous n'avons pas accès à vos informations de paiement. Consultez <a href="https://revenuecat.com" target="_blank">revenuecat.com</a>.</p>
     <p><strong>Google Play</strong></p>
     <p>Les transactions financières sont gérées par Google Play selon leurs conditions d'utilisation.</p>
+    <p><strong>Android Auto Backup (Google)</strong></p>
+    <p>TimeCoach utilise le service natif <strong>Android Auto Backup</strong> de Google pour sauvegarder automatiquement votre progression (XP, tâches, objectifs, badges, paramètres) sur votre compte Google personnel via Google Drive. Cela vous permet de retrouver vos données après une réinstallation de l'app ou un changement de téléphone. Cette sauvegarde est <strong>chiffrée par Google</strong>, stockée dans votre espace personnel Google Drive (sans compter dans votre quota), et nous n'y avons aucun accès. Vous pouvez désactiver cette sauvegarde à tout moment depuis les paramètres Android : <em>Système → Sauvegarde</em>. Pour plus d'informations : <a href="https://support.google.com/android/answer/2819582" target="_blank">support Google</a>.</p>
+    <p><em>Note : votre clé API personnelle (si renseignée) n'est pas incluse dans cette sauvegarde, car elle est protégée par le coffre-fort matériel Android (Keystore) lié à votre appareil.</em></p>
+    <p><strong>Sentry</strong></p>
+    <p>TimeCoach utilise <strong>Sentry</strong> pour détecter automatiquement les erreurs techniques et les plantages de l'application, afin de les corriger rapidement. Sentry peut collecter : type d'erreur survenue, version de l'app, modèle d'appareil et version Android, traces techniques anonymisées. <strong>Aucune donnée personnelle identifiable</strong> (prénom, contenu de tâches, objectifs, messages au Coach) n'est transmise à Sentry. Ces données techniques sont conservées maximum 90 jours et utilisées uniquement pour améliorer la stabilité de l'app. Pour plus d'informations : <a href="https://sentry.io/privacy/" target="_blank">politique Sentry</a>.</p>
   </div>
 
   <div class="card">
     <h2>4. Sécurité des données</h2>
     <p>Nous prenons la sécurité de vos données très au sérieux :</p>
     <ul>
-      <li>Les données sensibles (clé API) sont chiffrées via expo-secure-store</li>
+      <li>Les données sensibles (clé API personnelle) sont chiffrées via expo-secure-store et le coffre-fort matériel Android (Keystore)</li>
       <li>Les communications avec nos serveurs utilisent le protocole HTTPS</li>
+      <li>La sauvegarde Auto Backup vers Google Drive est chiffrée par Google de bout en bout</li>
       <li>Aucune donnée sensible n'est stockée en clair</li>
     </ul>
   </div>
@@ -221,7 +227,7 @@
     <ul>
       <li>Droit d'accès à vos données personnelles</li>
       <li>Droit de rectification de vos données</li>
-      <li>Droit à l'effacement — supprimez toutes vos données depuis les paramètres de l'app</li>
+      <li>Droit à l'effacement — supprimez toutes vos données depuis les paramètres de l'app. Pour supprimer également la sauvegarde cloud, désactivez Auto Backup dans Paramètres Android → Système → Sauvegarde, puis supprimez les données depuis votre compte Google Drive.</li>
       <li>Droit à la portabilité de vos données</li>
       <li>Droit d'opposition au traitement de vos données</li>
     </ul>
@@ -267,7 +273,7 @@
 </div>
 
 <footer>
-  TimeCoach — Politique de Confidentialité — Avril 2026 — Design Effect
+  TimeCoach — Politique de Confidentialité — 19 avril 2026 — Design Effect
 </footer>
 
 </body>
