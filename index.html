@@ -19,6 +19,8 @@
     --indigo: #4f46e5;
     --indigo-soft: #6366f1;
     --gold: #f59e0b;
+    --cta: #4f46e5;
+    --cta-deep: #4338ca;
     --green: #10b981;
     --red: #ef4444;
     --text: #1a1a24;
@@ -28,6 +30,15 @@
   }
 
   html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 
   body {
     font-family: 'Inter', sans-serif;
@@ -168,8 +179,8 @@
   }
 
   .btn-primary {
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--cta);
+    color: #fff;
     font-size: 15px;
     font-weight: 600;
     padding: 16px 28px;
@@ -184,9 +195,9 @@
     box-shadow: 0 4px 16px rgba(10, 10, 15, 0.15);
   }
   .btn-primary:hover {
-    background: var(--indigo);
+    background: var(--cta-deep);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.35);
   }
   .btn-primary svg {
     width: 18px;
@@ -211,6 +222,32 @@
     background: var(--ink);
     color: var(--paper);
     border-color: var(--ink);
+  }
+
+  /* Switch de profil (callout) */
+  .profils-switch {
+    margin: 32px auto 0;
+    max-width: 640px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--paper-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+  }
+  .profils-switch-icon { font-size: 26px; flex-shrink: 0; }
+  .profils-switch p { font-size: 15px; color: var(--text); line-height: 1.5; }
+  .badge-premium {
+    display: inline-block;
+    background: var(--indigo);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 100px;
+    margin-left: 4px;
+    vertical-align: middle;
   }
 
   .hero-trust {
@@ -334,17 +371,6 @@
     padding: 120px 0;
     position: relative;
     overflow: hidden;
-  }
-  .problem::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -200px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
-    transform: translateY(-50%);
-    pointer-events: none;
   }
   .problem .section-eyebrow { color: rgba(250, 250, 247, 0.5); }
   .problem .section-title em { color: var(--gold); }
@@ -703,8 +729,25 @@
     height: auto;
     border-radius: 16px;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-    /* Filtre pour atténuer la luminosité de la capture */
     filter: brightness(0.82) contrast(1.05);
+    display: block;
+  }
+  /* Visuals 01/02 — captures plein cadre (taille réduite, non rognées) */
+  .visual-shot {
+    background: var(--paper-2);
+    border-radius: 28px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .visual-shot-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    filter: brightness(0.92) contrast(1.03);
     display: block;
   }
 
@@ -955,16 +998,6 @@
     position: relative;
     overflow: hidden;
   }
-  .comparison::before {
-    content: '';
-    position: absolute;
-    bottom: -200px;
-    left: -200px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(79, 70, 229, 0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
   .comparison .section-eyebrow { color: rgba(250, 250, 247, 0.5); }
   .comparison .section-title { margin: 0 auto 60px; text-align: center; }
   .comparison .section-title em { color: var(--gold); }
@@ -1205,17 +1238,6 @@
     position: relative;
     overflow: hidden;
   }
-  .final-cta::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1000px;
-    height: 1000px;
-    background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 60%);
-    pointer-events: none;
-  }
   .final-cta-title {
     font-family: 'Fraunces', serif;
     font-size: clamp(40px, 5vw, 64px);
@@ -1312,7 +1334,7 @@
       <img src="timecoachicon512.png" alt="TimeCoach" class="logo-img">
       TimeCoach
     </a>
-    <a href="#waitlist" class="nav-cta">Rejoindre la waitlist →</a>
+    <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="nav-cta">Télécharger →</a>
   </div>
 </nav>
 
@@ -1330,8 +1352,8 @@
           Coach IA personnel, rappels précis qui ne ratent jamais sur Xiaomi/Samsung, et gamification basée sur tes vraies tâches. Pour celles et ceux qui en ont marre des to-do listes oubliées.
         </p>
         <div class="hero-ctas">
-          <a href="#waitlist" class="btn-primary">
-            Rejoindre la waitlist
+          <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="btn-primary">
+            Télécharger sur Google Play
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#solution" class="btn-secondary">Voir comment ça marche</a>
@@ -1415,27 +1437,8 @@
           </ul>
         </div>
         <div class="solution-visual">
-          <div class="visual-1">
-            <div class="v1-header">
-              <div class="v1-date">DIM 26 AVRIL</div>
-              <div class="v1-level-pill">⚡ Niv. 2 · Organisé</div>
-            </div>
-            <div class="v1-app-name">TimeCoach</div>
-            <div class="v1-profile">Entrepreneur 🚀</div>
-
-            <div class="v1-success-bar">
-              <div class="v1-check-circle">✓</div>
-              <span>Notification reçue à 14:00 — bien à l'heure</span>
-            </div>
-
-            <div class="v1-notif">
-              <div class="v1-notif-icon">⏰</div>
-              <div class="v1-notif-content">
-                <div class="v1-notif-app">TimeCoach</div>
-                <div class="v1-notif-text">C'est l'heure de "Réunion marketing importante"</div>
-              </div>
-              <div class="v1-notif-time">14:00</div>
-            </div>
+          <div class="visual-shot">
+            <img src="hero-phone.jpg" alt="Notification TimeCoach qui arrive à l'heure sur l'écran verrouillé" class="visual-shot-img">
           </div>
         </div>
       </div>
@@ -1456,26 +1459,8 @@
           </ul>
         </div>
         <div class="solution-visual">
-          <div class="visual-2">
-            <div class="visual-2-label">— Notifs proactives</div>
-            <div class="coach-notif">
-              <div class="coach-notif-icon">💪</div>
-              <div class="coach-notif-content">
-                <div class="coach-notif-app">Ton Coach TimeCoach</div>
-                <div class="coach-notif-text">Hey AbduLlah, 7 jours d'affilée 🔥 Continue, t'es lancé.</div>
-              </div>
-            </div>
-            <div class="coach-notif">
-              <div class="coach-notif-icon" style="background: linear-gradient(135deg, #f59e0b, #ea580c);">⚡</div>
-              <div class="coach-notif-content">
-                <div class="coach-notif-app">Ton Coach TimeCoach</div>
-                <div class="coach-notif-text">Pas grave si tu as raté hier. Une seule tâche aujourd'hui suffit.</div>
-              </div>
-            </div>
-            <div class="visual-2-divider"></div>
-            <div class="visual-2-label">— Chat direct (Premium)</div>
-            <div class="chat-bubble bubble-user">Comment je peux mieux gérer mon temps ?</div>
-            <div class="chat-bubble bubble-coach">Commence par identifier tes 3 tâches prioritaires chaque matin. C'est la base.</div>
+          <div class="visual-shot">
+            <img src="screen-coach.png" alt="Coach IA TimeCoach — notifications proactives et chat" class="visual-shot-img">
           </div>
         </div>
       </div>
@@ -1529,7 +1514,7 @@
         <div class="profil-experts">P. Drucker, S. Sinek</div>
       </div>
       <div class="profil-card">
-        <span class="profil-emoji">👨‍👩‍👧</span>
+        <span class="profil-emoji">👪</span>
         <div class="profil-name">Parent</div>
         <div class="profil-experts">Brené Brown, J. Joubert</div>
       </div>
@@ -1553,6 +1538,11 @@
         <div class="profil-name">Investisseur</div>
         <div class="profil-experts">W. Buffett, Ray Dalio</div>
       </div>
+    </div>
+
+    <div class="profils-switch">
+      <span class="profils-switch-icon">🔄</span>
+      <p><strong>Étudiant, parent, entrepreneur… selon le moment.</strong> Change de profil en un tap, l'app suit. <span class="badge-premium">Premium</span></p>
     </div>
   </div>
 </section>
@@ -1612,10 +1602,10 @@
 <section class="waitlist" id="waitlist">
   <div class="container">
     <div class="waitlist-inner">
-      <p class="section-eyebrow">Waitlist</p>
-      <h2 class="waitlist-title">Sois prévenu en <em>avant-première</em> du lancement.</h2>
+      <p class="section-eyebrow">Version iPhone</p>
+      <h2 class="waitlist-title">L'app iPhone arrive <em>bientôt</em>.</h2>
       <p class="waitlist-sub">
-        Inscris-toi à la waitlist. Tu seras parmi les premiers à recevoir l'app et profiter du prix de lancement.
+        TimeCoach est déjà disponible sur Android. La version iOS suit bientôt — inscris-toi pour être prévenu·e dès sa sortie et profiter du prix de lancement.
       </p>
       <div class="waitlist-form-wrap">
         <iframe
@@ -1786,7 +1776,7 @@
           <li>2 conseils d'experts par jour</li>
           <li>Système de XP, niveaux et streaks</li>
         </ul>
-        <a href="#waitlist" class="price-cta">Rejoindre la waitlist</a>
+        <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="price-cta">Télécharger gratuitement</a>
       </div>
 
       <!-- Premium -->
@@ -1806,7 +1796,7 @@
           <li>XP doublé (×2)</li>
           <li>Tous les conseils d'experts</li>
         </ul>
-        <a href="#waitlist" class="price-cta">Être prévenu au lancement</a>
+        <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="price-cta">Commencer l'essai 14 jours</a>
       </div>
     </div>
 
@@ -1863,7 +1853,7 @@
       <details class="faq-item">
         <summary class="faq-question">L'app est disponible sur iPhone ?</summary>
         <p class="faq-answer">
-          Pas encore. La version Android arrive en premier. La version iOS suivra quelques mois plus tard, une fois Android stabilisée. Inscris-toi à la waitlist pour être prévenu dès qu'elle sort.
+          Pas encore. La version Android est déjà disponible, l'iOS suivra prochainement. Inscris-toi à la waitlist iPhone pour être prévenu dès qu'elle sort.
         </p>
       </details>
 
@@ -1882,8 +1872,8 @@
   <div class="container">
     <h2 class="final-cta-title">Prêt à enfin <em>tenir</em> tes objectifs ?</h2>
     <p class="final-cta-sub">14 jours Premium offerts. Sans engagement. Annulable en 1 clic.</p>
-    <a href="#waitlist" class="btn-primary">
-      Rejoindre la waitlist
+    <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="btn-primary">
+      Télécharger sur Google Play
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
