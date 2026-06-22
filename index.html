@@ -1002,6 +1002,14 @@
   .comparison .section-title { margin: 0 auto 60px; text-align: center; }
   .comparison .section-title em { color: var(--gold); }
 
+  .compare-hint {
+    display: none;
+    text-align: center;
+    color: var(--gold);
+    font-size: 13.5px;
+    font-weight: 600;
+    margin: -40px auto 24px;
+  }
   .compare-table-wrap {
     overflow-x: auto;
     background: rgba(255, 255, 255, 0.03);
@@ -1010,6 +1018,19 @@
     padding: 12px;
     max-width: 980px;
     margin: 0 auto;
+    position: relative;
+  }
+  .compare-table-wrap::after {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(to right, rgba(26,26,36,0), rgba(26,26,36,0.55));
+    border-radius: 0 24px 24px 0;
   }
   table.compare {
     width: 100%;
@@ -1323,6 +1344,10 @@
     .profils-grid { grid-template-columns: repeat(2, 1fr); max-width: 320px; gap: 10px; }
     table.compare { font-size: 12.5px; }
     table.compare tbody td { padding: 10px 8px; }
+  }
+  @media (max-width: 700px) {
+    .compare-hint { display: block; }
+    .compare-table-wrap::after { display: block; }
   }
 </style>
 </head>
@@ -1672,6 +1697,8 @@
   <div class="container">
     <p class="section-eyebrow" style="text-align: center;">vs concurrence</p>
     <h2 class="section-title">Les apps que tu connais. <em>Et ce qu'elles n'ont pas.</em></h2>
+
+    <p class="compare-hint">👉 Glisse le tableau vers la droite pour comparer</p>
 
     <div class="compare-table-wrap">
       <table class="compare">
