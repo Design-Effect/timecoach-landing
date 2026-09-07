@@ -165,7 +165,7 @@
 <header>
   <h1><img src="timecoachicon512.png" alt="Icône TimeCoach"> TimeCoach</h1>
   <p>Politique de Confidentialité</p>
-  <div class="date">Dernière mise à jour : 2 juillet 2026</div>
+  <div class="date">Dernière mise à jour : 7 septembre 2026</div>
   <a class="lang-link" href="privacy-policy-en.html">🇬🇧 English version</a>
 </header>
 
@@ -189,14 +189,14 @@
       <li>Votre profil utilisateur (étudiant, professionnel, parent, entrepreneur, créatif)</li>
       <li>Vos tâches, objectifs et tâches récurrentes</li>
       <li>Votre progression XP, streak, niveaux et badges débloqués</li>
-      <li>Vos préférences de notifications, mode du Coach IA et paramètres d'affichage</li>
+      <li>Vos préférences de notifications et paramètres d'affichage</li>
     </ul>
     <div class="highlight">
       <p>✅ Toutes ces données sont stockées localement sur votre appareil. Une copie de sauvegarde peut également être créée automatiquement par le service de sauvegarde de votre appareil : <strong>Android Auto Backup</strong> (Google) sur Android, ou la <strong>sauvegarde iCloud</strong> (Apple) sur iOS (voir section 3). Aucune donnée n'est transmise à nos serveurs sans votre accord.</p>
     </div>
     <p><strong>Données transmises à des services tiers :</strong></p>
     <ul>
-      <li>Vos messages au Coach IA sont envoyés à Anthropic (via Supabase) pour générer des réponses. Ces messages ne sont pas conservés après traitement.</li>
+      <li>Si vous activez le Connecteur Claude (fonctionnalité Premium), le contenu des tâches que vous lui demandez de créer, reporter, cocher, modifier ou supprimer transite par notre serveur (Supabase) le temps que l'application les récupère (voir section 3).</li>
       <li>Les achats Premium sont gérés par Google Play ou l'App Store d'Apple (selon votre appareil) et RevenueCat (voir section 3).</li>
       <li>Les erreurs techniques anonymisées peuvent être transmises à Sentry (voir section 3).</li>
     </ul>
@@ -207,7 +207,7 @@
     <p>Vos données sont utilisées uniquement pour :</p>
     <ul>
       <li>Faire fonctionner l'application et personnaliser votre expérience</li>
-      <li>Générer les réponses du Coach IA selon vos messages</li>
+      <li>Faire transiter les ordres du Connecteur Claude (créer, reporter, cocher, modifier ou supprimer une tâche) jusqu'à leur récupération par l'application, si vous l'avez activé</li>
       <li>Envoyer des notifications locales si vous les avez activées</li>
       <li>Gérer vos achats et abonnements Premium</li>
       <li>Améliorer la stabilité de l'application via la détection d'erreurs anonymisées</li>
@@ -220,11 +220,11 @@
   <div class="card">
     <h2>3. Services tiers utilisés</h2>
 
-    <p><strong>Anthropic (Claude IA)</strong></p>
-    <p>Le Coach IA utilise l'API Claude d'Anthropic. Vos messages sont transmis pour génération de réponse mais ne sont pas conservés. Consultez leur politique sur <a href="https://anthropic.com" target="_blank">anthropic.com</a>.</p>
+    <p><strong>Connecteur Claude (fonctionnalité Premium)</strong></p>
+    <p>Si vous l'activez depuis les paramètres de l'application, le Connecteur Claude vous permet de piloter vos tâches TimeCoach depuis votre propre assistant Claude (Claude Desktop, Claude Code, ou tout client compatible MCP) : créer, reporter, cocher, modifier ou supprimer une tâche. Ces ordres transitent par notre serveur (Supabase) en attendant que l'application les récupère à sa prochaine ouverture, puis sont supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés). Sont conservés le temps de ce transit : le contenu de l'ordre (titre de la tâche, date, heure, priorité), un historique de son traitement (déposé, reçu, fait, reporté, supprimé) et l'identifiant technique de votre appareil, jamais votre nom ni votre compte. L'accès au connecteur repose sur un jeton personnel que vous générez et pouvez révoquer à tout moment depuis les paramètres de l'app ; ce jeton n'est jamais stocké en clair sur notre serveur, seule son empreinte l'est.</p>
 
     <p><strong>Supabase</strong></p>
-    <p>Serveur intermédiaire qui sécurise les appels à l'API Claude (Edge Functions). Aucune donnée personnelle identifiable n'est conservée sur ce serveur.</p>
+    <p>Hébergeur des Edge Functions et de la base de données qui font fonctionner le Connecteur Claude, la vérification des achats Premium et la remontée d'erreurs techniques. Les données décrites dans cette politique sont celles effectivement conservées sur ce serveur.</p>
 
     <p><strong>RevenueCat</strong></p>
     <p>Gestion des achats et abonnements Premium. Nous n'avons pas accès à vos informations de paiement. Consultez <a href="https://revenuecat.com" target="_blank">revenuecat.com</a>.</p>
@@ -250,7 +250,7 @@
     <p>Nous prenons la sécurité de vos données très au sérieux :</p>
     <ul>
       <li>Toutes les communications avec nos serveurs utilisent le protocole HTTPS</li>
-      <li>Les appels à l'API Claude sont sécurisés via Supabase Edge Functions (pas de clé API exposée côté application)</li>
+      <li>L'accès au Connecteur Claude repose sur un jeton personnel haché (jamais stocké en clair) et révocable à tout moment depuis les paramètres</li>
       <li>Les sauvegardes automatiques sont chiffrées par leur fournisseur : Google (Auto Backup vers Google Drive) ou Apple (sauvegarde iCloud)</li>
       <li>Aucune donnée sensible n'est stockée en clair</li>
     </ul>
@@ -263,6 +263,7 @@
       <li>Droit d'accès à vos données personnelles</li>
       <li>Droit de rectification de vos données</li>
       <li>Droit à l'effacement — supprimez toutes vos données en désinstallant l'app. Pour supprimer également la sauvegarde cloud : sur Android, désactivez Auto Backup dans <em>Paramètres → Système → Sauvegarde</em> puis supprimez les données depuis votre compte Google Drive ; sur iOS, gérez vos sauvegardes depuis <em>Réglages → [votre nom] → iCloud</em>.</li>
+      <li>Données du Connecteur Claude — désactivez-le et révoquez votre jeton à tout moment depuis les paramètres de l'app ; les ordres en transit sur notre serveur sont de toute façon supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés)</li>
       <li>Droit à la portabilité de vos données — utilisez la fonction de sauvegarde manuelle (export JSON) depuis les paramètres de l'app</li>
       <li>Droit d'opposition au traitement de vos données</li>
     </ul>
@@ -308,7 +309,7 @@
 </div>
 
 <footer>
-  TimeCoach — Politique de Confidentialité — 2 mai 2026 — Design Effect
+  TimeCoach — Politique de Confidentialité — 7 septembre 2026 — Design Effect
 </footer>
 
 </body>
