@@ -165,7 +165,7 @@
 <header>
   <h1><img src="timecoachicon512.png" alt="TimeCoach icon"> TimeCoach</h1>
   <p>Privacy Policy</p>
-  <div class="date">Last updated: September 7, 2026</div>
+  <div class="date">Last updated: September 8, 2026</div>
   <a class="lang-link" href="privacy-policy.html">🇫🇷 Version française</a>
 </header>
 
@@ -221,7 +221,7 @@
     <h2>3. Third-party services we use</h2>
 
     <p><strong>Claude Connector (Premium feature)</strong></p>
-    <p>If you enable it from the app's settings, the Claude Connector lets you manage your TimeCoach tasks from your own Claude assistant (Claude Desktop, Claude Code, or any MCP-compatible client): create, postpone, check off, edit or delete a task. These orders pass through our server (Supabase) while waiting for the app to fetch them the next time it opens, and are then automatically deleted no later than 90 days after being fetched (30 days if never fetched). What is kept for that time: the content of the order (task title, date, time, priority), a history of how it was handled (deposited, received, done, postponed, deleted), and your device's technical identifier, never your name or account. Access to the connector relies on a personal token that you generate and can revoke at any time from the app's settings; that token is never stored in plain text on our server, only its cryptographic fingerprint is.</p>
+    <p>If you enable it from the Claude tab in the app, the Claude Connector lets you manage your TimeCoach tasks from your own Claude assistant (Claude Desktop, Claude Code, or any MCP-compatible client): create, postpone, check off, edit or delete a task. These orders pass through our server (Supabase) while waiting for the app to fetch them the next time it opens, and are then automatically deleted no later than 90 days after being fetched (30 days if never fetched). What is kept for that time: the content of the order (task title, date, time, priority), a history of how it was handled (deposited, received, done, postponed, deleted), and your device's technical identifier, never your name or account. Access to the connector relies on a personal token that you generate and can revoke at any time from the Claude tab in the app; that token is never stored in plain text on our server, only its cryptographic fingerprint is. You choose exactly what Claude is allowed to do, capability by capability (create, check off, postpone, edit, delete), and you can change those permissions at any time from that same tab: a capability you turn off is refused by our server. The token automatically expires 90 days after it is created, unless you extend it from the app, and an expired token no longer grants any access.</p>
 
     <p><strong>Supabase</strong></p>
     <p>Hosts the Edge Functions and database that run the Claude Connector, Premium purchase verification, and error reporting. The data described in this policy is what is actually retained on this server.</p>
@@ -250,7 +250,7 @@
     <p>We take the security of your data very seriously:</p>
     <ul>
       <li>All communications with our servers use the HTTPS protocol</li>
-      <li>Access to the Claude Connector relies on a hashed personal token (never stored in plain text) that you can revoke at any time from the settings</li>
+      <li>Access to the Claude Connector relies on a hashed personal token (never stored in plain text) that you can revoke at any time from the Claude tab in the app, limited to the capabilities you have allowed and automatically expiring after 90 days</li>
       <li>Automatic backups are encrypted by their provider: Google (Auto Backup to Google Drive) or Apple (iCloud Backup)</li>
       <li>No sensitive data is stored in plain text</li>
     </ul>
@@ -263,7 +263,7 @@
       <li>Right of access to your personal data</li>
       <li>Right to rectification of your data</li>
       <li>Right to erasure — delete all your data by uninstalling the app. To also delete the cloud backup: on Android, disable Auto Backup in <em>Settings → System → Backup</em> then delete the data from your Google Drive account; on iOS, manage your backups from <em>Settings → [your name] → iCloud</em>.</li>
-      <li>Claude Connector data — disable it and revoke your token at any time from the app's settings; orders in transit on our server are in any case automatically deleted no later than 90 days after being fetched (30 days if never fetched)</li>
+      <li>Claude Connector data — disable it and revoke your token at any time from the Claude tab in the app; orders in transit on our server are in any case automatically deleted no later than 90 days after being fetched (30 days if never fetched)</li>
       <li>Right to data portability — use the manual backup feature (JSON export) from the app's settings</li>
       <li>Right to object to the processing of your data</li>
     </ul>
