@@ -197,6 +197,7 @@
     <p><strong>Données transmises à des services tiers :</strong></p>
     <ul>
       <li>Si vous activez le Connecteur Claude (fonctionnalité Premium), le contenu des tâches que vous lui demandez de créer, reporter, cocher, modifier ou supprimer transite par notre serveur (Supabase) le temps que l'application les récupère (voir section 3).</li>
+      <li>Si vous activez la Lecture par Claude (fonctionnalité Premium, optionnelle et désactivée par défaut), un instantané de vos tâches, tâches récurrentes et objectifs (jamais votre XP, votre série ni vos badges) est envoyé à notre serveur pour que Claude puisse les lire (voir section 3).</li>
       <li>Les achats Premium sont gérés par Google Play ou l'App Store d'Apple (selon votre appareil) et RevenueCat (voir section 3).</li>
       <li>Les erreurs techniques anonymisées peuvent être transmises à Sentry (voir section 3).</li>
     </ul>
@@ -208,6 +209,7 @@
     <ul>
       <li>Faire fonctionner l'application et personnaliser votre expérience</li>
       <li>Faire transiter les ordres du Connecteur Claude (créer, reporter, cocher, modifier ou supprimer une tâche) jusqu'à leur récupération par l'application, si vous l'avez activé</li>
+      <li>Faire lire par Claude un instantané de vos tâches, tâches récurrentes et objectifs, si vous avez activé la Lecture par Claude</li>
       <li>Envoyer des notifications locales si vous les avez activées</li>
       <li>Gérer vos achats et abonnements Premium</li>
       <li>Améliorer la stabilité de l'application via la détection d'erreurs anonymisées</li>
@@ -223,8 +225,11 @@
     <p><strong>Connecteur Claude (fonctionnalité Premium)</strong></p>
     <p>Si vous l'activez depuis l'onglet Claude de l'application, le Connecteur Claude vous permet de piloter vos tâches TimeCoach depuis votre propre assistant Claude (Claude Desktop, Claude Code, ou tout client compatible MCP) : créer, reporter, cocher, modifier ou supprimer une tâche. Ces ordres transitent par notre serveur (Supabase) en attendant que l'application les récupère à sa prochaine ouverture, puis sont supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés). Sont conservés le temps de ce transit : le contenu de l'ordre (titre de la tâche, date, heure, priorité), un historique de son traitement (déposé, reçu, fait, reporté, supprimé) et l'identifiant technique de votre appareil, jamais votre nom ni votre compte. L'accès au connecteur repose sur un jeton personnel que vous générez et pouvez révoquer à tout moment depuis l'onglet Claude de l'application ; ce jeton n'est jamais stocké en clair sur notre serveur, seule son empreinte l'est. Vous choisissez précisément ce que Claude est autorisé à faire, capacité par capacité (créer, cocher, reporter, modifier, supprimer), et vous pouvez modifier ces autorisations à tout moment depuis ce même onglet : une capacité désactivée est refusée par notre serveur. Ce jeton expire automatiquement 90 jours après sa création, sauf si vous le prolongez depuis l'application, et un jeton expiré n'ouvre plus aucun accès.</p>
 
+    <p><strong>Lecture par Claude (fonctionnalité Premium, optionnelle)</strong></p>
+    <p>Si vous l'activez depuis l'onglet Claude de l'application (désactivée par défaut, réservée pour l'instant aux appareils que nous autorisons explicitement), TimeCoach envoie à notre serveur un instantané de vos tâches, tâches récurrentes et objectifs, pour que Claude puisse les lire et vous aider à planifier autour de ce qui existe déjà. Cet instantané contient : le titre, la date, l'heure et la priorité de vos tâches non terminées (sans limite de date) et de vos tâches terminées des 7 derniers jours ; vos tâches récurrentes actives ; vos objectifs, avec leur progression exprimée en pourcentage ; un résumé du nombre de tâches planifiées et faites par jour sur les 30 derniers jours. <strong>Il ne contient jamais votre expérience (XP), votre série de jours (streak), vos badges, ni le montant d'un objectif financier</strong> : Claude ne voit que ce qui l'aide à planifier, jamais votre progression ni votre argent. Cet instantané remplace le précédent à chaque envoi (une seule copie est conservée par appareil, jamais un historique), et est supprimé automatiquement si vous désactivez cette fonctionnalité, si vous régénérez votre jeton, ou après 7 jours sans nouvel envoi. Vous pouvez l'effacer immédiatement à tout moment depuis l'onglet Claude, avec le bouton « Effacer maintenant ».</p>
+
     <p><strong>Supabase</strong></p>
-    <p>Hébergeur des Edge Functions et de la base de données qui font fonctionner le Connecteur Claude, la vérification des achats Premium et la remontée d'erreurs techniques. Les données décrites dans cette politique sont celles effectivement conservées sur ce serveur.</p>
+    <p>Hébergeur des Edge Functions et de la base de données qui font fonctionner le Connecteur Claude, la Lecture par Claude, la vérification des achats Premium et la remontée d'erreurs techniques. Les données décrites dans cette politique sont celles effectivement conservées sur ce serveur.</p>
 
     <p><strong>RevenueCat</strong></p>
     <p>Gestion des achats et abonnements Premium. Nous n'avons pas accès à vos informations de paiement. Consultez <a href="https://revenuecat.com" target="_blank">revenuecat.com</a>.</p>
@@ -251,6 +256,7 @@
     <ul>
       <li>Toutes les communications avec nos serveurs utilisent le protocole HTTPS</li>
       <li>L'accès au Connecteur Claude repose sur un jeton personnel haché (jamais stocké en clair), révocable à tout moment depuis l'onglet Claude de l'application, limité aux seules capacités que vous avez autorisées et expirant automatiquement après 90 jours</li>
+      <li>L'accès à la Lecture par Claude est réservé aux appareils que nous autorisons explicitement, désactivé par défaut, et révocable immédiatement (bouton « Effacer maintenant »)</li>
       <li>Les sauvegardes automatiques sont chiffrées par leur fournisseur : Google (Auto Backup vers Google Drive) ou Apple (sauvegarde iCloud)</li>
       <li>Aucune donnée sensible n'est stockée en clair</li>
     </ul>
@@ -264,6 +270,7 @@
       <li>Droit de rectification de vos données</li>
       <li>Droit à l'effacement — supprimez toutes vos données en désinstallant l'app. Pour supprimer également la sauvegarde cloud : sur Android, désactivez Auto Backup dans <em>Paramètres → Système → Sauvegarde</em> puis supprimez les données depuis votre compte Google Drive ; sur iOS, gérez vos sauvegardes depuis <em>Réglages → [votre nom] → iCloud</em>.</li>
       <li>Données du Connecteur Claude — désactivez-le et révoquez votre jeton à tout moment depuis l'onglet Claude de l'application ; les ordres en transit sur notre serveur sont de toute façon supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés)</li>
+      <li>Données de la Lecture par Claude, désactivez-la à tout moment depuis l'onglet Claude de l'application, ou effacez l'instantané immédiatement avec le bouton « Effacer maintenant » ; il est de toute façon supprimé automatiquement après 7 jours sans nouvel envoi</li>
       <li>Droit à la portabilité de vos données — utilisez la fonction de sauvegarde manuelle (export JSON) depuis les paramètres de l'app</li>
       <li>Droit d'opposition au traitement de vos données</li>
     </ul>

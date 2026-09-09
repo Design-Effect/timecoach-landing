@@ -197,6 +197,7 @@
     <p><strong>Data transmitted to third-party services:</strong></p>
     <ul>
       <li>If you enable the Claude Connector (a Premium feature), the content of the tasks you ask it to create, postpone, check off, edit or delete passes through our server (Supabase) while the app fetches them (see section 3).</li>
+      <li>If you enable Reading by Claude (a Premium feature, optional and off by default), a snapshot of your tasks, recurring tasks and goals (never your XP, streak or badges) is sent to our server so Claude can read them (see section 3).</li>
       <li>Premium purchases are handled by Google Play or Apple's App Store (depending on your device) and RevenueCat (see section 3).</li>
       <li>Anonymized technical errors may be transmitted to Sentry (see section 3).</li>
     </ul>
@@ -208,6 +209,7 @@
     <ul>
       <li>Run the application and personalize your experience</li>
       <li>Carry Claude Connector orders (create, postpone, check off, edit or delete a task) through to the app, if you have enabled it</li>
+      <li>Let Claude read a snapshot of your tasks, recurring tasks and goals, if you have enabled Reading by Claude</li>
       <li>Send local notifications if you have enabled them</li>
       <li>Manage your Premium purchases and subscriptions</li>
       <li>Improve the app's stability through anonymized error detection</li>
@@ -223,8 +225,11 @@
     <p><strong>Claude Connector (Premium feature)</strong></p>
     <p>If you enable it from the Claude tab in the app, the Claude Connector lets you manage your TimeCoach tasks from your own Claude assistant (Claude Desktop, Claude Code, or any MCP-compatible client): create, postpone, check off, edit or delete a task. These orders pass through our server (Supabase) while waiting for the app to fetch them the next time it opens, and are then automatically deleted no later than 90 days after being fetched (30 days if never fetched). What is kept for that time: the content of the order (task title, date, time, priority), a history of how it was handled (deposited, received, done, postponed, deleted), and your device's technical identifier, never your name or account. Access to the connector relies on a personal token that you generate and can revoke at any time from the Claude tab in the app; that token is never stored in plain text on our server, only its cryptographic fingerprint is. You choose exactly what Claude is allowed to do, capability by capability (create, check off, postpone, edit, delete), and you can change those permissions at any time from that same tab: a capability you turn off is refused by our server. The token automatically expires 90 days after it is created, unless you extend it from the app, and an expired token no longer grants any access.</p>
 
+    <p><strong>Reading by Claude (Premium feature, optional)</strong></p>
+    <p>If you enable it from the Claude tab in the app (off by default, currently reserved to devices we explicitly authorize), TimeCoach sends our server a snapshot of your tasks, recurring tasks and goals, so Claude can read them and help you plan around what already exists. This snapshot contains: the title, date, time and priority of your unfinished tasks (no date limit) and of tasks you completed in the last 7 days; your active recurring tasks; your goals, with their progress expressed as a percentage. <strong>It never contains your experience points (XP), your streak, your badges, or the amount behind a financial goal</strong>: Claude only sees what helps it plan, never your progress or your money. This snapshot replaces the previous one each time it is sent (only one copy is kept per device, never a history), and is automatically deleted if you turn this feature off, if you regenerate your token, or after 7 days without a new snapshot. You can erase it immediately at any time from the Claude tab, with the "Erase now" button.</p>
+
     <p><strong>Supabase</strong></p>
-    <p>Hosts the Edge Functions and database that run the Claude Connector, Premium purchase verification, and error reporting. The data described in this policy is what is actually retained on this server.</p>
+    <p>Hosts the Edge Functions and database that run the Claude Connector, Reading by Claude, Premium purchase verification, and error reporting. The data described in this policy is what is actually retained on this server.</p>
 
     <p><strong>RevenueCat</strong></p>
     <p>Management of Premium purchases and subscriptions. We have no access to your payment information. See <a href="https://revenuecat.com" target="_blank">revenuecat.com</a>.</p>
@@ -251,6 +256,7 @@
     <ul>
       <li>All communications with our servers use the HTTPS protocol</li>
       <li>Access to the Claude Connector relies on a hashed personal token (never stored in plain text) that you can revoke at any time from the Claude tab in the app, limited to the capabilities you have allowed and automatically expiring after 90 days</li>
+      <li>Access to Reading by Claude is reserved to devices we explicitly authorize, off by default, and immediately revocable (the "Erase now" button)</li>
       <li>Automatic backups are encrypted by their provider: Google (Auto Backup to Google Drive) or Apple (iCloud Backup)</li>
       <li>No sensitive data is stored in plain text</li>
     </ul>
@@ -264,6 +270,7 @@
       <li>Right to rectification of your data</li>
       <li>Right to erasure — delete all your data by uninstalling the app. To also delete the cloud backup: on Android, disable Auto Backup in <em>Settings → System → Backup</em> then delete the data from your Google Drive account; on iOS, manage your backups from <em>Settings → [your name] → iCloud</em>.</li>
       <li>Claude Connector data — disable it and revoke your token at any time from the Claude tab in the app; orders in transit on our server are in any case automatically deleted no later than 90 days after being fetched (30 days if never fetched)</li>
+      <li>Reading by Claude data, turn it off at any time from the Claude tab in the app, or erase the snapshot immediately with the "Erase now" button; it is in any case automatically deleted after 7 days without a new snapshot</li>
       <li>Right to data portability — use the manual backup feature (JSON export) from the app's settings</li>
       <li>Right to object to the processing of your data</li>
     </ul>
