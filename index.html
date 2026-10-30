@@ -3,1910 +3,954 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TimeCoach — Le coach productivité qui te relance quand tu lâches</title>
-<meta name="description" content="Le coach productivité avec rappels précis qui ne ratent jamais. Coach IA personnel, 7 profils, conseils d'experts reconnus, gamification motivante. 14 jours Premium offerts.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>TimeCoach : le coach productivité qui te relance quand tu lâches</title>
+<meta name="description" content="Rappels précis, gamification utile, 7 profils et Connecteur Claude : dépose et gère tes tâches depuis Claude. 14 jours Premium offerts.">
+<link rel="icon" type="image/png" href="timecoachicon512.png">
+<link rel="apple-touch-icon" href="timecoachicon512.png">
+<meta name="theme-color" content="#F5F8F8">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_BE">
+<meta property="og:site_name" content="TimeCoach">
+<meta property="og:title" content="TimeCoach : le coach productivité qui te relance quand tu lâches">
+<meta property="og:description" content="Rappels précis, gamification utile, 7 profils et Connecteur Claude : dépose et gère tes tâches depuis Claude. 14 jours Premium offerts.">
+<link rel="preload" href="fonts/Manrope_800ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/Manrope_500Medium.ttf" as="font" type="font/ttf" crossorigin>
+<script>
+  (function () {
+    var reduit = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var d = document.documentElement;
+    d.classList.add('js');
+    d.classList.add(reduit ? 'reduit' : 'anim');
+  })();
+</script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_500Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_600SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_700Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_800ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: swap; }
 
-  :root {
-    --ink: #0a0a0f;
-    --ink-soft: #1a1a24;
-    --paper: #fafaf7;
-    --paper-2: #f0efea;
-    --indigo: #4f46e5;
-    --indigo-soft: #6366f1;
-    --gold: #f59e0b;
-    --cta: #4f46e5;
-    --cta-deep: #4338ca;
-    --green: #10b981;
-    --red: #ef4444;
-    --text: #1a1a24;
-    --text-muted: #6b6880;
-    --text-light: rgba(250, 250, 247, 0.7);
-    --border: rgba(0, 0, 0, 0.08);
-  }
+/* tout en clair (JETONS-v3.md, thème clair) : retour d'AbduLlah du 30/10 sur la v1 de nuit */
+:root {
+  --fond: #F5F8F8; --fond-2: #EAF2F1; --carte: #FFFFFF; --carte-p: #F0F6F5; --lueur: #DCE9E8;
+  --filet: #D8E4E4; --filet-f: #B9CDCD; --piste: #DCE9E8;
+  --encre: #12323A; --sec: #3B545B; --ter: #50666F;
+  --acc: #0E7C86; --encre-acc: #FFFFFF; --acc-texte: #0A636B; --acc-doux: #D3ECE8;
+  --gain-texte: #16793A; --gain-trait: #1A8F45; --gain-plein: #4ADE80; --encre-gain: #082111; --vert-doux: #DEF7E7;
+  --jauge-a: #16793A; --jauge-b: #1A8F45;
+  --ambre: #A86500; --rouge: #C4321F;
+  --ombre: rgba(18, 50, 58, .10);
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --mono: 'Manrope', system-ui, sans-serif;
+  --large: 1200px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--fond); color: var(--encre); font: 500 17px/1.6 'Manrope', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+.ic { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.ic.s14 { width: 14px; height: 14px; } .ic.s16 { width: 16px; height: 16px; } .ic.s18 { width: 18px; height: 18px; }
+.ic.s22 { width: 22px; height: 22px; } .ic.s24 { width: 24px; height: 24px; }
+.mono { font-family: var(--mono); }
+body { font-variant-numeric: tabular-nums; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--large); margin: 0 auto; padding: 0 40px; }
+section { position: relative; }
+.bloc { padding: 128px 0; }
 
-  html { scroll-behavior: smooth; }
+/* étiquette à tiret : la graduation de l'app */
+.tiret { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 20px; font: 500 13px/1.3 var(--mono);
+  letter-spacing: .06em; text-transform: uppercase; color: var(--acc-texte); }
+.tiret::before { content: ""; width: 2px; height: 14px; border-radius: 1px; background: var(--acc); }
+h1, h2, h3 { margin: 0; font-weight: 800; color: var(--encre); text-wrap: balance; }
+h2 { font-size: 52px; line-height: 1.06; letter-spacing: -0.04em; max-width: 16ch; }
+h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
+.gain-txt { color: var(--gain-texte); }
+.sous { margin: 20px 0 0; max-width: 56ch; color: var(--sec); font-size: 18px; }
+.entete { margin-bottom: 56px; }
+.entete.centre { text-align: center; } .entete.centre h2, .entete.centre .sous { margin-left: auto; margin-right: auto; }
+.entete.centre h2 { max-width: 22ch; }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+/* boutons */
+.bouton { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px;
+  border-radius: 14px; border: 0; background: var(--acc); color: var(--encre-acc); font: 700 16px/1 'Manrope', sans-serif;
+  text-decoration: none; cursor: pointer; transition: transform 120ms var(--ease); }
+.bouton .fleche { transition: transform 160ms var(--ease); }
+.bouton:active, .lien-sec:active, .badge-store:active, .fleche-rangee:active, .bascule button:active { transform: scale(0.97); }
+.bouton.fantome { background: transparent; color: var(--encre); border: 1px solid var(--filet-f); }
+.lien-sec { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; color: var(--acc-texte); font-weight: 700;
+  text-decoration: none; transition: transform 120ms var(--ease); }
+.badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.badge-store { display: block; height: 52px; transition: transform 120ms var(--ease); }
+.badge-store img { height: 52px; width: auto; }
+@media (hover: hover) and (pointer: fine) {
+  .bouton:hover .fleche, .lien-sec:hover .fleche { transform: translateX(3px); }
+}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--paper);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+/* ─── navigation ─── */
+.nav { position: sticky; top: 0; z-index: 20; background: rgba(245, 248, 248, .88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--filet); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 21px; letter-spacing: -0.03em; }
+.logo img { width: 36px; height: 36px; border-radius: 9px; }
+.logo em { font-style: normal; color: var(--gain-texte); }
+.nav-liens { display: flex; gap: 28px; margin-left: auto; font-size: 15px; font-weight: 600; }
+.nav-liens a { text-decoration: none; color: var(--sec); }
+.nav .bouton { min-height: 44px; padding: 0 18px; font-size: 15px; }
+@media (prefers-reduced-transparency: reduce) { .nav { background: var(--fond); backdrop-filter: none; } }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+/* ─── héros ─── */
+.heros { overflow: hidden; padding: 72px 0 40px;
+  background: radial-gradient(640px 520px at 76% 40%, var(--lueur), transparent 70%), var(--fond); }
+.heros-grille { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
+.heros h1 { font-size: 68px; line-height: 1.02; letter-spacing: -0.045em; max-width: 12ch; }
+.heros .sous { font-size: 19px; max-width: 50ch; }
+.heros-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 36px; }
+.confiance { margin: 22px 0 0; font: 400 14px/1.5 var(--mono); color: var(--ter); white-space: nowrap; }
+.confiance b { font-weight: 600; color: var(--gain-texte); }
+@media (max-width: 640px) { .confiance .sep { display: none; } }
+.scene { position: relative; justify-self: center; width: 460px; max-width: 100%; }
+.cadran { position: relative; width: 400px; aspect-ratio: 1; margin: 0 auto; }
+.cadran > .cadran-svg, .trotteuse, .trotteuse svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.grad { stroke: var(--filet-f); } .grad.heure { stroke: var(--ter); } .grad.quart { stroke: var(--sec); }
+.echo { stroke: var(--piste); } .piste { stroke: var(--piste); }
+.eclair { stroke: var(--gain-trait); opacity: 0; }
+.trotteuse { opacity: 0; transform-origin: 50% 50%; }
+.aiguille { stroke: var(--gain-trait); } .moyeu { fill: var(--gain-trait); } .moyeu-creux { fill: var(--carte); }
+.cadran .centre { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: 4px; }
+.cadran .val { font: 600 76px/1 var(--mono); letter-spacing: -0.04em; color: var(--encre); font-variant-numeric: tabular-nums; }
+.cadran .val small { font-size: .4em; color: var(--sec); margin-left: 2px; }
+.cadran .lib { font: 500 13px/1.3 var(--mono); color: var(--ter); text-transform: uppercase; letter-spacing: .08em; }
+.cadran .taches { font: 500 14px/1.3 var(--mono); color: var(--sec); }
+.etiq { position: absolute; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 11px; border-radius: 12px;
+  background: var(--carte); border: 1px solid var(--filet); font: 600 15px/1 var(--mono); color: var(--encre);
+  box-shadow: 0 10px 30px var(--ombre); white-space: nowrap; }
+.etiq .ic { color: var(--acc-texte); }
+.etiq.gain { background: var(--vert-doux); border-color: var(--filet); color: var(--gain-texte); } .etiq.gain .ic { color: var(--gain-texte); }
+.etiq.e1 { left: 0; top: 54px; } .etiq.e2 { right: -6px; top: 150px; } .etiq.e3 { left: 6px; top: 318px; }
+.preuve-mini { display: flex; align-items: center; gap: 14px; margin: 26px auto 0; width: max-content; max-width: 100%;
+  padding: 10px 16px 10px 10px; border-radius: 18px; background: var(--carte); border: 1px solid var(--filet); }
+.preuve-mini img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; }
+.preuve-mini .ecran { object-position: 50% 18%; } .preuve-mini .montre { object-position: 70% 52%; border-radius: 50%; }
+.preuve-mini span { font: 400 13px/1.45 var(--mono); color: var(--ter); max-width: 24ch; }
+.preuve-mini span b { color: var(--sec); font-weight: 500; }
+/* la règle graduée sous le héros : l'instrument, fixe */
+.regle { height: 28px; margin-top: 64px; border-bottom: 1px solid var(--filet);
+  background:
+    repeating-linear-gradient(90deg, var(--ter) 0 1px, transparent 1px 80px) bottom left / 100% 14px no-repeat,
+    repeating-linear-gradient(90deg, var(--filet-f) 0 1px, transparent 1px 16px) bottom left / 100% 7px no-repeat; opacity: .8; }
+.regle-chiffres { display: flex; justify-content: space-between; font: 400 11px/1 var(--mono); color: var(--ter); padding-top: 10px; }
 
-  /* ─────────── NAV ─────────── */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 18px 0;
-    background: rgba(250, 250, 247, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    z-index: 100;
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .logo-img {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 2px 8px rgba(10, 10, 15, 0.15);
-  }
-  .nav-cta {
-    background: var(--ink);
-    color: var(--paper);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: transform 0.2s, background 0.2s;
-  }
-  .nav-cta:hover {
-    background: var(--indigo);
-    transform: translateY(-1px);
-  }
+/* ─── relevés (le problème) ─── */
+.releves { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.releve { position: relative; padding: 32px 30px 30px; border-radius: 22px; background: var(--carte); border: 1px solid var(--filet); }
+.releve .num { font: 500 13px/1 var(--mono); color: var(--ter); letter-spacing: .06em; }
+.releve .mesure { display: block; margin: 26px 0 6px; font: 600 44px/1.05 var(--mono); letter-spacing: -0.03em; color: var(--encre); font-variant-numeric: tabular-nums; }
+.releve .mesure .retard { color: var(--rouge); }
+.releve .mesure.heure { font-size: 34px; white-space: nowrap; letter-spacing: -0.04em; }
+.releve .mesure small { font-size: .5em; color: var(--sec); letter-spacing: 0; margin-left: 6px; }
+.releve .legende { font: 400 13px/1.45 var(--mono); color: var(--acc-texte); margin: 0 0 22px; }
+.releve h3 { font-size: 21px; margin-bottom: 10px; }
+.releve p { margin: 0; color: var(--sec); font-size: 16px; }
 
-  /* ─────────── HERO ─────────── */
-  .hero {
-    padding: 140px 0 100px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--ink);
-    color: var(--paper);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 8px 16px;
-    border-radius: 100px;
-    margin-bottom: 28px;
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-eyebrow-pulse {
-    width: 6px;
-    height: 6px;
-    background: #22c55e;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
-    50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(34,197,94,0); }
-  }
+/* ─── rappels ─── */
+.deux { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.liste { list-style: none; padding: 0; margin: 30px 0 0; display: grid; gap: 14px; }
+.liste li { display: flex; gap: 14px; align-items: flex-start; color: var(--sec); font-size: 16.5px; }
+.liste li .ic { margin-top: 3px; color: var(--acc-texte); }
+.marques { margin: 30px 0 0; padding-top: 20px; border-top: 1px solid var(--filet); font: 500 14px/1.5 var(--mono); color: var(--ter); letter-spacing: .04em; }
+.marques span { color: var(--sec); }
+.photos { position: relative; height: 560px; }
+.photo-ecran { position: absolute; left: 6%; top: 0; width: 290px; height: 560px; border-radius: 34px; overflow: hidden;
+  border: 1px solid var(--filet-f); box-shadow: 0 30px 70px var(--ombre); }
+.photo-ecran img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.photo-montre { position: absolute; right: 2%; bottom: 10px; width: 250px; height: 250px; border-radius: 50%; overflow: hidden;
+  border: 6px solid var(--carte); box-shadow: 0 30px 70px var(--ombre); }
+.photo-montre img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 54%; transform: scale(1.5); }
+.photo-legende { position: absolute; right: 2%; top: 60px; font: 400 13px/1.5 var(--mono); color: var(--ter); text-align: right; }
+.photo-legende b { display: block; font: 600 34px/1 var(--mono); color: var(--gain-texte); margin-bottom: 6px; letter-spacing: -0.02em; }
 
-  h1.hero-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(44px, 5.2vw, 64px);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    margin-bottom: 24px;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  h1.hero-title em {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--indigo);
-  }
-  .hero-sub {
-    font-size: 19px;
-    color: var(--text-muted);
-    max-width: 480px;
-    margin-bottom: 36px;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-  .hero-ctas {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
+/* ─── fonctions (mosaïque) ─── */
+.mosaique { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "gami profils" "gami experts"; gap: 20px; }
+.tuile { position: relative; padding: 36px; border-radius: 22px; background: var(--carte); border: 1px solid var(--filet);
+  transition: transform 160ms var(--ease), border-color 160ms var(--ease); overflow: hidden; }
+@media (hover: hover) and (pointer: fine) { .tuile:hover { transform: translateY(-2px); border-color: var(--acc); } }
+.tuile .num { font: 500 13px/1 var(--mono); color: var(--ter); letter-spacing: .06em; margin-bottom: 18px; display: block; }
+.tuile p { color: var(--sec); margin: 12px 0 0; font-size: 16px; }
+.tuile.gami { grid-area: gami; display: flex; flex-direction: column; }
+.tuile.profils { grid-area: profils; } .tuile.experts { grid-area: experts; }
+.xp { margin: 26px 0 0; padding: 18px 18px 16px; border-radius: 16px; background: var(--fond-2); border: 1px solid var(--piste); }
+.xp-haut { display: flex; justify-content: space-between; font: 500 14px/1 var(--mono); color: var(--sec); }
+.xp-haut b { color: var(--gain-texte); font-weight: 600; }
+.jauge { height: 10px; margin: 14px 0 12px; border-radius: 5px; background: var(--piste); overflow: hidden; }
+.jauge i { display: block; height: 100%; width: 100%; border-radius: 5px; transform-origin: 0 50%; transform: scaleX(var(--p));
+  background: linear-gradient(90deg, var(--jauge-a), var(--jauge-b)); }
+.xp-bas { display: flex; gap: 8px; flex-wrap: wrap; }
+.puce { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 9px; font: 500 13px/1.2 var(--mono);
+  background: var(--acc-doux); color: var(--acc-texte); }
+.puce.g { background: var(--vert-doux); color: var(--gain-texte); }
+.gami .liste { margin-top: 24px; }
+.gami-capture { flex: 1; min-height: 300px; padding-top: 30px; display: flex; gap: 16px; }
+.cadre { border-radius: 26px; padding: 6px; background: var(--fond-2); border: 1px solid var(--filet); box-shadow: 0 24px 50px var(--ombre); }
+.cadre img { border-radius: 21px; width: 100%; height: auto; }
+.gami-capture .cadre { flex: 1; display: flex; min-height: 0; }
+.gami-capture .cadre img { height: 100%; object-fit: cover; object-position: 50% 0; }
+.profils-grille { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 24px; }
+.profil { display: flex; flex-direction: column; gap: 8px; padding: 14px 10px; min-width: 0; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--piste); }
+.profil .ic { color: var(--acc-texte); }
+.profil b { font-size: 13.5px; overflow-wrap: anywhere; font-weight: 700; color: var(--encre); }
+.profil small { font: 400 11.5px/1.35 var(--mono); color: var(--ter); }
+.profil.bascule-premium { justify-content: center; background: var(--acc-doux); border-color: transparent; }
+.profil.bascule-premium b { color: var(--acc-texte); }
+.prem { display: inline-block; padding: 2px 7px; border-radius: 6px; font: 600 11px/1.4 var(--mono); letter-spacing: .05em;
+  text-transform: uppercase; background: var(--gain-plein); color: var(--encre-gain); vertical-align: 2px; }
+.rangee-haut { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.fleches { display: flex; gap: 8px; flex: none; }
+.fleche-rangee { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--filet-f); background: var(--carte);
+  color: var(--encre); display: grid; place-items: center; cursor: pointer; transition: transform 120ms var(--ease); }
+.fleche-rangee:disabled { opacity: .45; cursor: default; }
+.rangee { display: flex; gap: 10px; margin: 22px -36px 0; padding: 0 36px 4px; overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; scroll-padding: 0 36px; }
+.rangee::-webkit-scrollbar { display: none; }
+.expert { scroll-snap-align: start; flex: none; display: flex; gap: 12px; align-items: center; padding: 12px 16px 12px 12px;
+  border-radius: 14px; background: var(--fond-2); border: 1px solid var(--piste); }
+.expert .ic-rond { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--acc-doux); color: var(--acc-texte); }
+.expert b { display: block; font-size: 15px; font-weight: 700; white-space: nowrap; }
+.expert small { display: block; font: 400 12px/1.3 var(--mono); color: var(--ter); white-space: nowrap; }
 
-  .store-badges {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .store-badge img {
-    height: 52px;
-    width: auto;
-    display: block;
-    transition: transform 0.2s;
-  }
-  .store-badge:hover img { transform: translateY(-2px); }
+/* ─── aperçu ─── */
+.apercu { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.apercu figure { margin: 0; }
+.apercu figcaption { margin-top: 14px; font: 500 13px/1.4 var(--mono); color: var(--sec); text-align: center; }
+.apercu figcaption span { display: block; color: var(--ter); font-weight: 400; }
 
-  .btn-secondary {
-    background: transparent;
-    color: var(--ink);
-    font-size: 15px;
-    font-weight: 500;
-    padding: 16px 28px;
-    border-radius: 100px;
-    border: 1.5px solid rgba(10, 10, 15, 0.15);
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .btn-secondary:hover {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
+/* ─── iPhone ─── */
+.iphone { padding: 0 0 128px; }
+.iphone-carte { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px 44px; border-radius: 22px;
+  background: var(--carte); border: 1px solid var(--filet); }
+.iphone-carte h2 { font-size: 36px; max-width: none; }
+.iphone-carte p { margin: 10px 0 0; color: var(--sec); }
 
-  /* Switch de profil (callout) */
-  .profils-switch {
-    margin: 32px auto 0;
-    max-width: 640px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: var(--paper-2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px 24px;
-  }
-  .profils-switch-icon { font-size: 26px; flex-shrink: 0; }
-  .profils-switch p { font-size: 15px; color: var(--text); line-height: 1.5; }
-  .badge-premium {
-    display: inline-block;
-    background: var(--indigo);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 10px;
-    border-radius: 100px;
-    margin-left: 4px;
-    vertical-align: middle;
-  }
+/* ─── Claude ─── */
+.claude { background: linear-gradient(180deg, var(--fond) 0, var(--fond-2) 120px, var(--fond-2) calc(100% - 120px), var(--fond) 100%); }
+.claude .deux { grid-template-columns: .8fr 1.2fr; gap: 56px; }
+.claude h2 { font-size: 46px; }
+.claude-scene { display: grid; grid-template-columns: 1fr 200px; gap: 20px; align-items: start; }
+.conv { padding: 22px; border-radius: 22px; background: var(--carte); border: 1px solid var(--filet); }
+.conv-tete { display: flex; align-items: center; gap: 10px; padding-bottom: 16px; border-bottom: 1px solid var(--filet);
+  font: 500 13px/1 var(--mono); color: var(--ter); }
+.conv-tete .ic { color: var(--acc-texte); }
+.bulle { margin: 18px 0 0 auto; max-width: 86%; padding: 14px 16px; border-radius: 16px 16px 4px 16px; background: var(--carte-p);
+  border: 1px solid var(--filet-f); font-size: 15.5px; line-height: 1.5; }
+.reponse { margin-top: 14px; font-size: 15px; color: var(--sec); }
+.reponse .outil { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; padding: 6px 10px; border-radius: 9px;
+  background: var(--acc-doux); color: var(--acc-texte); font: 500 12.5px/1 var(--mono); }
+.liste-tc { margin-top: 14px; border-radius: 16px; background: var(--fond-2); border: 1px solid var(--piste); padding: 6px 14px; }
+.liste-tc .tete { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 8px; font: 500 12px/1 var(--mono);
+  color: var(--ter); text-transform: uppercase; letter-spacing: .06em; }
+.tache { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--piste); }
+.tache .case { width: 22px; height: 22px; border-radius: 7px; border: 1.5px solid var(--ter); flex: none; }
+.tache b { font-size: 15px; font-weight: 600; flex: 1; }
+.tache .h { font: 500 13px/1 var(--mono); color: var(--sec); }
+.tache .xp-t { font: 500 13px/1 var(--mono); color: var(--gain-texte); min-width: 54px; text-align: right; }
+.prochaine { display: flex; align-items: center; gap: 8px; margin: 14px 0 2px; font: 400 13px/1.4 var(--mono); color: var(--acc-texte); }
+.claude-capture { margin: 0; }
+.claude-capture figcaption { margin-top: 12px; font: 400 12px/1.45 var(--mono); color: var(--ter); }
+.mention { margin: 26px 0 0; font: 400 12.5px/1.5 var(--mono); color: var(--ter); max-width: 60ch; }
 
-  .hero-trust {
-    font-size: 13px;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    animation: fadeUp 0.6s 0.4s ease both;
-  }
-  .hero-trust strong {
-    color: var(--ink);
-    font-weight: 600;
-  }
+/* ─── comparatif ─── */
+.comparatif { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 22px; overflow: hidden;
+  border: 1px solid var(--filet); background: var(--carte); }
+.comparatif th, .comparatif td { padding: 18px 22px; text-align: center; border-bottom: 1px solid var(--filet); font-size: 16px; }
+.comparatif tr:last-child td { border-bottom: 0; }
+.comparatif th { font: 600 13px/1.2 var(--mono); color: var(--ter); text-transform: uppercase; letter-spacing: .06em; background: var(--fond-2); }
+.comparatif th.tc { color: var(--acc-texte); }
+.comparatif td:first-child, .comparatif th:first-child { text-align: left; color: var(--encre); font-weight: 600; }
+.comparatif .tc { background: var(--acc-doux); }
+.oui { color: var(--acc-texte); } .non { color: var(--ter); } .partiel { font: 500 13px/1 var(--mono); color: var(--ambre); }
+.comparatif td .ic { display: inline-block; vertical-align: middle; }
+.cartes-comp { display: none; }
 
-  /* ── HERO VISUAL : photo lock screen + smartwatch ── */
-  .hero-visual {
-    position: relative;
-    height: 580px;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-  .phone-photo {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-58%);
-    width: 290px;
-    height: auto;
-    border-radius: 36px;
-    box-shadow:
-      0 30px 60px rgba(0, 0, 0, 0.25),
-      0 0 0 8px #1a1a24,
-      0 0 0 9px rgba(255, 255, 255, 0.05);
-    display: block;
-  }
-  .smartwatch-photo {
-    position: absolute;
-    bottom: 30px;
-    right: -40px;
-    width: 180px;
-    height: auto;
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-    z-index: 4;
-    transform: rotate(-3deg);
-  }
+/* ─── prix ─── */
+.bascule { display: inline-flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--filet); margin: 0 auto 40px; }
+.bascule button { min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px; background: transparent; color: var(--sec);
+  font: 700 15px/1 'Manrope', sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: transform 120ms var(--ease); }
+.bascule button[aria-pressed="true"] { background: var(--carte); color: var(--encre); box-shadow: inset 0 0 0 1px var(--filet-f), 0 2px 6px var(--ombre); }
+.bascule .offert { padding: 3px 7px; border-radius: 6px; background: var(--gain-plein); color: var(--encre-gain); font: 600 11.5px/1.2 var(--mono); }
+.prix-centre { text-align: center; }
+.prix-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto; text-align: left; }
+.prix { display: flex; flex-direction: column; padding: 36px; border-radius: 22px; background: var(--fond-2); border: 1px solid var(--filet); }
+.prix.premium { background: var(--carte); border: 1.5px solid var(--acc); box-shadow: 0 30px 80px var(--ombre); }
+.prix .nom { font: 600 13px/1 var(--mono); color: var(--ter); text-transform: uppercase; letter-spacing: .08em; }
+.prix.premium .nom { color: var(--acc-texte); }
+.prix .accroche { margin: 8px 0 0; color: var(--sec); font-size: 15px; }
+.montant { display: flex; align-items: baseline; gap: 8px; margin: 26px 0 4px; font-family: var(--mono); }
+.montant b { font-size: 52px; font-weight: 600; letter-spacing: -0.06em; line-height: 1; }
+.montant span { font-size: 16px; color: var(--sec); }
+.detail { min-height: 22px; font: 400 13.5px/1.5 var(--mono); color: var(--ter); }
+.detail b { color: var(--gain-texte); font-weight: 600; }
+.prix ul { list-style: none; padding: 0; margin: 26px 0 30px; display: grid; gap: 12px; }
+.prix li { display: flex; gap: 12px; color: var(--sec); font-size: 15.5px; }
+.prix li .ic { margin-top: 3px; color: var(--acc-texte); }
+.prix li strong { color: var(--encre); font-weight: 700; }
+.prix .bouton { margin-top: auto; width: 100%; }
+.prix:not(.premium) .bouton { background: transparent; color: var(--encre); border: 1px solid var(--filet-f); }
+.prix-pied { margin: 28px auto 0; text-align: center; font: 400 13.5px/1.5 var(--mono); color: var(--ter); }
+[data-periode="mensuel"] .si-annuel, [data-periode="annuel"] .si-mensuel { display: none; }
 
-  .annotation {
-    position: absolute;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    animation: fadeUp 0.6s 1s ease both;
-    z-index: 5;
-    line-height: 1.4;
-  }
-  .annotation::before {
-    content: '';
-    position: absolute;
-    background: var(--ink);
-  }
-  .annotation-1 {
-    top: 70px;
-    right: -40px;
-    max-width: 180px;
-  }
-  .annotation-1::before {
-    left: -32px;
-    top: 50%;
-    width: 32px;
-    height: 2px;
-  }
-  .annotation-2 {
-    bottom: 220px;
-    left: -80px;
-    max-width: 170px;
-  }
-  .annotation-2::before {
-    right: -32px;
-    top: 50%;
-    width: 32px;
-    height: 2px;
-  }
-  .annotation strong {
-    color: var(--gold);
-    font-weight: 600;
-  }
+/* ─── FAQ ─── */
+.faq-grille { display: grid; gap: 12px; max-width: 860px; }
+.faq details { border-radius: 16px; background: var(--carte); border: 1px solid var(--filet); }
+.faq summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px;
+  padding: 18px 22px; cursor: pointer; font-size: 17.5px; font-weight: 700; letter-spacing: -0.01em; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .ic { color: var(--acc-texte); transition: transform 200ms var(--ease); }
+.faq details[open] summary .ic { transform: rotate(180deg); }
+.faq details p { margin: 0; padding: 0 22px 22px; color: var(--sec); font-size: 16px; max-width: 70ch; }
+.faq details a { color: var(--acc-texte); font-weight: 700; }
+.faq-cols { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: start; }
+.faq-cols .entete { position: sticky; top: 110px; margin: 0; }
+/* ─── appel final et pied ─── */
+.final { text-align: center; padding: 128px 0; background: radial-gradient(560px 380px at 50% 30%, var(--lueur), transparent 70%), var(--fond); }
+.final .cadran { width: 132px; margin-bottom: 36px; }
+.final .cadran .val { font-size: 26px; }
+.final h2 { margin: 0 auto; max-width: 18ch; font-size: 56px; }
+.final .sous { margin: 18px auto 34px; }
+.final .badges { justify-content: center; }
+.pied { background: var(--fond-2); border-top: 1px solid var(--filet); padding: 40px 0; font: 400 13.5px/1.6 var(--mono); color: var(--ter); }
+.pied .wrap { display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: space-between; align-items: center; }
+.pied nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.pied a { color: var(--sec); text-decoration: none; }
+.pied a:hover { color: var(--acc-texte); }
+.pied .signature b { color: var(--acc-texte); font-weight: 500; }
 
-  /* ─────────── SECTIONS COMMUNES ─────────── */
-  .section-eyebrow {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-  }
-  .section-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(36px, 4.5vw, 52px);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-    margin-bottom: 60px;
-    max-width: 720px;
-  }
-  .section-title em {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--indigo);
-  }
+/* ─── mouvement ─── */
+/* la révélation passe par `translate` : `transform` reste libre pour le survol des tuiles et la pression des boutons */
+.anim [data-rev] > * { opacity: 0; translate: 0 10px; }
+.anim [data-rev].vu > * { opacity: 1; translate: none;
+  transition: opacity 360ms var(--ease), translate 360ms var(--ease), transform 160ms var(--ease), border-color 160ms var(--ease);
+  transition-delay: calc(var(--i, 0) * 60ms), calc(var(--i, 0) * 60ms), 0ms, 0ms; }
+.reduit [data-rev] > * { opacity: 0; }
+.reduit [data-rev].vu > * { opacity: 1; transition: opacity 200ms ease; }
+.anim .jauge i { transform: scaleX(0); }
+.anim .vu .jauge i { transform: scaleX(var(--p)); transition: transform 420ms var(--ease) 120ms; }
+.anim .heros .etiq { opacity: 0; }
+.anim .heros .cadran .arc { stroke-dashoffset: var(--c0); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .tuile, .bouton, .bouton .fleche { transition: none; } }
 
-  /* ─────────── PROBLEM (sombre) ─────────── */
-  .problem {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 120px 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .problem .section-eyebrow { color: rgba(250, 250, 247, 0.5); }
-  .problem .section-title em { color: var(--gold); }
-
-  .problem-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .problem-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 32px 28px;
-    transition: transform 0.3s, background 0.3s;
-  }
-  .problem-card:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.07);
-  }
-  .problem-card-num {
-    font-family: 'Fraunces', serif;
-    font-size: 14px;
-    font-weight: 500;
-    font-style: italic;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-  .problem-card-title {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.25;
-    margin-bottom: 12px;
-    color: var(--paper);
-  }
-  .problem-card-desc {
-    font-size: 14.5px;
-    color: var(--text-light);
-    line-height: 1.6;
-  }
-
-  /* ─────────── SOLUTION ─────────── */
-  .solution {
-    padding: 120px 0;
-    background: var(--paper);
-  }
-  .solution-grid {
-    display: grid;
-    gap: 80px;
-  }
-  .solution-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  .solution-row:nth-child(even) .solution-text { order: 2; }
-  .solution-row:nth-child(even) .solution-visual { order: 1; }
-
-  .solution-num {
-    font-family: 'Fraunces', serif;
-    font-size: 88px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--indigo);
-    line-height: 1;
-    margin-bottom: 16px;
-    letter-spacing: -0.04em;
-  }
-  .solution-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(30px, 3.6vw, 42px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-    margin-bottom: 20px;
-    color: var(--ink);
-  }
-  .solution-desc {
-    font-size: 17px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 24px;
-    max-width: 460px;
-  }
-  .solution-list {
-    list-style: none;
-    padding: 0;
-  }
-  .solution-list li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 12px;
-    font-size: 15px;
-    color: var(--text);
-    line-height: 1.5;
-  }
-  .check {
-    width: 22px;
-    height: 22px;
-    background: var(--green);
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 13px;
-    margin-top: 1px;
-  }
-
-  /* Visual 1 — Mini-écran TimeCoach avec notification (esthétique app) */
-  .visual-1 {
-    background: #0f1024;
-    border-radius: 28px;
-    padding: 24px 22px;
-    height: 380px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .visual-1::before {
-    content: '';
-    position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 240px;
-    height: 240px;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .v1-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2;
-    position: relative;
-  }
-  .v1-date {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    color: rgba(255, 255, 255, 0.5);
-    text-transform: uppercase;
-  }
-  .v1-level-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(34, 211, 238, 0.12);
-    border: 1px solid rgba(34, 211, 238, 0.3);
-    padding: 5px 11px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-weight: 700;
-    color: #22d3ee;
-  }
-  .v1-app-name {
-    font-family: 'Fraunces', serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    z-index: 2;
-    position: relative;
-  }
-  .v1-app-name::after {
-    content: ' ⏱️';
-    font-size: 18px;
-  }
-  .v1-profile {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 500;
-    z-index: 2;
-    position: relative;
-  }
-  .v1-notif {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 12px 14px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    z-index: 2;
-    position: relative;
-    margin-top: auto;
-    animation: notifPulse 3s ease-in-out infinite;
-  }
-  @keyframes notifPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
-    50% { box-shadow: 0 0 0 8px rgba(79, 70, 229, 0); }
-  }
-  .v1-notif-icon {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .v1-notif-content { flex: 1; min-width: 0; }
-  .v1-notif-app {
-    font-size: 11px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 2px;
-  }
-  .v1-notif-text {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.4;
-  }
-  .v1-notif-time {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.4);
-    align-self: flex-start;
-    flex-shrink: 0;
-  }
-  .v1-success-bar {
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    border-radius: 10px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 2;
-    position: relative;
-    font-size: 11px;
-    color: #10b981;
-    font-weight: 600;
-  }
-  .v1-check-circle {
-    width: 16px;
-    height: 16px;
-    background: #10b981;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  /* Visual 2 — coach proactif + chat (vrai produit) */
-  .visual-2 {
-    background: var(--paper-2);
-    border-radius: 28px;
-    padding: 28px;
-    height: 380px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .visual-2-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .coach-notif {
-    background: white;
-    border-radius: 14px;
-    padding: 10px 12px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--border);
-  }
-  .coach-notif-icon {
-    width: 28px;
-    height: 28px;
-    background: linear-gradient(135deg, var(--indigo), #7c3aed);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-  .coach-notif-content { flex: 1; min-width: 0; }
-  .coach-notif-app {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 2px;
-  }
-  .coach-notif-text {
-    font-size: 12.5px;
-    color: var(--text);
-    line-height: 1.4;
-  }
-
-  .visual-2-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 4px 0;
-  }
-  .chat-bubble {
-    max-width: 80%;
-    padding: 10px 14px;
-    border-radius: 16px;
-    font-size: 13px;
-    line-height: 1.4;
-  }
-  .bubble-user {
-    background: var(--ink);
-    color: var(--paper);
-    border-bottom-right-radius: 4px;
-    align-self: flex-end;
-  }
-  .bubble-coach {
-    background: white;
-    color: var(--ink);
-    border-bottom-left-radius: 4px;
-    align-self: flex-start;
-    border: 1px solid var(--border);
-  }
-
-  /* Visual 3 — vraie capture app gamification */
-  .visual-3 {
-    background: var(--paper-2);
-    border-radius: 28px;
-    padding: 24px;
-    height: 380px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .visual-3-screen {
-    width: 100%;
-    max-width: 420px;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-    filter: brightness(0.82) contrast(1.05);
-    display: block;
-  }
-  /* Visuals 01/02 — captures plein cadre (taille réduite, non rognées) */
-  .visual-shot {
-    background: var(--paper-2);
-    border-radius: 28px;
-    padding: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .visual-shot-img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-    filter: brightness(0.92) contrast(1.03);
-    display: block;
-  }
-
-  /* ─────────── PROFILS ─────────── */
-  .profils {
-    padding: 120px 0;
-    background: var(--paper-2);
-  }
-  .profils-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-  .profils-header .section-title {
-    margin: 0 auto;
-  }
-  .profils-sub {
-    font-size: 18px;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.55;
-  }
-  .profils-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 12px;
-    max-width: 980px;
-    margin: 0 auto;
-  }
-  .profil-card {
-    background: white;
-    border: 1.5px solid var(--border);
-    border-radius: 18px;
-    padding: 24px 8px;
-    text-align: center;
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-  }
-  .profil-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--indigo);
-    box-shadow: 0 12px 24px rgba(79, 70, 229, 0.12);
-  }
-  .profil-emoji {
-    font-size: 36px;
-    display: block;
-    margin-bottom: 10px;
-  }
-  .profil-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink);
-  }
-  .profil-experts {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 4px;
-    line-height: 1.3;
-  }
-
-  /* ─────────── APERÇU APP (screenshots) ─────────── */
-  .preview {
-    padding: 120px 0;
-    background: var(--paper);
-    overflow: hidden;
-  }
-  .preview-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-  .preview-header .section-title { margin: 0 auto 16px; }
-  .preview-sub {
-    font-size: 17px;
-    color: var(--text-muted);
-    max-width: 540px;
-    margin: 0 auto;
-  }
-  .preview-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .preview-card {
-    text-align: center;
-    transition: transform 0.3s;
-  }
-  .preview-card:hover {
-    transform: translateY(-8px);
-  }
-  .preview-screen-wrap {
-    background: linear-gradient(160deg, #1a1a2e 0%, #0a0a14 100%);
-    border-radius: 28px;
-    padding: 14px 10px 10px;
-    box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.18),
-      0 0 0 4px #1a1a24;
-    margin-bottom: 16px;
-    position: relative;
-  }
-  .preview-screen-wrap::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 16px;
-    background: #000;
-    border-radius: 10px;
-    z-index: 2;
-  }
-  .preview-screen {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 18px;
-    aspect-ratio: 9 / 19.5;
-    object-fit: cover;
-    object-position: top;
-  }
-  .preview-emoji {
-    font-size: 22px;
-    margin-bottom: 6px;
-  }
-  .preview-name {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-  .preview-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-
-  /* ─────────── WAITLIST ─────────── */
-  .waitlist {
-    padding: 100px 0;
-    background: var(--paper-2);
-  }
-  .waitlist-inner {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .waitlist .section-eyebrow { color: var(--text-muted); }
-  .waitlist-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(32px, 4vw, 44px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin-bottom: 16px;
-  }
-  .waitlist-title em {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--indigo);
-  }
-  .waitlist-sub {
-    font-size: 16px;
-    color: var(--text-muted);
-    line-height: 1.55;
-    margin-bottom: 32px;
-  }
-  .waitlist .store-badges { justify-content: center; }
-
-  /* ─────────── EXPERTS (carrousel) ─────────── */
-  .experts {
-    padding: 120px 0;
-    background: var(--paper);
-    overflow: hidden;
-  }
-  .experts-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-  .experts-header .section-title { margin: 0 auto 16px; }
-  .experts-sub {
-    font-size: 17px;
-    color: var(--text-muted);
-    max-width: 540px;
-    margin: 0 auto;
-  }
-  .marquee {
-    display: flex;
-    overflow: hidden;
-    mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
-  }
-  .marquee-track {
-    display: flex;
-    gap: 16px;
-    animation: scroll 40s linear infinite;
-    flex-shrink: 0;
-  }
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .expert-chip {
-    background: var(--paper-2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 14px 18px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-shrink: 0;
-    min-width: 220px;
-  }
-  .exp-emoji { font-size: 28px; }
-  .exp-name {
-    font-family: 'Fraunces', serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-  .exp-role {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-
-  /* ─────────── COMPARATIF ─────────── */
-  .comparison {
-    padding: 120px 0;
-    background: var(--ink);
-    color: var(--paper);
-    position: relative;
-    overflow: hidden;
-  }
-  .comparison .section-eyebrow { color: rgba(250, 250, 247, 0.5); }
-  .comparison .section-title { margin: 0 auto 60px; text-align: center; }
-  .comparison .section-title em { color: var(--gold); }
-
-  .compare-hint {
-    display: none;
-    text-align: center;
-    color: var(--gold);
-    font-size: 13.5px;
-    font-weight: 600;
-    margin: -40px auto 24px;
-  }
-  .compare-table-wrap {
-    overflow-x: auto;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 12px;
-    max-width: 980px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .compare-table-wrap::after {
-    content: '';
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 40px;
-    height: 100%;
-    pointer-events: none;
-    background: linear-gradient(to right, rgba(26,26,36,0), rgba(26,26,36,0.55));
-    border-radius: 0 24px 24px 0;
-  }
-  table.compare {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 640px;
-  }
-  table.compare thead th {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--paper);
-    padding: 18px 16px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  table.compare thead th:first-child { text-align: left; }
-  table.compare thead th.tc-col {
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.3), rgba(124, 58, 237, 0.2));
-    border-radius: 12px 12px 0 0;
-    color: white;
-  }
-  table.compare tbody td {
-    padding: 14px 16px;
-    font-size: 14px;
-    color: var(--text-light);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    text-align: center;
-  }
-  table.compare tbody td:first-child {
-    text-align: left;
-    color: var(--paper);
-    font-weight: 500;
-  }
-  table.compare tbody td.hl {
-    background: rgba(79, 70, 229, 0.1);
-    color: white;
-    font-weight: 600;
-  }
-  table.compare tbody tr:last-child td { border-bottom: none; }
-  .ok { color: var(--green); font-weight: 700; font-size: 16px; }
-  .no { color: rgba(239, 68, 68, 0.6); font-size: 16px; }
-  .partial { color: var(--gold); font-weight: 600; font-size: 14px; }
-
-  /* ─────────── PRICING ─────────── */
-  .pricing {
-    background: var(--paper);
-    color: var(--ink);
-    padding: 120px 0;
-  }
-  .pricing .section-title { text-align: center; margin: 0 auto 16px; }
-  .pricing-sub {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 17px;
-    max-width: 540px;
-    margin: 0 auto 60px;
-  }
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .price-card {
-    background: white;
-    border: 1.5px solid var(--border);
-    border-radius: 24px;
-    padding: 40px 32px;
-  }
-  .price-card.featured {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-    position: relative;
-    transform: scale(1.02);
-    box-shadow: 0 20px 50px rgba(10, 10, 15, 0.2);
-  }
-  .price-card.featured::before {
-    content: 'PRIX DE LANCEMENT';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--gold);
-    color: var(--ink);
-    padding: 6px 14px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-  .price-card-name {
-    font-family: 'Fraunces', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .price-card-tagline {
-    font-size: 14px;
-    opacity: 0.7;
-    margin-bottom: 28px;
-  }
-  .price-amount {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-  .price-num {
-    font-family: 'Fraunces', serif;
-    font-size: 56px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-  .price-period { font-size: 16px; opacity: 0.6; }
-  .price-old {
-    font-size: 13px;
-    opacity: 0.5;
-    text-decoration: line-through;
-    margin-bottom: 24px;
-  }
-  .price-old.invisible { visibility: hidden; }
-  .price-features {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 32px;
-  }
-  .price-features li {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 10px 0;
-    font-size: 14.5px;
-    border-bottom: 1px solid var(--border);
-  }
-  .price-card.featured .price-features li {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  .price-features li:last-child { border-bottom: none; }
-  .price-features li::before {
-    content: '→';
-    color: var(--indigo);
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .price-card.featured .price-features li::before { color: var(--gold); }
-  .price-cta {
-    width: 100%;
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    padding: 16px;
-    border-radius: 100px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-  }
-  .price-card.featured .price-cta {
-    background: var(--paper);
-    color: var(--ink);
-  }
-  .price-cta:hover { background: var(--indigo); color: var(--paper); }
-  .price-disclaimer {
-    text-align: center;
-    margin-top: 32px;
-    color: var(--text-muted);
-    font-size: 13px;
-  }
-  .price-disclaimer strong { color: var(--gold); }
-
-  /* ─────────── FAQ ─────────── */
-  .faq {
-    padding: 120px 0;
-    background: var(--paper-2);
-  }
-  .faq-header { text-align: center; margin-bottom: 60px; }
-  .faq-header .section-title { margin: 0 auto; }
-  .faq-grid {
-    max-width: 760px;
-    margin: 0 auto;
-  }
-  .faq-item {
-    border-bottom: 1px solid var(--border);
-    padding: 24px 0;
-  }
-  .faq-question {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--ink);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    transition: color 0.2s;
-  }
-  .faq-question::-webkit-details-marker { display: none; }
-  .faq-question:hover { color: var(--indigo); }
-  .faq-question::after {
-    content: '+';
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--indigo);
-    transition: transform 0.3s;
-  }
-  details[open] .faq-question::after { transform: rotate(45deg); }
-  .faq-answer {
-    margin-top: 14px;
-    font-size: 15.5px;
-    color: var(--text-muted);
-    line-height: 1.65;
-  }
-
-  /* ─────────── FINAL CTA ─────────── */
-  .final-cta {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 120px 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .final-cta-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .final-cta-title em {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--gold);
-  }
-  .final-cta-sub {
-    font-size: 18px;
-    color: var(--text-light);
-    max-width: 560px;
-    margin: 0 auto 40px;
-  }
-  .final-cta .store-badges { justify-content: center; }
-  .final-cta .store-badge img { height: 60px; }
-
-  /* ─────────── FOOTER ─────────── */
-  footer {
-    background: var(--ink);
-    color: var(--text-light);
-    padding: 40px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    text-align: center;
-    font-size: 13px;
-  }
-  footer a {
-    color: var(--paper);
-    text-decoration: none;
-  }
-  footer a:hover { color: var(--indigo-soft); }
-
-  /* ─────────── ANIMATIONS ─────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ─────────── RESPONSIVE ─────────── */
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-    .hero-visual { height: 520px; }
-    .phone-photo { width: 240px; transform: translateX(-58%); }
-    .smartwatch-photo { width: 130px; bottom: 50px; right: 5px; }
-    .annotation { display: none; }
-    .problem-grid { grid-template-columns: 1fr; gap: 16px; }
-    .solution-row { grid-template-columns: 1fr; gap: 32px; }
-    .solution-row:nth-child(even) .solution-text { order: 1; }
-    .solution-row:nth-child(even) .solution-visual { order: 2; }
-    .solution-num { font-size: 64px; }
-    .profils-grid { grid-template-columns: repeat(4, 1fr); max-width: 540px; }
-    .preview-grid { grid-template-columns: 1fr; max-width: 320px; gap: 36px; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .price-card.featured { transform: none; }
-    .visual-1, .visual-2, .visual-3 { height: 320px; }
-  }
-  @media (max-width: 540px) {
-    .hero { padding: 110px 0 60px; }
-    .container { padding: 0 20px; }
-    .hero-ctas { flex-direction: column; align-items: stretch; }
-    .store-badge img { height: 48px; }
-    .final-cta .store-badge img { height: 52px; }
-    .btn-secondary { justify-content: center; }
-    .nav-cta { padding: 8px 14px; font-size: 12px; }
-    .problem, .solution, .profils, .experts, .comparison, .pricing, .faq, .final-cta { padding: 80px 0; }
-    .phone-photo { width: 220px; transform: translateX(-50%); }
-    .smartwatch-photo { width: 100px; bottom: 30px; right: 0; transform: rotate(-3deg); }
-    .hero-visual { height: 480px; }
-    .profils-grid { grid-template-columns: repeat(2, 1fr); max-width: 320px; gap: 10px; }
-    table.compare { font-size: 12.5px; }
-    table.compare tbody td { padding: 10px 8px; }
-  }
-  @media (max-width: 700px) {
-    .compare-hint { display: block; }
-    .compare-table-wrap::after { display: block; }
-  }
+/* ─── téléphone ─── */
+@media (max-width: 1080px) {
+  .heros-grille, .deux { grid-template-columns: 1fr; }
+  .mosaique { grid-template-columns: 1fr; grid-template-areas: "gami" "profils" "experts"; }
+  .claude .deux { grid-template-columns: 1fr; }
+  .gami-capture { min-height: 0; } .gami-capture .cadre img { height: auto; aspect-ratio: 1179 / 1300; }
+  .apercu { grid-template-columns: repeat(5, 220px); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -40px; padding: 0 40px 8px; }
+  .apercu figure { scroll-snap-align: start; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 20px; }
+  .bloc { padding: 80px 0; }
+  h2 { font-size: 34px; line-height: 1.1; letter-spacing: -0.035em; }
+  h3 { font-size: 21px; }
+  .sous { font-size: 16.5px; }
+  .entete { margin-bottom: 36px; }
+  .nav .wrap { height: 60px; } .nav-liens { display: none; } .logo { font-size: 19px; } .logo img { width: 32px; height: 32px; }
+  .nav .bouton { min-height: 44px; padding: 0 14px; }
+  .heros { padding: 40px 0 24px; background: radial-gradient(360px 320px at 50% 74%, var(--lueur), transparent 70%), var(--fond); }
+  .heros-grille { gap: 36px; }
+  .heros h1 { font-size: 42px; line-height: 1.04; letter-spacing: -0.04em; }
+  .heros .sous { font-size: 16.5px; }
+  .heros-actions { margin-top: 28px; }
+  .heros-actions .badges { width: 100%; }
+  .badge-store, .badge-store img { height: 46px; }
+  .confiance { font-size: 12.5px; white-space: normal; } .confiance b { display: block; margin-bottom: 2px; }
+  .scene { width: 340px; }
+  .cadran { width: 280px; }
+  .cadran .val { font-size: 56px; }
+  .etiq { font-size: 13px; padding: 7px 11px 7px 9px; }
+  .etiq.e1 { left: -2px; top: 26px; } .etiq.e2 { right: -4px; top: 112px; } .etiq.e3 { left: 2px; top: 222px; }
+  .preuve-mini { display: none; }
+  .regle { margin-top: 36px; } .regle-chiffres span:nth-child(even) { display: none; }
+  .releves { grid-template-columns: 1fr; gap: 14px; }
+  .releve { padding: 24px 22px; }
+  .releve .mesure { font-size: 36px; margin-top: 18px; }
+  .deux { gap: 44px; }
+  .photos { height: 440px; }
+  .photo-ecran { left: 0; width: 220px; height: 430px; border-radius: 28px; }
+  .photo-montre { right: 0; width: 170px; height: 170px; bottom: 0; }
+  .photo-legende { display: none; }
+  .tuile { padding: 26px 22px; }
+  .profils-grille { grid-template-columns: repeat(2, 1fr); }
+  .rangee { margin: 18px -22px 0; padding: 0 22px 4px; scroll-padding: 0 22px; }
+  .apercu { grid-template-columns: repeat(5, 200px); margin: 0 -20px; padding: 0 20px 8px; gap: 14px; }
+  .iphone-carte { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+  .iphone-carte h2 { font-size: 28px; }
+  .claude-scene { grid-template-columns: 1fr; }
+  .claude-capture { width: 210px; margin: 0 auto; }
+  .claude h2 { font-size: 34px; }
+  .faq-cols { grid-template-columns: 1fr; gap: 36px; } .faq-cols .entete { position: static; }
+  .xp-haut { font-size: 12.5px; gap: 8px; }
+  .comparatif { display: none; }
+  .cartes-comp { display: grid; gap: 10px; }
+  .carte-comp { padding: 18px 20px; border-radius: 16px; background: var(--fond-2); border: 1px solid var(--filet); }
+  .carte-comp b { display: block; font-size: 16px; margin-bottom: 12px; }
+  .carte-comp dl { margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .carte-comp dt { font: 500 10.5px/1.2 var(--mono); color: var(--ter); text-transform: uppercase; letter-spacing: .04em; }
+  .carte-comp dt.tc { color: var(--acc-texte); }
+  .carte-comp dd { margin: 4px 0 0; }
+  .carte-comp .col { padding: 8px 6px; border-radius: 10px; background: var(--carte); text-align: center; }
+  .carte-comp .col.tc { background: var(--acc-doux); }
+  .bascule { margin-bottom: 28px; }
+  .bascule button { padding: 0 12px; font-size: 14px; }
+  .prix-grille { grid-template-columns: 1fr; }
+  .prix.premium { order: -1; }
+  .prix { padding: 28px 22px; }
+  .faq summary { font-size: 16px; padding: 16px 18px; }
+  .faq details p { padding: 0 18px 18px; font-size: 15.5px; }
+  .final { padding: 88px 0; }
+  .final h2 { font-size: 36px; }
+  .pied .wrap { flex-direction: column; align-items: flex-start; }
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs><linearGradient id="tc-gain" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16793A"/><stop offset="1" stop-color="#1A8F45"/></linearGradient></defs>
+</svg>
 
-<!-- ═══════════════ NAV ═══════════════ -->
-<nav>
-  <div class="nav-inner">
-    <a href="#hero" class="logo">
-      <img src="timecoachicon512.png" alt="TimeCoach" class="logo-img">
-      TimeCoach
-    </a>
-    <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="nav-cta store-auto">Télécharger →</a>
+<!-- ═══ navigation ═══ -->
+<header class="nav">
+  <div class="wrap">
+    <a href="#heros" class="logo"><img src="timecoachicon512.png" alt="" width="36" height="36"><span>Time<em>Coach</em></span></a>
+    <nav class="nav-liens" aria-label="Sections">
+      <a href="#solution">Fonctions</a><a href="#claude">Claude</a><a href="#tarifs">Tarifs</a><a href="#faq">Questions</a>
+    </nav>
+    <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="bouton store-auto">Télécharger<svg class="ic s18 fleche" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
   </div>
-</nav>
+</header>
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<section class="hero" id="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-pulse"></span>
-          Disponible sur iPhone et Android
-        </div>
-        <h1 class="hero-title">Le coach productivité <em>qui te relance</em> quand tu lâches.</h1>
-        <p class="hero-sub">
-          Coach IA personnel, rappels précis qui ne ratent jamais sur Xiaomi/Samsung, et gamification basée sur tes vraies tâches. Pour celles et ceux qui en ont marre des to-do listes oubliées.
-        </p>
-        <div class="hero-ctas">
-          <div class="store-badges">
-            <a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener" class="store-badge">
-              <img src="badge-app-store.svg" alt="Télécharger dans l'App Store">
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="store-badge">
-              <img src="badge-google-play.png" alt="Disponible sur Google Play">
-            </a>
+<main>
+<!-- ═══ héros ═══ -->
+<section class="heros" id="heros">
+  <div class="wrap">
+    <div class="heros-grille">
+      <div class="heros-texte">
+        <p class="tiret">Disponible sur iPhone et Android</p>
+        <h1>Le coach productivité qui te <span class="gain-txt">relance</span> quand tu lâches.</h1>
+        <p class="sous">Rappels précis qui ne ratent jamais sur Xiaomi/Samsung, gamification basée sur tes vraies tâches, et un Connecteur Claude pour déposer et gérer tes tâches depuis l’app Claude. Pour celles et ceux qui en ont marre des to-do listes oubliées.</p>
+        <div class="heros-actions">
+          <div class="badges">
+            <a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener" class="badge-store"><img src="badge-app-store.svg" alt="Télécharger dans l’App Store"></a>
+            <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="badge-store"><img src="badge-google-play.png" alt="Disponible sur Google Play"></a>
           </div>
-          <a href="#solution" class="btn-secondary">Voir comment ça marche</a>
+          <a href="#solution" class="lien-sec">Voir comment ça marche<svg class="ic s18 fleche" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </div>
-        <div class="hero-trust">
-          <strong>14 jours Premium offerts</strong> · Sans engagement · Annulable en 1 clic
-        </div>
+        <p class="confiance"><b>14 jours Premium offerts</b><span class="sep"> · </span>sans engagement · annulable en un geste</p>
       </div>
 
-      <div class="hero-visual">
-        <!-- À REMPLACER par tes vraies photos -->
-        <img src="hero-phone.jpg" alt="Lock screen avec notification TimeCoach" class="phone-photo">
-        <img src="hero-watch.jpg" alt="Notification TimeCoach sur smartwatch" class="smartwatch-photo">
-
-        <div class="annotation annotation-1">
-          Des notifs qui <strong>arrivent vraiment</strong>, même sur Xiaomi et Samsung.
-        </div>
-        <div class="annotation annotation-2">
-          Double notif : <strong>rappel + heure pile</strong>. Compatible smartwatch.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ PROBLEM ═══════════════ -->
-<section class="problem">
-  <div class="container">
-    <p class="section-eyebrow">Le problème</p>
-    <h2 class="section-title">Tu as déjà essayé. Et <em>ça ne marche pas</em>.</h2>
-
-    <div class="problem-grid">
-      <div class="problem-card">
-        <div class="problem-card-num">— 01</div>
-        <h3 class="problem-card-title">Les notifs n'arrivent pas</h3>
-        <p class="problem-card-desc">
-          Tu programmes un rappel pour 14h. Il sonne à 14h12. Ou jamais. Surtout sur Xiaomi, Huawei, Samsung. Android tue les apps en arrière-plan, et personne ne le dit.
-        </p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-num">— 02</div>
-        <h3 class="problem-card-title">La gamification est creuse</h3>
-        <p class="problem-card-desc">
-          Tu gagnes des points pour avoir bu de l'eau. Tu débloques des badges qui ne veulent rien dire. La distraction prend le pas sur la productivité.
-        </p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-num">— 03</div>
-        <h3 class="problem-card-title">Tu lâches après 3 jours</h3>
-        <p class="problem-card-desc">
-          Aucune app ne s'adapte vraiment à toi. Pas de coach. Pas de relance intelligente. Juste une liste statique. Forcément, tu décroches.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ SOLUTION ═══════════════ -->
-<section class="solution" id="solution">
-  <div class="container">
-    <div style="margin-bottom: 80px; max-width: 720px;">
-      <p class="section-eyebrow">La solution</p>
-      <h2 class="section-title" style="color: var(--ink);">Ce que TimeCoach fait <em>vraiment</em> différemment.</h2>
-    </div>
-
-    <div class="solution-grid">
-
-      <!-- 01 — Rappels qui ne ratent pas -->
-      <div class="solution-row">
-        <div class="solution-text">
-          <div class="solution-num">01</div>
-          <h3 class="solution-title">Des rappels qui arrivent. Vraiment.</h3>
-          <p class="solution-desc">
-            On a passé des semaines à debugger les optimisations batterie d'Android. Channel HIGH, importance MAX, onboarding par marque. Résultat : tes rappels arrivent vraiment, pas avec 12 minutes de retard comme ailleurs.
-          </p>
-          <ul class="solution-list">
-            <li><span class="check">✓</span><span>Notifications haute priorité (channel MAX), survivent aux optimisations batterie</span></li>
-            <li><span class="check">✓</span><span>Configuration guidée pour Xiaomi, Samsung, Huawei, Oppo</span></li>
-            <li><span class="check">✓</span><span>Double notif : préparation + heure pile, pour ne rien rater</span></li>
-            <li><span class="check">✓</span><span>Compatible avec ta smartwatch (Wear OS, Galaxy Watch)</span></li>
-          </ul>
-        </div>
-        <div class="solution-visual">
-          <div class="visual-shot">
-            <img src="hero-phone.jpg" alt="Notification TimeCoach qui arrive à l'heure sur l'écran verrouillé" class="visual-shot-img">
+      <div class="scene">
+        <div class="cadran" role="img" aria-label="Le cadran de TimeCoach : score du jour à 50 %, 3 tâches sur 6">
+          <svg class="cadran-svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><line class="grad quart" x1="200.00" y1="11.00" x2="200.00" y2="1.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="220.33" y1="6.57" x2="220.74" y2="2.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="240.44" y1="9.75" x2="241.25" y2="5.94" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="260.10" y1="15.02" x2="261.31" y2="11.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="279.11" y1="22.32" x2="280.70" y2="18.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="295.25" y1="35.02" x2="299.40" y2="27.83" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="314.32" y1="42.65" x2="316.62" y2="39.49" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="330.15" y1="55.46" x2="332.76" y2="52.56" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="344.54" y1="69.85" x2="347.44" y2="67.24" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="357.35" y1="85.68" x2="360.51" y2="83.38" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="364.98" y1="104.75" x2="372.17" y2="100.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="377.68" y1="120.89" x2="381.25" y2="119.30" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="384.98" y1="139.90" x2="388.69" y2="138.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="390.25" y1="159.56" x2="394.06" y2="158.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="393.43" y1="179.67" x2="397.31" y2="179.26" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="389.00" y1="200.00" x2="399.00" y2="200.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="393.43" y1="220.33" x2="397.31" y2="220.74" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="390.25" y1="240.44" x2="394.06" y2="241.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="384.98" y1="260.10" x2="388.69" y2="261.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="377.68" y1="279.11" x2="381.25" y2="280.70" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="364.98" y1="295.25" x2="372.17" y2="299.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="357.35" y1="314.32" x2="360.51" y2="316.62" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="344.54" y1="330.15" x2="347.44" y2="332.76" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="330.15" y1="344.54" x2="332.76" y2="347.44" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="314.32" y1="357.35" x2="316.62" y2="360.51" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="295.25" y1="364.98" x2="299.40" y2="372.17" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="279.11" y1="377.68" x2="280.70" y2="381.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="260.10" y1="384.98" x2="261.31" y2="388.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="240.44" y1="390.25" x2="241.25" y2="394.06" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="220.33" y1="393.43" x2="220.74" y2="397.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="200.00" y1="389.00" x2="200.00" y2="399.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="179.67" y1="393.43" x2="179.26" y2="397.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="159.56" y1="390.25" x2="158.75" y2="394.06" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="139.90" y1="384.98" x2="138.69" y2="388.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="120.89" y1="377.68" x2="119.30" y2="381.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="104.75" y1="364.98" x2="100.60" y2="372.17" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="85.68" y1="357.35" x2="83.38" y2="360.51" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="69.85" y1="344.54" x2="67.24" y2="347.44" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="55.46" y1="330.15" x2="52.56" y2="332.76" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="42.65" y1="314.32" x2="39.49" y2="316.62" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="35.02" y1="295.25" x2="27.83" y2="299.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="22.32" y1="279.11" x2="18.75" y2="280.70" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="15.02" y1="260.10" x2="11.31" y2="261.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="9.75" y1="240.44" x2="5.94" y2="241.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="6.57" y1="220.33" x2="2.69" y2="220.74" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="11.00" y1="200.00" x2="1.00" y2="200.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="6.57" y1="179.67" x2="2.69" y2="179.26" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="9.75" y1="159.56" x2="5.94" y2="158.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="15.02" y1="139.90" x2="11.31" y2="138.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="22.32" y1="120.89" x2="18.75" y2="119.30" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="35.02" y1="104.75" x2="27.83" y2="100.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="42.65" y1="85.68" x2="39.49" y2="83.38" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="55.46" y1="69.85" x2="52.56" y2="67.24" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="69.85" y1="55.46" x2="67.24" y2="52.56" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="85.68" y1="42.65" x2="83.38" y2="39.49" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="104.75" y1="35.02" x2="100.60" y2="27.83" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="120.89" y1="22.32" x2="119.30" y2="18.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="139.90" y1="15.02" x2="138.69" y2="11.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="159.56" y1="9.75" x2="158.75" y2="5.94" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="179.67" y1="6.57" x2="179.26" y2="2.69" stroke-width="1.1" stroke-linecap="round"/><circle class="echo" cx="200.0" cy="200.0" r="187.00" fill="none" stroke-width="1"/><circle class="piste" cx="200.0" cy="200.0" r="175.00" fill="none" stroke-width="14.0"/><circle class="arc" data-c="1099.56" data-p="0.5000" cx="200.0" cy="200.0" r="175.00" fill="none" stroke="url(#tc-gain)" stroke-width="14.0" stroke-linecap="round" stroke-dasharray="1099.56" stroke-dashoffset="549.78" transform="rotate(-90 200.0 200.0)"/><g class="eclairs"><line class="eclair" data-h="0" x1="200.00" y1="11.50" x2="200.00" y2="0.60" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="1" x1="294.25" y1="36.75" x2="299.70" y2="27.31" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="2" x1="363.25" y1="105.75" x2="372.69" y2="100.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="3" x1="388.50" y1="200.00" x2="399.40" y2="200.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="4" x1="363.25" y1="294.25" x2="372.69" y2="299.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="5" x1="294.25" y1="363.25" x2="299.70" y2="372.69" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="6" x1="200.00" y1="388.50" x2="200.00" y2="399.40" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="7" x1="105.75" y1="363.25" x2="100.30" y2="372.69" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="8" x1="36.75" y1="294.25" x2="27.31" y2="299.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="9" x1="11.50" y1="200.00" x2="0.60" y2="200.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="10" x1="36.75" y1="105.75" x2="27.31" y2="100.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="11" x1="105.75" y1="36.75" x2="100.30" y2="27.31" stroke-width="2.6" stroke-linecap="round"/></g></svg><div class="trotteuse" aria-hidden="true"><svg viewBox="0 0 400 400" focusable="false"><line class="aiguille" x1="200.0" y1="240.00" x2="200.0" y2="2" stroke-width="2" stroke-linecap="round"/><circle class="moyeu" cx="200.0" cy="200.0" r="5"/><circle class="moyeu-creux" cx="200.0" cy="200.0" r="2"/></svg></div>
+          <div class="centre" aria-hidden="true">
+            <span class="lib">Score du jour</span>
+            <span class="val"><b data-score>50</b><small>%</small></span>
+            <span class="taches">3/6 tâches</span>
           </div>
         </div>
-      </div>
-
-      <!-- 02 — Coach IA proactif + chat -->
-      <div class="solution-row">
-        <div class="solution-text">
-          <div class="solution-num">02</div>
-          <h3 class="solution-title">Un coach qui te connaît. Pas un bot.</h3>
-          <p class="solution-desc">
-            Ton coach personnel prend l'initiative quand ton streak est en danger, ou quand toutes tes tâches sont faites. Et tu peux aussi lui parler directement quand tu veux, propulsé par Claude.
-          </p>
-          <ul class="solution-list">
-            <li><span class="check">✓</span><span>Notifs proactives intelligentes (streak, victoires, relances)</span></li>
-            <li><span class="check">✓</span><span>Chat direct avec le coach (Premium)</span></li>
-            <li><span class="check">✓</span><span>3 modes au choix : Silencieux, Modéré, Actif</span></li>
-            <li><span class="check">✓</span><span>Jamais entre 22h et 8h. Aucune intrusion.</span></li>
-          </ul>
+        <span class="etiq gain e1"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>+140&nbsp;XP</span>
+        <span class="etiq e2"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>Niv.&nbsp;5</span>
+        <span class="etiq e3"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>10h00 pile</span>
+        <div class="preuve-mini">
+          <img class="ecran" src="images/hero-phone.jpg" width="1000" height="2166" alt="Notification TimeCoach sur l’écran verrouillé d’un téléphone Android">
+          <img class="montre" src="images/hero-watch.jpg" width="1000" height="1334" alt="La même notification TimeCoach sur une montre connectée">
+          <span><b>Photos réelles</b><br>écran verrouillé et montre</span>
         </div>
-        <div class="solution-visual">
-          <div class="visual-shot">
-            <img src="screen-coach-v2.jpg" alt="Coach IA TimeCoach — notifications proactives et chat" class="visual-shot-img">
+      </div>
+    </div>
+    <div class="regle" aria-hidden="true"></div>
+    <div class="regle-chiffres" aria-hidden="true"><span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span><span>18:00</span><span>20:00</span></div>
+  </div>
+</section>
+
+<!-- ═══ le problème : trois relevés ═══ -->
+<section class="bloc probleme">
+  <div class="wrap">
+    <div class="entete" data-rev>
+      <p class="tiret">Le problème</p>
+      <h2>Tu as déjà essayé. Et ça ne marche pas.</h2>
+    </div>
+    <div class="releves" data-rev>
+      <article class="releve" style="--i:0">
+        <span class="num">Relevé 01</span>
+        <span class="mesure heure">14h00 <span class="retard">→&nbsp;14h12</span></span>
+        <p class="legende">Le rappel en retard, ailleurs</p>
+        <h3>Les notifs n’arrivent pas</h3>
+        <p>Tu programmes un rappel pour 14h. Il sonne à 14h12. Ou jamais. Surtout sur Xiaomi, Huawei, Samsung. Android tue les apps en arrière-plan, et personne ne le dit.</p>
+      </article>
+      <article class="releve" style="--i:1">
+        <span class="num">Relevé 02</span>
+        <span class="mesure"><span data-compte="33">33</span><small>badges</small></span>
+        <p class="legende">Sur tes vraies tâches, pas sur l’eau bue</p>
+        <h3>La gamification est creuse</h3>
+        <p>Tu gagnes des points pour avoir bu de l’eau. Tu débloques des badges qui ne veulent rien dire. La distraction prend le pas sur la productivité.</p>
+      </article>
+      <article class="releve" style="--i:2">
+        <span class="num">Relevé 03</span>
+        <span class="mesure"><span data-compte="7">7</span><small>profils</small></span>
+        <p class="legende">Une app qui s’adapte à toi</p>
+        <h3>Tu lâches après 3 jours</h3>
+        <p>Une liste statique, des rappels qui arrivent en retard, aucune récompense pour ce que tu fais vraiment. Forcément, tu décroches.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 01 : rappels ═══ -->
+<section class="bloc" id="solution">
+  <div class="wrap">
+    <div class="entete" data-rev>
+      <p class="tiret">La solution</p>
+      <h2>Ce que TimeCoach fait vraiment différemment.</h2>
+    </div>
+    <div class="deux">
+      <div data-rev>
+        <p class="tiret" style="--i:0">01 · Rappels exacts</p>
+        <h3 style="--i:1">Des rappels qui arrivent. Vraiment.</h3>
+        <p class="sous" style="--i:2">On a passé des semaines à debugger les optimisations batterie d’Android. Channel HIGH, importance MAX, onboarding par marque. Résultat : tes rappels arrivent vraiment, pas avec 12 minutes de retard comme ailleurs.</p>
+        <ul class="liste" style="--i:3">
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Notifications haute priorité (channel MAX), survivent aux optimisations batterie</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Configuration guidée pour Xiaomi, Samsung, Huawei, Oppo</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Double notif : préparation + heure pile, pour ne rien rater</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Compatible avec ta smartwatch (Wear OS, Galaxy Watch)</li>
+        </ul>
+        <p class="marques" style="--i:4"><span>Xiaomi</span> · <span>Samsung</span> · <span>Huawei</span> · <span>Oppo</span> : guidage par marque</p>
+      </div>
+      <div class="photos" data-rev>
+        <div class="photo-ecran" style="--i:0"><img src="images/hero-phone.jpg" width="1000" height="2166" alt="Notification TimeCoach qui arrive à l’heure sur l’écran verrouillé"></div>
+        <p class="photo-legende" style="--i:1"><b>17:15</b>Rappel à l’heure pile<br>sur l’écran verrouillé</p>
+        <div class="photo-montre" style="--i:2"><img src="images/hero-watch.jpg" width="1000" height="1334" alt="Notification TimeCoach sur une montre connectée"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 : fonctions en mosaïque ═══ -->
+<section class="bloc fonctions" style="padding-top: 24px">
+  <div class="wrap">
+    <div class="mosaique" data-rev>
+      <article class="tuile gami" style="--i:0">
+        <span class="num">02 · Gamification</span>
+        <h3>La gamification qui sert ta vie.</h3>
+        <p>XP, niveaux, streaks, 33 badges. Mais basés <strong>uniquement</strong> sur tes vraies tâches importantes. Pas sur boire de l’eau. La progression, mais sans la distraction.</p>
+        <div class="xp">
+          <div class="xp-haut"><span><b>1100 XP</b> · Niv. 3 Efficace</span><span>Niv. 4 à 2500</span></div>
+          <div class="jauge"><i style="--p:.44"></i></div>
+          <div class="xp-bas"><span class="puce g">+15 / +30 / +50 XP</span><span class="puce">6 niveaux</span><span class="puce">33 badges</span></div>
+        </div>
+        <ul class="liste">
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>XP par tâche (+15 / +30 / +50 selon priorité)</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>6 niveaux : Débutant → Maître du temps<span style="color: var(--ambre); display: inline-flex"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg></span></li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>33 badges à débloquer</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Timer Pomodoro intégré + calendrier mensuel</li>
+        </ul>
+        <div class="gami-capture">
+          <div class="cadre"><img src="images/badges.jpg" width="800" height="1734" alt="Capture de TimeCoach : les badges, 8 sur 33 débloqués"></div>
+          <div class="cadre"><img src="images/xp-streak.jpg" width="800" height="1734" alt="Capture de TimeCoach : progression XP et bonus de streak"></div>
+        </div>
+      </article>
+
+      <article class="tuile profils" style="--i:1">
+        <span class="num">03 · 7 profils personnalisés</span>
+        <h3>L’app s’adapte à toi.</h3>
+        <p>Étudiant, parent, entrepreneur ou investisseur : chaque profil débloque ses objectifs types et ses experts dédiés.</p>
+        <div class="profils-grille">
+          <div class="profil"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg><b>Étudiant</b><small>Cal Newport, Jim Rohn</small></div>
+          <div class="profil"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg><b>Professionnel</b><small>P. Drucker, S. Sinek</small></div>
+          <div class="profil"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.62 13.8A2.25 2.25 0 1 1 12 10.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><b>Parent</b><small>Brené Brown, J. Joubert</small></div>
+          <div class="profil"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"/><path d="m2.5 21.5 1.4-1.4"/><path d="m20.1 3.9 1.4-1.4"/><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"/><path d="m9.6 14.4 4.8-4.8"/></svg><b>Sportif</b><small>Kobe Bryant, S. Williams</small></div>
+          <div class="profil"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg><b>Entrepreneur</b><small>Elon Musk, Steve Jobs</small></div>
+          <div class="profil"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg><b>Créatif</b><small>Picasso, A. Kleon</small></div>
+          <div class="profil"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg><b>Investisseur</b><small>W. Buffett, Ray Dalio</small></div>
+          <div class="profil bascule-premium"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg><b>Change en un tap</b><small><span class="prem">Premium</span></small></div>
+        </div>
+        <p style="font-size:15px"><strong style="color:var(--encre)">Étudiant, parent, entrepreneur… selon le moment.</strong> Change de profil en un tap, l’app suit.</p>
+      </article>
+
+      <article class="tuile experts" style="--i:2">
+        <div class="rangee-haut">
+          <div>
+            <span class="num">04 · Conseils d’experts</span>
+            <h3>Apprends des meilleurs au monde.</h3>
+          </div>
+          <div class="fleches">
+            <button class="fleche-rangee" type="button" data-defile="-1" aria-label="Experts précédents"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button class="fleche-rangee" type="button" data-defile="1" aria-label="Experts suivants"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></button>
           </div>
         </div>
-      </div>
-
-      <!-- 03 — Gamification -->
-      <div class="solution-row">
-        <div class="solution-text">
-          <div class="solution-num">03</div>
-          <h3 class="solution-title">La gamification qui sert ta vie.</h3>
-          <p class="solution-desc">
-            XP, niveaux, streaks, 37 badges. Mais basés <strong>uniquement</strong> sur tes vraies tâches importantes. Pas sur boire de l'eau. La progression, mais sans la distraction.
-          </p>
-          <ul class="solution-list">
-            <li><span class="check">✓</span><span>XP par tâche (+15 / +30 / +50 selon priorité)</span></li>
-            <li><span class="check">✓</span><span>6 niveaux : Débutant → Maître du temps 👑</span></li>
-            <li><span class="check">✓</span><span>37 badges à débloquer</span></li>
-            <li><span class="check">✓</span><span>Timer Pomodoro intégré + calendrier mensuel</span></li>
-          </ul>
+        <p>Chaque jour, un conseil personnalisé des plus grands experts de ton domaine. 60+ citations adaptées à ton profil.</p>
+        <div class="rangee" tabindex="0" aria-label="Les experts cités dans l’app">
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></span><div><b>Warren Buffett</b><small>Investisseur légendaire</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"/><path d="m2.5 21.5 1.4-1.4"/><path d="m20.1 3.9 1.4-1.4"/><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"/><path d="m9.6 14.4 4.8-4.8"/></svg></span><div><b>Kobe Bryant</b><small>Légende du basketball</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg></span><div><b>Steve Jobs</b><small>Co-fondateur d’Apple</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.62 13.8A2.25 2.25 0 1 1 12 10.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><div><b>Brené Brown</b><small>Chercheuse &amp; auteure</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg></span><div><b>Pablo Picasso</b><small>Maître du XXe siècle</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg></span><div><b>Elon Musk</b><small>Entrepreneur visionnaire</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span><div><b>Cal Newport</b><small>Auteur, deep work</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg></span><div><b>Peter Drucker</b><small>Père du management</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"/><path d="m2.5 21.5 1.4-1.4"/><path d="m20.1 3.9 1.4-1.4"/><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"/><path d="m9.6 14.4 4.8-4.8"/></svg></span><div><b>Serena Williams</b><small>Légende du tennis</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></span><div><b>Ray Dalio</b><small>Fondateur Bridgewater</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg></span><div><b>Austin Kleon</b><small>Auteur, Steal Like an Artist</small></div></div>
+          <div class="expert"><span class="ic-rond"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg></span><div><b>Simon Sinek</b><small>Auteur, Start With Why</small></div></div>
         </div>
-        <div class="solution-visual">
-          <div class="visual-3">
-            <img src="screen-gamification.png" alt="Écran d'accueil TimeCoach avec niveaux, XP et streak" class="visual-3-screen">
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ aperçu de l'app (captures 1.9.0) ═══ -->
+<section class="bloc apercu-bloc" style="padding-top: 24px">
+  <div class="wrap">
+    <div class="entete" data-rev>
+      <p class="tiret">Aperçu de l’app</p>
+      <h2>Découvre TimeCoach en action.</h2>
+      <p class="sous">Une interface pensée pour être belle et motivante. Chaque profil avec ses objectifs et ses experts.</p>
+    </div>
+    <div class="apercu" data-rev>
+      <figure style="--i:0"><div class="cadre"><img src="images/accueil.jpg" width="800" height="1734" alt="Capture de TimeCoach : l’accueil, profil Entrepreneur, tâches du jour"></div><figcaption>Accueil<span>Ta journée, ton XP</span></figcaption></figure>
+      <figure style="--i:1"><div class="cadre"><img src="images/analyse.jpg" width="800" height="1734" alt="Capture de TimeCoach : analyse et progression, score du jour"></div><figcaption>Analyse<span>Score du jour, graphique</span></figcaption></figure>
+      <figure style="--i:2"><div class="cadre"><img src="images/conseils.jpg" width="800" height="1734" alt="Capture de TimeCoach : citations et sagesse"></div><figcaption>Conseils<span>Citations &amp; sagesse</span></figcaption></figure>
+      <figure style="--i:3"><div class="cadre"><img src="images/nouvelle-tache.jpg" width="800" height="1734" alt="Capture de TimeCoach : nouvelle tâche, priorité et récurrence"></div><figcaption>Nouvelle tâche<span>Priorité, objectif, récurrence</span></figcaption></figure>
+      <figure style="--i:4"><div class="cadre"><img src="images/calendrier.jpg" width="800" height="1734" alt="Capture de TimeCoach : le calendrier du mois"></div><figcaption>Calendrier<span>Ton mois d’un coup d’œil</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ l'app iPhone ═══ -->
+<section class="iphone" id="waitlist">
+  <div class="wrap" data-rev>
+    <div class="iphone-carte">
+      <div>
+        <p class="tiret" style="margin-bottom:12px">Version iPhone</p>
+        <h2>L’app iPhone est là.</h2>
+        <p>TimeCoach est désormais disponible sur l’App Store.</p>
+      </div>
+      <a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener" class="badge-store"><img src="badge-app-store.svg" alt="Télécharger dans l’App Store"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 : Claude ═══ -->
+<section class="bloc claude" id="claude">
+  <div class="wrap">
+    <div class="deux">
+      <div data-rev>
+        <p class="tiret" style="--i:0">05 · Connecteur Claude</p>
+        <h2 style="--i:1">Claude gère tes tâches. Tu gardes la main.</h2>
+        <p class="sous" style="--i:2">Dis à Claude ce que tu as à faire, depuis l’app Claude. Il dépose tes tâches dans TimeCoach, puis les coche, les reporte, les modifie ou les supprime quand tu le demandes. Tout s’applique à ta prochaine ouverture de l’app.</p>
+        <ul class="liste" style="--i:3">
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Claude agit sur les tâches qu’il a déposées, jamais sur le reste de ta liste</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>Tu choisis ses autorisations, action par action <span class="prem">Premium</span></li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>Un journal de ce qu’il a fait, et une corbeille pour tout restaurer</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Un jeton valable 90 jours, prolongeable d’un geste</li>
+        </ul>
+        <p class="mention" style="--i:4">Le Connecteur Claude demande l’application Claude et un abonnement TimeCoach Premium. TimeCoach est une application indépendante, ni éditée ni approuvée par Anthropic.</p>
+      </div>
+      <div data-rev>
+        <div class="claude-scene">
+          <div class="conv" style="--i:0">
+            <div class="conv-tete"><svg class="ic s16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg>Dans l’app Claude</div>
+            <p class="bulle">Dépose mes trois tâches de demain : appeler le comptable à 9h, envoyer le devis, préparer la réunion de 14h.</p>
+            <div class="reponse">
+              <span class="outil"><svg class="ic s14" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></svg>TimeCoach · creer_taches</span>
+              <div>C’est fait, trois tâches déposées dans TimeCoach pour demain.</div>
+            </div>
+            <div class="liste-tc">
+              <div class="tete"><span>TimeCoach · demain</span><span>3 tâches</span></div>
+              <div class="tache"><span class="case"></span><b>Appeler le comptable</b><span class="h">09:00</span><span class="xp-t">+30 XP</span></div>
+              <div class="tache"><span class="case"></span><b>Envoyer le devis</b><span class="h"></span><span class="xp-t">+30 XP</span></div>
+              <div class="tache"><span class="case"></span><b>Préparer la réunion</b><span class="h">14:00</span><span class="xp-t">+50 XP</span></div>
+            </div>
+            <p class="prochaine"><svg class="ic s16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>Elles arrivent à ta prochaine ouverture de l’app.</p>
           </div>
+          <figure class="claude-capture" style="--i:1">
+            <div class="cadre"><img src="images/claude-connecte.jpg" width="800" height="1496" alt="Capture de l’onglet Claude de TimeCoach connecté : jeton actif et ce que Claude peut faire"></div>
+            <figcaption>L’onglet Claude, dans l’app 1.9.0</figcaption>
+          </figure>
         </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ PROFILS ═══════════════ -->
-<section class="profils">
-  <div class="container">
-    <div class="profils-header">
-      <p class="section-eyebrow">7 profils personnalisés</p>
-      <h2 class="section-title">L'app <em>s'adapte</em> à toi.</h2>
-      <p class="profils-sub">
-        Étudiant, parent, entrepreneur ou investisseur — chaque profil débloque ses objectifs types et ses experts dédiés.
-      </p>
-    </div>
-
-    <div class="profils-grid">
-      <div class="profil-card">
-        <span class="profil-emoji">🎓</span>
-        <div class="profil-name">Étudiant</div>
-        <div class="profil-experts">Cal Newport, Jim Rohn</div>
-      </div>
-      <div class="profil-card">
-        <span class="profil-emoji">💼</span>
-        <div class="profil-name">Professionnel</div>
-        <div class="profil-experts">P. Drucker, S. Sinek</div>
-      </div>
-      <div class="profil-card">
-        <span class="profil-emoji">👪</span>
-        <div class="profil-name">Parent</div>
-        <div class="profil-experts">Brené Brown, J. Joubert</div>
-      </div>
-      <div class="profil-card">
-        <span class="profil-emoji">💪</span>
-        <div class="profil-name">Sportif</div>
-        <div class="profil-experts">Kobe Bryant, S. Williams</div>
-      </div>
-      <div class="profil-card">
-        <span class="profil-emoji">🚀</span>
-        <div class="profil-name">Entrepreneur</div>
-        <div class="profil-experts">Elon Musk, Steve Jobs</div>
-      </div>
-      <div class="profil-card">
-        <span class="profil-emoji">🎨</span>
-        <div class="profil-name">Créatif</div>
-        <div class="profil-experts">Picasso, A. Kleon</div>
-      </div>
-      <div class="profil-card">
-        <span class="profil-emoji">📈</span>
-        <div class="profil-name">Investisseur</div>
-        <div class="profil-experts">W. Buffett, Ray Dalio</div>
-      </div>
-    </div>
-
-    <div class="profils-switch">
-      <span class="profils-switch-icon">🔄</span>
-      <p><strong>Étudiant, parent, entrepreneur… selon le moment.</strong> Change de profil en un tap, l'app suit. <span class="badge-premium">Premium</span></p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ APERÇU APP ═══════════════ -->
-<section class="preview">
-  <div class="container">
-    <div class="preview-header">
-      <p class="section-eyebrow">Aperçu de l'app</p>
-      <h2 class="section-title">Découvre TimeCoach <em>en action</em>.</h2>
-      <p class="preview-sub">
-        Une interface pensée pour être belle et motivante. Chaque profil avec ses objectifs et ses experts.
-      </p>
-    </div>
-
-    <div class="preview-grid">
-      <div class="preview-card">
-        <div class="preview-screen-wrap">
-          <img src="screen-entrepreneur.png" alt="Écran TimeCoach profil Entrepreneur" class="preview-screen">
-        </div>
-        <div class="preview-emoji">🚀</div>
-        <div class="preview-name">Entrepreneur</div>
-        <div class="preview-desc">Suivi CA, clients, lancement</div>
-      </div>
-
-      <div class="preview-card">
-        <div class="preview-screen-wrap">
-          <img src="screen-coach-v2.jpg" alt="Écran Coach IA TimeCoach" class="preview-screen">
-        </div>
-        <div class="preview-emoji">💬</div>
-        <div class="preview-name">Coach IA</div>
-        <div class="preview-desc">Ton coach personnel</div>
-      </div>
-
-      <div class="preview-card">
-        <div class="preview-screen-wrap">
-          <img src="screen-investisseur.png" alt="Écran TimeCoach profil Investisseur" class="preview-screen">
-        </div>
-        <div class="preview-emoji">📈</div>
-        <div class="preview-name">Investisseur</div>
-        <div class="preview-desc">Portefeuille, épargne, bourse</div>
-      </div>
-
-      <div class="preview-card">
-        <div class="preview-screen-wrap">
-          <img src="screen-sportif.png" alt="Écran TimeCoach profil Sportif" class="preview-screen">
-        </div>
-        <div class="preview-emoji">💪</div>
-        <div class="preview-name">Sportif</div>
-        <div class="preview-desc">Calories, séances, poids</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ WAITLIST ═══════════════ -->
-<section class="waitlist" id="waitlist">
-  <div class="container">
-    <div class="waitlist-inner">
-      <p class="section-eyebrow">Version iPhone</p>
-      <h2 class="waitlist-title">L'app iPhone <em>est là</em>.</h2>
-      <p class="waitlist-sub">
-        TimeCoach est désormais disponible sur l'App Store. Profite du prix de lancement jusqu'au 31 juillet 2026.
-      </p>
-      <div class="store-badges">
-        <a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener" class="store-badge">
-          <img src="badge-app-store.svg" alt="Télécharger dans l'App Store">
-        </a>
-      </div>
+<!-- ═══ comparatif ═══ -->
+<section class="bloc comparaison">
+  <div class="wrap">
+    <div class="entete centre" data-rev>
+      <p class="tiret">Face à la concurrence</p>
+      <h2>Les apps que tu connais. Et ce qu’elles n’ont pas.</h2>
     </div>
-  </div>
-</section>
-
-<!-- ═══════════════ EXPERTS ═══════════════ -->
-<section class="experts">
-  <div class="container">
-    <div class="experts-header">
-      <p class="section-eyebrow">Conseils d'experts</p>
-      <h2 class="section-title">Apprends des <em>meilleurs au monde</em>.</h2>
-      <p class="experts-sub">
-        Chaque jour, un conseil personnalisé des plus grands experts de ton domaine. 60+ citations adaptées à ton profil.
-      </p>
-    </div>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <!-- Première série -->
-      <div class="expert-chip"><span class="exp-emoji">💰</span><div><div class="exp-name">Warren Buffett</div><div class="exp-role">Investisseur légendaire</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🏀</span><div><div class="exp-name">Kobe Bryant</div><div class="exp-role">Légende du basketball</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">💻</span><div><div class="exp-name">Steve Jobs</div><div class="exp-role">Co-fondateur d'Apple</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">❤️</span><div><div class="exp-name">Brené Brown</div><div class="exp-role">Chercheuse & auteure</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎨</span><div><div class="exp-name">Pablo Picasso</div><div class="exp-role">Maître du XXe siècle</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🚀</span><div><div class="exp-name">Elon Musk</div><div class="exp-role">Entrepreneur visionnaire</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">📚</span><div><div class="exp-name">Cal Newport</div><div class="exp-role">Auteur, deep work</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎯</span><div><div class="exp-name">Peter Drucker</div><div class="exp-role">Père du management</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎾</span><div><div class="exp-name">Serena Williams</div><div class="exp-role">Légende du tennis</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">📊</span><div><div class="exp-name">Ray Dalio</div><div class="exp-role">Fondateur Bridgewater</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">✏️</span><div><div class="exp-name">Austin Kleon</div><div class="exp-role">Auteur, Steal Like an Artist</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎤</span><div><div class="exp-name">Simon Sinek</div><div class="exp-role">Auteur, Start With Why</div></div></div>
-      <!-- Deuxième série (clone pour boucle infinie) -->
-      <div class="expert-chip"><span class="exp-emoji">💰</span><div><div class="exp-name">Warren Buffett</div><div class="exp-role">Investisseur légendaire</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🏀</span><div><div class="exp-name">Kobe Bryant</div><div class="exp-role">Légende du basketball</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">💻</span><div><div class="exp-name">Steve Jobs</div><div class="exp-role">Co-fondateur d'Apple</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">❤️</span><div><div class="exp-name">Brené Brown</div><div class="exp-role">Chercheuse & auteure</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎨</span><div><div class="exp-name">Pablo Picasso</div><div class="exp-role">Maître du XXe siècle</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🚀</span><div><div class="exp-name">Elon Musk</div><div class="exp-role">Entrepreneur visionnaire</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">📚</span><div><div class="exp-name">Cal Newport</div><div class="exp-role">Auteur, deep work</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎯</span><div><div class="exp-name">Peter Drucker</div><div class="exp-role">Père du management</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎾</span><div><div class="exp-name">Serena Williams</div><div class="exp-role">Légende du tennis</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">📊</span><div><div class="exp-name">Ray Dalio</div><div class="exp-role">Fondateur Bridgewater</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">✏️</span><div><div class="exp-name">Austin Kleon</div><div class="exp-role">Auteur, Steal Like an Artist</div></div></div>
-      <div class="expert-chip"><span class="exp-emoji">🎤</span><div><div class="exp-name">Simon Sinek</div><div class="exp-role">Auteur, Start With Why</div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ COMPARISON ═══════════════ -->
-<section class="comparison">
-  <div class="container">
-    <p class="section-eyebrow" style="text-align: center;">vs concurrence</p>
-    <h2 class="section-title">Les apps que tu connais. <em>Et ce qu'elles n'ont pas.</em></h2>
-
-    <p class="compare-hint">👉 Glisse le tableau vers la droite pour comparer</p>
-
-    <div class="compare-table-wrap">
-      <table class="compare">
-        <thead>
-          <tr>
-            <th></th>
-            <th class="tc-col">TimeCoach</th>
-            <th>Todoist</th>
-            <th>Habitica</th>
-            <th>TickTick</th>
-          </tr>
-        </thead>
+    <div data-rev>
+      <table class="comparatif">
+        <thead><tr><th scope="col"><span class="sr">Fonction</span></th><th scope="col" class="tc">TimeCoach</th><th scope="col">Todoist</th><th scope="col">Habitica</th><th scope="col">TickTick</th></tr></thead>
         <tbody>
-          <tr>
-            <td>Gestion de tâches</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="ok">✓</span></td>
-            <td><span class="ok">✓</span></td>
-            <td><span class="ok">✓</span></td>
-          </tr>
-          <tr>
-            <td>Rappels précis (Xiaomi/Samsung)</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="partial">~</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="partial">~</span></td>
-          </tr>
-          <tr>
-            <td>Coach IA personnel</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-          </tr>
-          <tr>
-            <td>Coach IA proactif</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-          </tr>
-          <tr>
-            <td>Conseils d'experts reconnus</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-          </tr>
-          <tr>
-            <td>7 profils personnalisés</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-          </tr>
-          <tr>
-            <td>Système XP utile (vraies tâches)</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="partial">~</span></td>
-            <td><span class="no">✗</span></td>
-          </tr>
-          <tr>
-            <td>Tes données restent privées</td>
-            <td class="hl"><span class="ok">✓</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-            <td><span class="no">✗</span></td>
-          </tr>
-          <tr>
-            <td>Prix mensuel</td>
-            <td class="hl" style="color: #10b981; font-weight: 700;">4,49€/mois</td>
-            <td>5€/mois</td>
-            <td>4,67€/mois</td>
-            <td>3,49€/mois</td>
-          </tr>
+          <tr><td>Gestion de tâches</td><td class="tc"><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td></tr>
+          <tr><td>Rappels précis (Xiaomi/Samsung)</td><td class="tc"><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="partiel">partiel</span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="partiel">partiel</span></td></tr>
+          <tr><td>Conseils d’experts reconnus</td><td class="tc"><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td></tr>
+          <tr><td>7 profils personnalisés</td><td class="tc"><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td></tr>
+          <tr><td>Système XP utile (vraies tâches)</td><td class="tc"><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="partiel">partiel</span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td></tr>
+          <tr><td>Tes données restent privées</td><td class="tc"><span class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td><td><span class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></span></td></tr>
         </tbody>
       </table>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ PRICING ═══════════════ -->
-<section class="pricing" id="pricing">
-  <div class="container">
-    <p class="section-eyebrow" style="text-align: center;">Tarifs</p>
-    <h2 class="section-title">Une fois <em>convaincu</em>, c'est simple.</h2>
-    <p class="pricing-sub">Le gratuit suffit pour la plupart. Le Premium ajoute le Coach IA, les statistiques avancées et tout l'illimité.</p>
-
-    <div class="pricing-grid">
-      <!-- Free -->
-      <div class="price-card">
-        <div class="price-card-name">Gratuit</div>
-        <div class="price-card-tagline">Pour toujours, sans limite de durée.</div>
-        <div class="price-amount">
-          <span class="price-num">0€</span>
-        </div>
-        <div class="price-old invisible">placeholder</div>
-        <ul class="price-features">
-          <li>3 tâches par jour</li>
-          <li>1 objectif maximum</li>
-          <li>Timer Pomodoro</li>
-          <li>2 conseils d'experts par jour</li>
-          <li>Système de XP, niveaux et streaks</li>
-        </ul>
-        <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="price-cta store-auto">Télécharger gratuitement</a>
-      </div>
-
-      <!-- Premium -->
-      <div class="price-card featured">
-        <div class="price-card-name">Premium</div>
-        <div class="price-card-tagline">14 jours offerts. Annulable en 1 clic.</div>
-        <div class="price-amount">
-          <span class="price-num">4,49€</span>
-          <span class="price-period">/mois</span>
-        </div>
-        <div class="price-old">Prix normal : 5,99€/mois</div>
-        <ul class="price-features">
-          <li><strong>Tâches illimitées</strong></li>
-          <li><strong>Objectifs illimités</strong></li>
-          <li>Tâches récurrentes</li>
-          <li><strong>Coach IA (Claude)</strong> · 20 msg/jour + notifs proactives</li>
-          <li>XP doublé (×2)</li>
-          <li>Tous les conseils d'experts</li>
-        </ul>
-        <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="price-cta store-auto">Commencer l'essai 14 jours</a>
+      <div class="cartes-comp">
+        <div class="carte-comp"><b>Rappels précis (Xiaomi/Samsung)</b><dl>
+          <div class="col tc"><dt class="tc">TimeCoach</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>Todoist</dt><dd class="partiel">partiel</dd></div>
+          <div class="col"><dt>Habitica</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>TickTick</dt><dd class="partiel">partiel</dd></div></dl></div>
+        <div class="carte-comp"><b>Système XP utile (vraies tâches)</b><dl>
+          <div class="col tc"><dt class="tc">TimeCoach</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>Todoist</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>Habitica</dt><dd class="partiel">partiel</dd></div>
+          <div class="col"><dt>TickTick</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div></dl></div>
+        <div class="carte-comp"><b>Conseils d’experts reconnus</b><dl>
+          <div class="col tc"><dt class="tc">TimeCoach</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>Todoist</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>Habitica</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>TickTick</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div></dl></div>
+        <div class="carte-comp"><b>7 profils personnalisés</b><dl>
+          <div class="col tc"><dt class="tc">TimeCoach</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>Todoist</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>Habitica</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>TickTick</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div></dl></div>
+        <div class="carte-comp"><b>Tes données restent privées</b><dl>
+          <div class="col tc"><dt class="tc">TimeCoach</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>Todoist</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>Habitica</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div>
+          <div class="col"><dt>TickTick</dt><dd class="non"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span class="sr">non</span></dd></div></dl></div>
+        <div class="carte-comp"><b>Gestion de tâches</b><dl>
+          <div class="col tc"><dt class="tc">TimeCoach</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>Todoist</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>Habitica</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div>
+          <div class="col"><dt>TickTick</dt><dd class="oui"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span class="sr">oui</span></dd></div></dl></div>
       </div>
     </div>
-
-    <p class="price-disclaimer">
-      Annuel <strong>35,99€/an</strong> (équivalent ~3€/mois). <strong>Prix de lancement valables jusqu'au 31 juillet 2026.</strong>
-    </p>
   </div>
 </section>
 
-<!-- ═══════════════ FAQ ═══════════════ -->
-<section class="faq">
-  <div class="container">
-    <div class="faq-header">
-      <p class="section-eyebrow">Questions fréquentes</p>
-      <h2 class="section-title">Tout ce qu'on te demande <em>avant</em> de télécharger.</h2>
+<!-- ═══ tarifs ═══ -->
+<section class="bloc tarifs" id="tarifs" data-periode="annuel">
+  <div class="wrap">
+    <div class="entete centre" data-rev>
+      <p class="tiret">Tarifs</p>
+      <h2>Une fois convaincu, c’est simple.</h2>
+      <p class="sous">Le gratuit suffit pour la plupart. Le Premium ajoute le Connecteur Claude, l’XP doublé, les tâches récurrentes et tout l’illimité.</p>
     </div>
-
-    <div class="faq-grid">
-      <details class="faq-item" open>
-        <summary class="faq-question">Pourquoi 4,49€/mois et pas gratuit ?</summary>
-        <p class="faq-answer">
-          Parce que le Coach IA repose sur Claude, qui coûte de l'argent à chaque message. Et parce que je suis un développeur indépendant, pas une grosse boîte qui revend tes données. Le tarif lancement est volontairement bas pour rester accessible aux étudiants et aux freelances.
-        </p>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">Est-ce que ça marche vraiment sur Xiaomi, Huawei, Samsung ?</summary>
-        <p class="faq-answer">
-          Oui, c'est notre obsession depuis le début. L'app détecte ta marque au lancement et te guide étape par étape pour activer les bonnes permissions (démarrage en arrière-plan, alarmes exactes, etc.). Sans ça, aucune app productivité ne fonctionne correctement sur ces marques.
-        </p>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">Combien de messages par jour avec le Coach IA ?</summary>
-        <p class="faq-answer">
-          20 messages/jour en Premium, avec un compteur clair dans l'app. En plus de ces 20 messages, tu reçois aussi les notifications proactives (gratuites en termes de quota). Quand tu actives le mode "Silencieux", aucune notif proactive n'est envoyée.
-        </p>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">Mes données sont-elles privées ?</summary>
-        <p class="faq-answer">
-          Oui. Tes tâches, objectifs et progression sont stockés en local sur ton téléphone. Le Coach IA n'a accès qu'aux informations strictement nécessaires pour te répondre, transmises de façon chiffrée à Claude. Aucune revente, aucun tracking publicitaire. Conforme RGPD.
-        </p>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">Et si je n'aime pas après 14 jours ?</summary>
-        <p class="faq-answer">
-          Tu annules en 1 clic depuis le Play Store ou l'App Store. Tu repasses automatiquement sur la version gratuite, qui reste largement utilisable. Aucun engagement, aucune mauvaise surprise.
-        </p>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">L'app est disponible sur iPhone ?</summary>
-        <p class="faq-answer">
-          Oui ! TimeCoach est disponible sur l'<a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener">App Store</a> depuis juillet 2026, en plus de Google Play.
-        </p>
-      </details>
-
-      <details class="faq-item">
-        <summary class="faq-question">Qui est derrière TimeCoach ?</summary>
-        <p class="faq-answer">
-          Un développeur indépendant basé en Belgique. Design Effect Studio. Pas une grosse boîte, pas d'investisseurs. Juste quelqu'un qui voulait une app productivité honnête, et qui l'a faite.
-        </p>
-      </details>
+    <div class="prix-centre" data-rev>
+      <div class="bascule" role="group" aria-label="Période de facturation">
+        <button type="button" data-periode-choix="mensuel" aria-pressed="false">Mensuel</button>
+        <button type="button" data-periode-choix="annuel" aria-pressed="true">Annuel <span class="offert">4 mois offerts</span></button>
+      </div>
+      <div class="prix-grille">
+        <article class="prix" style="--i:0">
+          <span class="nom">Gratuit</span>
+          <p class="accroche">Pour toujours, sans limite de durée.</p>
+          <div class="montant"><b>0&#8239;€</b></div>
+          <div class="detail">Aucune carte demandée</div>
+          <ul>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>3 tâches par jour</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>1 objectif maximum</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Timer Pomodoro</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>2 conseils d’experts par jour</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Système de XP, niveaux et streaks</li>
+          </ul>
+          <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="bouton store-auto">Télécharger gratuitement</a>
+        </article>
+        <article class="prix premium" style="--i:1">
+          <span class="nom">Premium</span>
+          <p class="accroche">14 jours offerts. Annulable en un geste.</p>
+          <div class="montant si-annuel"><b>47,99&#8239;€</b><span>par an</span></div>
+          <div class="detail si-annuel">Soit moins de 4 € par mois · <b>4 mois offerts</b></div>
+          <div class="montant si-mensuel"><b>5,99&#8239;€</b><span>par mois</span></div>
+          <div class="detail si-mensuel">Ou 47,99 € par an, 4 mois offerts</div>
+          <ul>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Tâches illimitées</strong></span></li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Objectifs illimités</strong></span></li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Tâches récurrentes</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Connecteur Claude</strong> · Claude dépose et gère tes tâches</span></li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>XP doublé (×2)</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Tous les conseils d’experts</li>
+          </ul>
+          <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="bouton store-auto">Commencer l’essai 14 jours<svg class="ic s18 fleche" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+      </div>
+      <p class="prix-pied">Sans engagement. Annulable à tout moment depuis le Play Store ou l’App Store.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FINAL CTA ═══════════════ -->
-<section class="final-cta">
-  <div class="container">
-    <h2 class="final-cta-title">Prêt à enfin <em>tenir</em> tes objectifs ?</h2>
-    <p class="final-cta-sub">14 jours Premium offerts. Sans engagement. Annulable en 1 clic.</p>
-    <div class="store-badges">
-      <a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener" class="store-badge">
-        <img src="badge-app-store.svg" alt="Télécharger dans l'App Store">
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="store-badge">
-        <img src="badge-google-play.png" alt="Disponible sur Google Play">
-      </a>
+<!-- ═══ FAQ : la respiration claire ═══ -->
+<section class="bloc faq" id="faq">
+  <div class="wrap">
+    <div class="faq-cols">
+    <div class="entete" data-rev>
+      <p class="tiret">Questions fréquentes</p>
+      <h2>Tout ce qu’on te demande avant de télécharger.</h2>
+    </div>
+    <div>
+    <div class="faq-grille" data-rev>
+      <details open style="--i:0"><summary>Pourquoi un abonnement et pas tout gratuit ?<svg class="ic s22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p>Parce que le Connecteur Claude repose sur un serveur que je paie et que je maintiens. Et parce que je suis un développeur indépendant, pas une grosse boîte qui revend tes données. Le tarif est volontairement bas pour rester accessible aux étudiants et aux freelances.</p></details>
+      <details style="--i:1"><summary>Est-ce que ça marche vraiment sur Xiaomi, Huawei, Samsung ?<svg class="ic s22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p>Oui, c’est notre obsession depuis le début. L’app détecte ta marque au lancement et te guide étape par étape pour activer les bonnes permissions (démarrage en arrière-plan, alarmes exactes, etc.). Sans ça, aucune app productivité ne fonctionne correctement sur ces marques.</p></details>
+      <details style="--i:2"><summary>Comment fonctionne le Connecteur Claude ?<svg class="ic s22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p>Dans l’onglet Claude de l’app, tu génères un jeton et tu colles l’adresse dans Claude (Paramètres, Connecteurs, Ajouter un connecteur personnalisé), une seule fois. Ensuite, tu demandes à Claude de déposer des tâches : elles arrivent dans TimeCoach à ta prochaine ouverture de l’app. Tu choisis ce que Claude peut faire et tu vois tout dans le journal. Réservé aux membres Premium.</p></details>
+      <details style="--i:3"><summary>Mes données sont-elles privées ?<svg class="ic s22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p>Oui. Tes tâches, objectifs et progression sont stockés en local sur ton téléphone. Seules les tâches que Claude dépose, et ses ordres, passent par notre serveur pour arriver dans l’app. Tu peux régénérer ton jeton à tout moment. Aucune revente, aucun tracking publicitaire. Conforme RGPD.</p></details>
+      <details style="--i:4"><summary>Et si je n’aime pas après 14 jours ?<svg class="ic s22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p>Tu annules en un geste depuis le Play Store ou l’App Store. Tu repasses automatiquement sur la version gratuite, qui reste largement utilisable. Aucun engagement, aucune mauvaise surprise.</p></details>
+      <details style="--i:5"><summary>L’app est disponible sur iPhone ?<svg class="ic s22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p>Oui ! TimeCoach est disponible sur l’<a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener">App Store</a> depuis juillet 2026, en plus de <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener">Google Play</a>.</p></details>
+      <details style="--i:6"><summary>Qui est derrière TimeCoach ?<svg class="ic s22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <p>Un développeur indépendant basé en Belgique, Fervia. Pas une grosse boîte, pas d’investisseurs. Juste quelqu’un qui voulait une app productivité honnête, et qui l’a faite.</p></details>
+    </div>
+    </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
-<footer>
-  <div class="container">
-    <p>© 2026 <a href="#hero">TimeCoach</a> · Développé par <a href="https://designeffect3d.com">Design Effect Studio</a> · <a href="privacy-policy.html">Politique de confidentialité</a></p>
+<!-- ═══ appel final ═══ -->
+<section class="final">
+  <div class="wrap" data-rev>
+    <div class="cadran" aria-hidden="true" style="--i:0"><svg class="cadran-svg" viewBox="0 0 132 132" aria-hidden="true" focusable="false"><line class="grad quart" x1="66.00" y1="11.00" x2="66.00" y2="1.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="72.32" y1="5.83" x2="72.73" y2="1.95" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="78.58" y1="6.82" x2="79.39" y2="3.01" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="84.70" y1="8.46" x2="85.90" y2="4.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="90.61" y1="10.73" x2="92.19" y2="7.17" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="94.25" y1="17.07" x2="98.40" y2="9.88" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="101.56" y1="17.05" x2="103.85" y2="13.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="106.48" y1="21.04" x2="109.09" y2="18.14" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="110.96" y1="25.52" x2="113.86" y2="22.91" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="114.95" y1="30.44" x2="118.10" y2="28.15" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="114.93" y1="37.75" x2="122.12" y2="33.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="121.27" y1="41.39" x2="124.83" y2="39.81" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="123.54" y1="47.30" x2="127.25" y2="46.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="125.18" y1="53.42" x2="128.99" y2="52.61" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="126.17" y1="59.68" x2="130.05" y2="59.27" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="121.00" y1="66.00" x2="131.00" y2="66.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="126.17" y1="72.32" x2="130.05" y2="72.73" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="125.18" y1="78.58" x2="128.99" y2="79.39" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="123.54" y1="84.70" x2="127.25" y2="85.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="121.27" y1="90.61" x2="124.83" y2="92.19" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="114.93" y1="94.25" x2="122.12" y2="98.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="114.95" y1="101.56" x2="118.10" y2="103.85" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="110.96" y1="106.48" x2="113.86" y2="109.09" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="106.48" y1="110.96" x2="109.09" y2="113.86" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="101.56" y1="114.95" x2="103.85" y2="118.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="94.25" y1="114.93" x2="98.40" y2="122.12" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="90.61" y1="121.27" x2="92.19" y2="124.83" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="84.70" y1="123.54" x2="85.90" y2="127.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="78.58" y1="125.18" x2="79.39" y2="128.99" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="72.32" y1="126.17" x2="72.73" y2="130.05" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="66.00" y1="121.00" x2="66.00" y2="131.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="59.68" y1="126.17" x2="59.27" y2="130.05" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="53.42" y1="125.18" x2="52.61" y2="128.99" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="47.30" y1="123.54" x2="46.10" y2="127.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="41.39" y1="121.27" x2="39.81" y2="124.83" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="37.75" y1="114.93" x2="33.60" y2="122.12" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="30.44" y1="114.95" x2="28.15" y2="118.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="25.52" y1="110.96" x2="22.91" y2="113.86" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="21.04" y1="106.48" x2="18.14" y2="109.09" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="17.05" y1="101.56" x2="13.90" y2="103.85" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="17.07" y1="94.25" x2="9.88" y2="98.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="10.73" y1="90.61" x2="7.17" y2="92.19" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="8.46" y1="84.70" x2="4.75" y2="85.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="6.82" y1="78.58" x2="3.01" y2="79.39" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="5.83" y1="72.32" x2="1.95" y2="72.73" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="11.00" y1="66.00" x2="1.00" y2="66.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="5.83" y1="59.68" x2="1.95" y2="59.27" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="6.82" y1="53.42" x2="3.01" y2="52.61" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="8.46" y1="47.30" x2="4.75" y2="46.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="10.73" y1="41.39" x2="7.17" y2="39.81" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="17.07" y1="37.75" x2="9.88" y2="33.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="17.05" y1="30.44" x2="13.90" y2="28.15" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="21.04" y1="25.52" x2="18.14" y2="22.91" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="25.52" y1="21.04" x2="22.91" y2="18.14" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="30.44" y1="17.05" x2="28.15" y2="13.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="37.75" y1="17.07" x2="33.60" y2="9.88" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="41.39" y1="10.73" x2="39.81" y2="7.17" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="47.30" y1="8.46" x2="46.10" y2="4.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="53.42" y1="6.82" x2="52.61" y2="3.01" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="59.68" y1="5.83" x2="59.27" y2="1.95" stroke-width="1.1" stroke-linecap="round"/><circle class="echo" cx="66.0" cy="66.0" r="53.00" fill="none" stroke-width="1"/><circle class="piste" cx="66.0" cy="66.0" r="45.00" fill="none" stroke-width="6.0"/><circle class="arc" data-c="282.74" data-p="1.0000" cx="66.0" cy="66.0" r="45.00" fill="none" stroke="url(#tc-gain)" stroke-width="6.0" stroke-linecap="round" stroke-dasharray="282.74" stroke-dashoffset="0.00" transform="rotate(-90 66.0 66.0)"/><g class="eclairs"><line class="eclair" data-h="0" x1="66.00" y1="11.50" x2="66.00" y2="0.60" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="1" x1="93.25" y1="18.80" x2="98.70" y2="9.36" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="2" x1="113.20" y1="38.75" x2="122.64" y2="33.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="3" x1="120.50" y1="66.00" x2="131.40" y2="66.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="4" x1="113.20" y1="93.25" x2="122.64" y2="98.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="5" x1="93.25" y1="113.20" x2="98.70" y2="122.64" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="6" x1="66.00" y1="120.50" x2="66.00" y2="131.40" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="7" x1="38.75" y1="113.20" x2="33.30" y2="122.64" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="8" x1="18.80" y1="93.25" x2="9.36" y2="98.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="9" x1="11.50" y1="66.00" x2="0.60" y2="66.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="10" x1="18.80" y1="38.75" x2="9.36" y2="33.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="11" x1="38.75" y1="18.80" x2="33.30" y2="9.36" stroke-width="2.6" stroke-linecap="round"/></g></svg><div class="trotteuse" aria-hidden="true"><svg viewBox="0 0 132 132" focusable="false"><line class="aiguille" x1="66.0" y1="79.20" x2="66.0" y2="2" stroke-width="2" stroke-linecap="round"/><circle class="moyeu" cx="66.0" cy="66.0" r="5"/><circle class="moyeu-creux" cx="66.0" cy="66.0" r="2"/></svg></div><div class="centre"><span class="val">100<small>%</small></span></div></div>
+    <h2 style="--i:1">Prêt à enfin <span class="gain-txt">tenir</span> tes objectifs ?</h2>
+    <p class="sous" style="--i:2">14 jours Premium offerts. Sans engagement. Annulable en un geste.</p>
+    <div class="badges" style="--i:3">
+      <a href="https://apps.apple.com/fr/app/timecoach/id6776392229" target="_blank" rel="noopener" class="badge-store"><img src="badge-app-store.svg" alt="Télécharger dans l’App Store"></a>
+      <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="badge-store"><img src="badge-google-play.png" alt="Disponible sur Google Play"></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="wrap">
+    <span>© 2026 <a href="#heros">TimeCoach</a> · <span class="signature">Conçue par <a href="https://fervia.be"><b>Fervia</b></a></span></span>
+    <nav aria-label="Informations légales">
+      <a href="privacy-policy.html">Politique de confidentialité</a>
+      <a href="privacy-policy-en.html" hreflang="en" lang="en">Privacy policy (English)</a>
+    </nav>
   </div>
 </footer>
 
 <script>
-  // Visiteurs iOS : les CTA texte pointent vers l'App Store
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
-      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
-    document.querySelectorAll('a.store-auto').forEach(a => {
-      a.href = 'https://apps.apple.com/fr/app/timecoach/id6776392229';
-    });
+(function () {
+  var d = document.documentElement;
+  var anim = d.classList.contains('anim'), reduit = d.classList.contains('reduit');
+  var EASE = 'cubic-bezier(0.23, 1, 0.32, 1)';
+
+  // Visiteurs iOS : les boutons texte pointent vers l'App Store.
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+    document.querySelectorAll('a.store-auto').forEach(function (a) { a.href = 'https://apps.apple.com/fr/app/timecoach/id6776392229'; });
   }
 
-  // Scroll animations légères
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.animation = 'fadeUp 0.6s ease both';
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.problem-card, .solution-row, .profil-card, .price-card, .faq-item').forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
+  // Index de décalage des enfants révélés (60 ms entre deux).
+  document.querySelectorAll('[data-rev]').forEach(function (b) {
+    Array.prototype.forEach.call(b.children, function (c, i) { if (!c.style.getPropertyValue('--i')) c.style.setProperty('--i', i); });
   });
-</script>
 
+  // Compteurs : la valeur finale est dans le HTML (lisible sans script) ; ils comptent seulement en mouvement normal.
+  function compter(el) {
+    var fin = +el.dataset.compte, t0 = performance.now();
+    (function pas(t) {
+      var k = Math.min(1, (t - t0) / 420), e = 1 - Math.pow(1 - k, 4);
+      el.textContent = Math.round(fin * e);
+      if (k < 1) requestAnimationFrame(pas);
+    })(t0);
+  }
+
+  // Révélations uniques au défilement.
+  if (anim || reduit) {
+    var io = new IntersectionObserver(function (ent) {
+      ent.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('vu');
+        if (anim) e.target.querySelectorAll('[data-compte]').forEach(compter);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-rev]').forEach(function (b) { io.observe(b); });
+  }
+
+  // Le geste signature : un seul tour de trotteuse, douze crans de 80 ms (SPEC-ANIMATIONS-v3 § 2), l'arc le suit
+  // jusqu'à 50 % (six crans), le chiffre avance avec lui ; puis les trois étiquettes, l'une après l'autre.
+  var heros = document.querySelector('.heros .cadran');
+  var arc = heros.querySelector('.arc'), trot = heros.querySelector('.trotteuse'), score = heros.querySelector('[data-score]');
+  var circ = +arc.dataset.c, p = +arc.dataset.p, CRAN = 80, DEPART = 200, TOUR = 12 * CRAN;
+  arc.style.setProperty('--c0', circ);
+  var animations = [];
+  function tour() {
+    var kRot = [], kArc = [];
+    for (var i = 0; i < 12; i++) {
+      kRot.push({ offset: (i * CRAN) / TOUR, transform: 'rotate(' + (i * 30) + 'deg)', easing: EASE });
+      kRot.push({ offset: (i * CRAN + CRAN / 2) / TOUR, transform: 'rotate(' + ((i + 1) * 30) + 'deg)', easing: 'linear' });
+      var a0 = circ * (1 - Math.min(i, 6) / 6 * p), a1 = circ * (1 - Math.min(i + 1, 6) / 6 * p);
+      kArc.push({ offset: (i * CRAN) / TOUR, strokeDashoffset: a0, easing: EASE });
+      kArc.push({ offset: (i * CRAN + CRAN / 2) / TOUR, strokeDashoffset: a1, easing: 'linear' });
+    }
+    kRot.push({ offset: 1, transform: 'rotate(360deg)' });
+    kArc.push({ offset: 1, strokeDashoffset: circ * (1 - p) });
+    animations.push(trot.animate(kRot, { duration: TOUR, delay: DEPART, fill: 'both' }));
+    animations.push(trot.animate([{ opacity: 0 }, { opacity: 1, offset: 50 / (TOUR + 100) }, { opacity: 1, offset: TOUR / (TOUR + 100) }, { opacity: 0 }],
+      { duration: TOUR + 100, delay: DEPART, fill: 'both' }));
+    animations.push(arc.animate(kArc, { duration: TOUR, delay: DEPART, fill: 'both' }));
+    heros.querySelectorAll('.eclair').forEach(function (l) {
+      var h = +l.dataset.h || 12;
+      animations.push(l.animate([{ opacity: 0 }, { opacity: .95, offset: .3 }, { opacity: 0 }],
+        { duration: 380, delay: DEPART + (h - 0.5) * CRAN, fill: 'both', easing: EASE }));
+    });
+    document.querySelectorAll('.heros .etiq').forEach(function (e, k) {
+      animations.push(e.animate([{ opacity: 0, transform: 'translateY(6px) scale(0.96)' }, { opacity: 1, transform: 'none' }],
+        { duration: 240, delay: DEPART + TOUR - 80 + k * 90, fill: 'both', easing: EASE }));
+    });
+  }
+  function majScore(t) {
+    var crans = Math.max(0, Math.min(6, Math.floor((t - DEPART + CRAN / 2) / CRAN)));
+    score.textContent = Math.round(crans / 6 * p * 100);
+  }
+  if (anim) {
+    score.textContent = '0';
+    var lancer = function () {
+      tour();
+      var t0 = performance.now();
+      (function suivre(t) { majScore(t - t0); if (t - t0 < DEPART + TOUR) requestAnimationFrame(suivre); else score.textContent = Math.round(p * 100); })(t0);
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(lancer, 60); }); else lancer();
+  }
+
+  // Rangée des experts : on la fait défiler soi-même.
+  var rangee = document.querySelector('.rangee');
+  function bornes() {
+    document.querySelector('[data-defile="-1"]').disabled = rangee.scrollLeft < 4;
+    document.querySelector('[data-defile="1"]').disabled = rangee.scrollLeft + rangee.clientWidth > rangee.scrollWidth - 4;
+  }
+  document.querySelectorAll('[data-defile]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      rangee.scrollBy({ left: +b.dataset.defile * rangee.clientWidth * 0.8, behavior: reduit ? 'auto' : 'smooth' });
+    });
+  });
+  rangee.addEventListener('scroll', bornes, { passive: true }); bornes();
+
+  // Bascule Mensuel / Annuel, sans saut de page.
+  var tarifs = document.querySelector('.tarifs');
+  document.querySelectorAll('[data-periode-choix]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      tarifs.dataset.periode = b.dataset.periodeChoix;
+      document.querySelectorAll('[data-periode-choix]').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+    });
+  });
+})();
+</script>
 </body>
 </html>
