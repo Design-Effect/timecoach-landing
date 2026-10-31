@@ -192,13 +192,14 @@
       <li>Vos préférences de notifications et paramètres d'affichage</li>
     </ul>
     <div class="highlight">
-      <p>✅ Toutes ces données sont stockées localement sur votre appareil. Une copie de sauvegarde peut également être créée automatiquement par le service de sauvegarde de votre appareil : <strong>Android Auto Backup</strong> (Google) sur Android, ou la <strong>sauvegarde iCloud</strong> (Apple) sur iOS (voir section 3). Aucune donnée n'est transmise à nos serveurs sans votre accord.</p>
+      <p>✅ Toutes ces données sont stockées localement sur votre appareil. Une copie de sauvegarde peut également être créée automatiquement par le service de sauvegarde de votre appareil : <strong>Android Auto Backup</strong> (Google) sur Android, ou la <strong>sauvegarde iCloud</strong> (Apple) sur iOS (voir section 3). Ces données ne sont pas transmises à nos serveurs. Seules en sortent, dans les cas décrits ci-dessous, les informations des fonctionnalités facultatives que vous activez (Connecteur Claude, Lecture par Claude, parrainage) et les événements d'achat Premium.</p>
     </div>
     <p><strong>Données transmises à des services tiers :</strong></p>
     <ul>
       <li>Si vous activez le Connecteur Claude (fonctionnalité Premium), le contenu des tâches que vous lui demandez de créer, reporter, cocher, modifier ou supprimer transite par notre serveur (Supabase) le temps que l'application les récupère (voir section 3).</li>
       <li>Si vous activez la Lecture par Claude (fonctionnalité Premium, optionnelle et désactivée par défaut), un instantané de vos tâches, tâches récurrentes et objectifs (jamais votre XP, votre série ni vos badges) est envoyé à notre serveur pour que Claude puisse les lire (voir section 3).</li>
-      <li>Les achats Premium sont gérés par Google Play ou l'App Store d'Apple (selon votre appareil) et RevenueCat (voir section 3).</li>
+      <li>Si vous utilisez le parrainage (facultatif), votre code de parrainage, une empreinte de votre identifiant technique, l'état et les dates de vos parrainages et, le cas échéant, de votre récompense sont conservés sur notre serveur (voir section 3).</li>
+      <li>Les achats Premium sont gérés par Google Play ou l'App Store d'Apple (selon votre appareil) et RevenueCat. RevenueCat transmet à notre serveur certains événements d'achat (achat initial, renouvellement, annulation, transfert), pour tous les abonnés : ils ne servent qu'au parrainage et, s'ils ne concernent pas un filleul, ils sont écartés sur-le-champ sans rien enregistrer (voir section 3).</li>
       <li>Les erreurs techniques anonymisées peuvent être transmises à Sentry (voir section 3).</li>
     </ul>
   </div>
@@ -211,6 +212,7 @@
       <li>Faire transiter les ordres du Connecteur Claude (créer, reporter, cocher, modifier ou supprimer une tâche) jusqu'à leur récupération par l'application, si vous l'avez activé</li>
       <li>Faire lire par Claude un instantané de vos tâches, tâches récurrentes et objectifs, si vous avez activé la Lecture par Claude</li>
       <li>Envoyer des notifications locales si vous les avez activées</li>
+      <li>Faire fonctionner le programme de parrainage, si vous l'utilisez, et prévenir la fraude à ce programme</li>
       <li>Gérer vos achats et abonnements Premium</li>
       <li>Améliorer la stabilité de l'application via la détection d'erreurs anonymisées</li>
     </ul>
@@ -228,11 +230,34 @@
     <p><strong>Lecture par Claude (fonctionnalité Premium, optionnelle)</strong></p>
     <p>Si vous l'activez depuis l'onglet Claude de l'application (désactivée par défaut, réservée pour l'instant aux appareils que nous autorisons explicitement), TimeCoach envoie à notre serveur un instantané de vos tâches, tâches récurrentes et objectifs, pour que Claude puisse les lire et vous aider à planifier autour de ce qui existe déjà. Cet instantané contient : le titre, la date, l'heure et la priorité de vos tâches non terminées (sans limite de date) et de vos tâches terminées des 7 derniers jours ; vos tâches récurrentes actives ; vos objectifs, avec leur progression exprimée en pourcentage ; un résumé du nombre de tâches planifiées et faites par jour sur les 30 derniers jours. <strong>Il ne contient jamais votre expérience (XP), votre série de jours (streak), vos badges, ni le montant d'un objectif financier</strong> : Claude ne voit que ce qui l'aide à planifier, jamais votre progression ni votre argent. Cet instantané remplace le précédent à chaque envoi (une seule copie est conservée par appareil, jamais un historique), et est supprimé automatiquement si vous désactivez cette fonctionnalité, si vous régénérez votre jeton, ou après 7 jours sans nouvel envoi. Vous pouvez l'effacer immédiatement à tout moment depuis l'onglet Claude, avec le bouton « Effacer maintenant ».</p>
 
+    <p><strong>Parrainage (facultatif)</strong></p>
+    <p>Le parrainage est un programme facultatif : TimeCoach s'utilise en entier sans lui. Il permet de recommander l'application à un proche. Vous recevez un code personnel ; si votre proche (le filleul) le saisit dans l'application puis prend un abonnement payant, vous pouvez recevoir un mois offert. Les règles du programme figurent dans son règlement, accessible depuis l'application.</p>
+    <p><strong>Ce que notre serveur (Supabase) enregistre, et rien d'autre :</strong></p>
+    <ul>
+      <li>pour le parrain : son code de parrainage (8 caractères tirés au hasard par nos soins), la date de création de ce code, et une empreinte de son identifiant technique ;</li>
+      <li>pour chaque filleul : une empreinte de son identifiant technique, le code qu'il a saisi, l'état de son parrainage (rattaché, payé, acquis ou annulé), la boutique par laquelle son premier paiement a été fait (Google Play ou App Store), les dates de rattachement, de premier paiement et d'acquisition, et l'identifiant technique de l'événement d'achat qui a constaté ce premier paiement ;</li>
+      <li>pour chaque mois offert au parrain : le lien avec le parrainage concerné, l'empreinte du parrain, l'état de la récompense (à appliquer, appliquée, échouée ou au-delà du plafond), sa forme (report d'échéance, offre promotionnelle ou Premium offert), la date de son application, la date de fin de son effet et, pendant quelques minutes, l'heure d'une tentative d'application en cours, qui évite d'appliquer deux fois le même mois ;</li>
+      <li>pour chaque événement d'achat concernant un filleul : son identifiant technique et sa date de réception, pour ne pas le traiter deux fois ;</li>
+      <li>un numéro interne aléatoire par ligne, sans lien avec vous.</li>
+    </ul>
+    <p>L'empreinte est calculée avec une clé secrète que nous gardons à part de la base : elle permet de reconnaître un même appareil d'un échange à l'autre, mais la base seule ne permet de retrouver ni l'appareil ni la personne. Votre identifiant technique n'est tenu en clair que le temps d'un échange avec notre serveur, par exemple pour interroger RevenueCat ; il n'est jamais écrit dans la base ni dans nos journaux.</p>
+    <p><strong>Ce que nous n'enregistrons pas :</strong> votre nom, votre adresse e-mail, le montant, la devise, le produit ou le pays d'un achat. Le parrainage n'accède ni à vos contacts ni à votre carnet d'adresses : le partage de votre code passe par la feuille de partage de votre téléphone, vous choisissez l'application et le destinataire, et nous ne voyons rien de ce choix. La date de fin de votre essai gratuit, si vous en avez un, nous est transmise le temps de calculer la fin d'un mois de Premium offert ; elle n'est pas conservée telle quelle.</p>
+    <p><strong>Pourquoi :</strong> faire fonctionner le programme (constater le premier paiement d'un filleul, appliquer la récompense au parrain après une garde de 14 jours) et prévenir la fraude (refuser qu'on se parraine soi-même, ne récompenser qu'un paiement réel, écarter un paiement remboursé pendant la garde). Pour la même raison, notre serveur compte les appels reçus par adresse IP et par jour, afin de limiter les tentatives de saisie de codes au hasard ; ces compteurs ne contiennent que l'adresse, la date et un nombre d'appels, et sont effacés après 30 jours.</p>
+    <p><strong>Ce qui passe par notre serveur :</strong> pour reconnaître le premier paiement d'un filleul, RevenueCat envoie à notre serveur des événements d'achat (achat initial, renouvellement, annulation, transfert d'abonnement) pour tous les abonnés Premium, pas seulement pour les filleuls. Pour chacun, notre serveur calcule l'empreinte des identifiants concernés et cherche si elle correspond à un filleul. Si ce n'est pas le cas, l'événement est écarté sur-le-champ : rien n'est enregistré, et nos journaux ne retiennent que des étiquettes techniques (type d'événement, résultat), jamais un identifiant. Pour un filleul, nous relisons son statut d'abonnement chez RevenueCat avant de noter son premier paiement. Pour appliquer une récompense, notre serveur lit le statut d'abonnement du parrain chez RevenueCat, puis demande à RevenueCat de reporter l'échéance de son abonnement de 30 jours ou de lui ouvrir un accès Premium de 30 jours ; sur iPhone, l'offre est rendue à l'application, qui l'active par la feuille d'Apple.</p>
+    <p><strong>Durées de conservation :</strong></p>
+    <ul>
+      <li>un parrainage dont le filleul n'a pas payé est effacé 90 jours après son rattachement ;</li>
+      <li>un parrainage dont le premier paiement a été constaté reste enregistré pendant la garde de 14 jours ; une fois la garde passée, il est compté comme acquis à la prochaine ouverture de l'application par le parrain ;</li>
+      <li>un parrainage acquis ou annulé (remboursement pendant la garde), avec ses récompenses, est effacé 13 mois après sa date la plus récente (acquisition, sinon premier paiement, sinon rattachement) : le plafond de 3 mois offerts s'apprécie sur douze mois ;</li>
+      <li>les événements d'achat enregistrés pour ne pas être traités deux fois sont effacés après 30 jours ;</li>
+      <li>le code du parrain et l'empreinte associée sont conservés tant que le programme existe ; vous pouvez en demander l'effacement à contact@fervia.be en indiquant votre code.</li>
+    </ul>
+
     <p><strong>Supabase</strong></p>
-    <p>Hébergeur des Edge Functions et de la base de données qui font fonctionner le Connecteur Claude, la Lecture par Claude, la vérification des achats Premium et la remontée d'erreurs techniques. Les données décrites dans cette politique sont celles effectivement conservées sur ce serveur.</p>
+    <p>Hébergeur des Edge Functions et de la base de données qui font fonctionner le Connecteur Claude, la Lecture par Claude, le parrainage, la vérification des achats Premium et la remontée d'erreurs techniques. Les données décrites dans cette politique sont celles effectivement conservées sur ce serveur.</p>
 
     <p><strong>RevenueCat</strong></p>
-    <p>Gestion des achats et abonnements Premium. Nous n'avons pas accès à vos informations de paiement. Consultez <a href="https://revenuecat.com" target="_blank">revenuecat.com</a>.</p>
+    <p>Gestion des achats et abonnements Premium. Nous n'avons pas accès à vos informations de paiement. RevenueCat transmet à notre serveur les événements d'achat décrits ci-dessus (parrainage), et reçoit de lui les demandes de report d'échéance ou d'accès Premium offert. Consultez <a href="https://revenuecat.com" target="_blank">revenuecat.com</a>.</p>
 
     <p><strong>Google Play / Apple App Store</strong></p>
     <p>Les transactions financières sont gérées par Google Play (Android) ou par l'App Store d'Apple (iOS), selon leurs conditions d'utilisation respectives.</p>
@@ -257,6 +282,7 @@
       <li>Toutes les communications avec nos serveurs utilisent le protocole HTTPS</li>
       <li>L'accès au Connecteur Claude repose sur un jeton personnel haché (jamais stocké en clair), révocable à tout moment depuis l'onglet Claude de l'application, limité aux seules capacités que vous avez autorisées et expirant automatiquement après 90 jours</li>
       <li>L'accès à la Lecture par Claude est réservé aux appareils que nous autorisons explicitement, désactivé par défaut, et révocable immédiatement (bouton « Effacer maintenant »)</li>
+      <li>Pour le parrainage, notre serveur ne conserve qu'une empreinte de votre identifiant technique, calculée avec une clé secrète gardée à part de la base, jamais l'identifiant lui-même</li>
       <li>Les sauvegardes automatiques sont chiffrées par leur fournisseur : Google (Auto Backup vers Google Drive) ou Apple (sauvegarde iCloud)</li>
       <li>Aucune donnée sensible n'est stockée en clair</li>
     </ul>
@@ -271,6 +297,7 @@
       <li>Droit à l'effacement, supprimez toutes vos données en désinstallant l'app. Pour supprimer également la sauvegarde cloud : sur Android, désactivez Auto Backup dans <em>Paramètres → Système → Sauvegarde</em> puis supprimez les données depuis votre compte Google Drive ; sur iOS, gérez vos sauvegardes depuis <em>Réglages → [votre nom] → iCloud</em>.</li>
       <li>Données du Connecteur Claude, désactivez-le et révoquez votre jeton à tout moment depuis l'onglet Claude de l'application ; les ordres en transit sur notre serveur sont de toute façon supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés)</li>
       <li>Données de la Lecture par Claude, désactivez-la à tout moment depuis l'onglet Claude de l'application, ou effacez l'instantané immédiatement avec le bouton « Effacer maintenant » ; il est de toute façon supprimé automatiquement après 7 jours sans nouvel envoi</li>
+      <li>Données du parrainage, vous pouvez cesser de l'utiliser à tout moment ; un parrainage sans paiement est effacé après 90 jours, un parrainage acquis ou annulé après 13 mois, et vous pouvez demander l'effacement de votre code en écrivant à contact@fervia.be en l'indiquant</li>
       <li>Droit à la portabilité de vos données, utilisez la fonction de sauvegarde manuelle (export JSON) depuis les paramètres de l'app</li>
       <li>Droit d'opposition au traitement de vos données</li>
     </ul>
