@@ -165,7 +165,7 @@
 <header>
   <h1><img src="timecoachicon512.png" alt="TimeCoach icon"> TimeCoach</h1>
   <p>Privacy Policy</p>
-  <div class="date">Last updated: October 31, 2026</div>
+  <div class="date">Last updated: November 4, 2026</div>
   <a class="lang-link" href="privacy-policy.html">🇫🇷 Version française</a>
 </header>
 
@@ -196,7 +196,7 @@
     </div>
     <p><strong>Data transmitted to third-party services:</strong></p>
     <ul>
-      <li>If you enable the Claude Connector (a Premium feature), the content of the tasks you ask it to create, postpone, check off, edit or delete passes through our server (Supabase) while the app fetches them (see section 3).</li>
+      <li>If you enable the Claude Connector (a Premium feature), the content of the tasks and goals you ask it to create, and of the tasks you ask it to postpone, check off, edit or delete, passes through our server (Supabase) while the app fetches them (see section 3).</li>
       <li>If you enable Reading by Claude (a Premium feature, optional and off by default), a snapshot of your tasks, recurring tasks and goals (never your XP, streak or badges) is sent to our server so Claude can read them (see section 3).</li>
       <li>If you use the referral program (optional), your referral code, a fingerprint of your technical identifier, the status and dates of your referrals and, where applicable, of your reward are kept on our server (see section 3).</li>
       <li>Premium purchases are handled by Google Play or Apple's App Store (depending on your device) and RevenueCat. RevenueCat sends our server certain purchase events (initial purchase, renewal, cancellation, transfer) for all subscribers: they are used only for the referral program and, if they do not concern a referred friend, they are discarded immediately without anything being recorded (see section 3).</li>
@@ -209,7 +209,7 @@
     <p>Your data is used solely to:</p>
     <ul>
       <li>Run the application and personalize your experience</li>
-      <li>Carry Claude Connector orders (create, postpone, check off, edit or delete a task) through to the app, if you have enabled it</li>
+      <li>Carry Claude Connector orders (create tasks or goals, postpone, check off, edit or delete a task) through to the app, if you have enabled it</li>
       <li>Let Claude read a snapshot of your tasks, recurring tasks and goals, if you have enabled Reading by Claude</li>
       <li>Send local notifications if you have enabled them</li>
       <li>Run the referral program, if you use it, and prevent fraud against that program</li>
@@ -225,7 +225,8 @@
     <h2>3. Third-party services we use</h2>
 
     <p><strong>Claude Connector (Premium feature)</strong></p>
-    <p>If you enable it from the Claude tab in the app, the Claude Connector lets you manage your TimeCoach tasks from your own Claude assistant (Claude Desktop, Claude Code, or any MCP-compatible client): create, postpone, check off, edit or delete a task. These orders pass through our server (Supabase) while waiting for the app to fetch them the next time it opens, and are then automatically deleted no later than 90 days after being fetched (30 days if never fetched). What is kept for that time: the content of the order (task title, date, time, priority), a history of how it was handled (deposited, received, done, postponed, deleted), and your device's technical identifier, never your name or account. Access to the connector relies on a personal token that you generate and can revoke at any time from the Claude tab in the app; that token is never stored in plain text on our server, only its cryptographic fingerprint is. You choose exactly what Claude is allowed to do, capability by capability (create, check off, postpone, edit, delete), and you can change those permissions at any time from that same tab: a capability you turn off is refused by our server. The token automatically expires 90 days after it is created, unless you extend it from the app, and an expired token no longer grants any access.</p>
+    <p>If you enable it from the Claude tab in the app, the Claude Connector lets you manage your TimeCoach tasks and add goals to them from your own Claude assistant (Claude Desktop, Claude Code, or any MCP-compatible client): create, postpone, check off, edit or delete a task, and create a goal, with tasks attached to it if you wish. Claude can only create goals: it cannot edit, complete or delete one. These orders pass through our server (Supabase) while waiting for the app to fetch them the next time it opens, and are then automatically deleted no later than 90 days after being fetched (30 days if never fetched). What is kept for that time: the content of the order (for a task: its title, date, time and priority; for a goal: its name, its tracking mode by tasks, by counter or by amount, its target, its priority and its duration in days), a history of how it was handled (deposited, received, done, postponed, deleted), and your device's technical identifier, never your name or account. Access to the connector relies on a personal token that you generate and can revoke at any time from the Claude tab in the app; that token is never stored in plain text on our server, only its cryptographic fingerprint is. You choose exactly what Claude is allowed to do, capability by capability (create tasks, create goals, check off, postpone, edit, delete), and you can change those permissions at any time from that same tab: a capability you turn off is refused by our server. The token automatically expires 90 days after it is created, unless you extend it from the app, and an expired token no longer grants any access.</p>
+    <p><strong>Goals created by Claude:</strong> a numeric target, including an amount of money, is only deposited if you dictate it yourself to your assistant; the amount you have reached in the app never leaves your device. As soon as the app has received the goal, its mode, target and duration are erased from our server; its name, priority and history stay there until the automatic deletion mentioned above. As long as the app has not fetched it, the goal stays on our server, with its target, for 30 days at most. If erasing the target failed, it would remain until that automatic deletion, 90 days after being fetched at the latest.</p>
 
     <p><strong>Reading by Claude (Premium feature, optional)</strong></p>
     <p>If you enable it from the Claude tab in the app (off by default, currently reserved to devices we explicitly authorize), TimeCoach sends our server a snapshot of your tasks, recurring tasks and goals, so Claude can read them and help you plan around what already exists. This snapshot contains: the title, date, time and priority of your unfinished tasks (no date limit) and of tasks you completed in the last 7 days; your active recurring tasks; your goals, with their progress expressed as a percentage. <strong>It never contains your experience points (XP), your streak, your badges, or the amount behind a financial goal</strong>: Claude only sees what helps it plan, never your progress or your money. This snapshot replaces the previous one each time it is sent (only one copy is kept per device, never a history), and is automatically deleted if you turn this feature off, if you regenerate your token, or after 7 days without a new snapshot. You can erase it immediately at any time from the Claude tab, with the "Erase now" button.</p>
@@ -295,7 +296,7 @@
       <li>Right of access to your personal data</li>
       <li>Right to rectification of your data</li>
       <li>Right to erasure, delete all your data by uninstalling the app. To also delete the cloud backup: on Android, disable Auto Backup in <em>Settings → System → Backup</em> then delete the data from your Google Drive account; on iOS, manage your backups from <em>Settings → [your name] → iCloud</em>.</li>
-      <li>Claude Connector data, disable it and revoke your token at any time from the Claude tab in the app; orders in transit on our server are in any case automatically deleted no later than 90 days after being fetched (30 days if never fetched)</li>
+      <li>Claude Connector data, disable it and revoke your token at any time from the Claude tab in the app; orders and goals in transit on our server are in any case automatically deleted no later than 90 days after being fetched (30 days if never fetched), and a goal's target is erased from it as soon as the app has received it</li>
       <li>Reading by Claude data, turn it off at any time from the Claude tab in the app, or erase the snapshot immediately with the "Erase now" button; it is in any case automatically deleted after 7 days without a new snapshot</li>
       <li>Referral data, you can stop using it at any time; a referral without payment is erased after 90 days, a paid, earned or cancelled referral after 13 months, and you can ask for your code to be erased by writing to contact@fervia.be and giving it</li>
       <li>Right to data portability, use the manual backup feature (JSON export) from the app's settings</li>
@@ -343,7 +344,7 @@
 </div>
 
 <footer>
-  TimeCoach · Privacy Policy · October 31, 2026 · Fervia
+  TimeCoach · Privacy Policy · November 4, 2026 · Fervia
 </footer>
 
 </body>

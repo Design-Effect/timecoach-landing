@@ -165,7 +165,7 @@
 <header>
   <h1><img src="timecoachicon512.png" alt="Icône TimeCoach"> TimeCoach</h1>
   <p>Politique de Confidentialité</p>
-  <div class="date">Dernière mise à jour : 31 octobre 2026</div>
+  <div class="date">Dernière mise à jour : 4 novembre 2026</div>
   <a class="lang-link" href="privacy-policy-en.html">🇬🇧 English version</a>
 </header>
 
@@ -196,7 +196,7 @@
     </div>
     <p><strong>Données transmises à des services tiers :</strong></p>
     <ul>
-      <li>Si vous activez le Connecteur Claude (fonctionnalité Premium), le contenu des tâches que vous lui demandez de créer, reporter, cocher, modifier ou supprimer transite par notre serveur (Supabase) le temps que l'application les récupère (voir section 3).</li>
+      <li>Si vous activez le Connecteur Claude (fonctionnalité Premium), le contenu des tâches et des objectifs que vous lui demandez de créer, ainsi que celui des tâches que vous lui demandez de reporter, cocher, modifier ou supprimer, transite par notre serveur (Supabase) le temps que l'application les récupère (voir section 3).</li>
       <li>Si vous activez la Lecture par Claude (fonctionnalité Premium, optionnelle et désactivée par défaut), un instantané de vos tâches, tâches récurrentes et objectifs (jamais votre XP, votre série ni vos badges) est envoyé à notre serveur pour que Claude puisse les lire (voir section 3).</li>
       <li>Si vous utilisez le parrainage (facultatif), votre code de parrainage, une empreinte de votre identifiant technique, l'état et les dates de vos parrainages et, le cas échéant, de votre récompense sont conservés sur notre serveur (voir section 3).</li>
       <li>Les achats Premium sont gérés par Google Play ou l'App Store d'Apple (selon votre appareil) et RevenueCat. RevenueCat transmet à notre serveur certains événements d'achat (achat initial, renouvellement, annulation, transfert), pour tous les abonnés : ils ne servent qu'au parrainage et, s'ils ne concernent pas un filleul, ils sont écartés sur-le-champ sans rien enregistrer (voir section 3).</li>
@@ -209,7 +209,7 @@
     <p>Vos données sont utilisées uniquement pour :</p>
     <ul>
       <li>Faire fonctionner l'application et personnaliser votre expérience</li>
-      <li>Faire transiter les ordres du Connecteur Claude (créer, reporter, cocher, modifier ou supprimer une tâche) jusqu'à leur récupération par l'application, si vous l'avez activé</li>
+      <li>Faire transiter les ordres du Connecteur Claude (créer des tâches ou des objectifs, reporter, cocher, modifier ou supprimer une tâche) jusqu'à leur récupération par l'application, si vous l'avez activé</li>
       <li>Faire lire par Claude un instantané de vos tâches, tâches récurrentes et objectifs, si vous avez activé la Lecture par Claude</li>
       <li>Envoyer des notifications locales si vous les avez activées</li>
       <li>Faire fonctionner le programme de parrainage, si vous l'utilisez, et prévenir la fraude à ce programme</li>
@@ -225,7 +225,8 @@
     <h2>3. Services tiers utilisés</h2>
 
     <p><strong>Connecteur Claude (fonctionnalité Premium)</strong></p>
-    <p>Si vous l'activez depuis l'onglet Claude de l'application, le Connecteur Claude vous permet de piloter vos tâches TimeCoach depuis votre propre assistant Claude (Claude Desktop, Claude Code, ou tout client compatible MCP) : créer, reporter, cocher, modifier ou supprimer une tâche. Ces ordres transitent par notre serveur (Supabase) en attendant que l'application les récupère à sa prochaine ouverture, puis sont supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés). Sont conservés le temps de ce transit : le contenu de l'ordre (titre de la tâche, date, heure, priorité), un historique de son traitement (déposé, reçu, fait, reporté, supprimé) et l'identifiant technique de votre appareil, jamais votre nom ni votre compte. L'accès au connecteur repose sur un jeton personnel que vous générez et pouvez révoquer à tout moment depuis l'onglet Claude de l'application ; ce jeton n'est jamais stocké en clair sur notre serveur, seule son empreinte l'est. Vous choisissez précisément ce que Claude est autorisé à faire, capacité par capacité (créer, cocher, reporter, modifier, supprimer), et vous pouvez modifier ces autorisations à tout moment depuis ce même onglet : une capacité désactivée est refusée par notre serveur. Ce jeton expire automatiquement 90 jours après sa création, sauf si vous le prolongez depuis l'application, et un jeton expiré n'ouvre plus aucun accès.</p>
+    <p>Si vous l'activez depuis l'onglet Claude de l'application, le Connecteur Claude vous permet de piloter vos tâches TimeCoach et d'y ajouter des objectifs depuis votre propre assistant Claude (Claude Desktop, Claude Code, ou tout client compatible MCP) : créer, reporter, cocher, modifier ou supprimer une tâche, et créer un objectif, avec si vous le souhaitez des tâches rattachées. Claude ne fait que créer des objectifs : il ne peut ni en modifier, ni en terminer, ni en supprimer. Ces ordres transitent par notre serveur (Supabase) en attendant que l'application les récupère à sa prochaine ouverture, puis sont supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés). Sont conservés le temps de ce transit : le contenu de l'ordre (pour une tâche : son titre, sa date, son heure et sa priorité ; pour un objectif : son libellé, son mode de suivi par tâches, par compteur ou par montant, sa cible, sa priorité et sa durée en jours), un historique de son traitement (déposé, reçu, fait, reporté, supprimé) et l'identifiant technique de votre appareil, jamais votre nom ni votre compte. L'accès au connecteur repose sur un jeton personnel que vous générez et pouvez révoquer à tout moment depuis l'onglet Claude de l'application ; ce jeton n'est jamais stocké en clair sur notre serveur, seule son empreinte l'est. Vous choisissez précisément ce que Claude est autorisé à faire, capacité par capacité (créer des tâches, créer des objectifs, cocher, reporter, modifier, supprimer), et vous pouvez modifier ces autorisations à tout moment depuis ce même onglet : une capacité désactivée est refusée par notre serveur. Ce jeton expire automatiquement 90 jours après sa création, sauf si vous le prolongez depuis l'application, et un jeton expiré n'ouvre plus aucun accès.</p>
+    <p><strong>Objectifs créés par Claude :</strong> une cible chiffrée, y compris un montant d'argent, n'est déposée que si vous la dictez vous-même à votre assistant ; le montant que vous avez atteint dans l'application, lui, ne quitte jamais votre appareil. Dès que l'application a reçu l'objectif, son mode, sa cible et sa durée sont effacés de notre serveur ; son libellé, sa priorité et l'historique y restent jusqu'à la suppression automatique indiquée plus haut. Tant que l'application ne l'a pas récupéré, l'objectif reste sur notre serveur, au plus 30 jours, avec sa cible. Si l'effacement de la cible échouait, elle resterait jusqu'à cette suppression automatique, au plus tard 90 jours après la récupération.</p>
 
     <p><strong>Lecture par Claude (fonctionnalité Premium, optionnelle)</strong></p>
     <p>Si vous l'activez depuis l'onglet Claude de l'application (désactivée par défaut, réservée pour l'instant aux appareils que nous autorisons explicitement), TimeCoach envoie à notre serveur un instantané de vos tâches, tâches récurrentes et objectifs, pour que Claude puisse les lire et vous aider à planifier autour de ce qui existe déjà. Cet instantané contient : le titre, la date, l'heure et la priorité de vos tâches non terminées (sans limite de date) et de vos tâches terminées des 7 derniers jours ; vos tâches récurrentes actives ; vos objectifs, avec leur progression exprimée en pourcentage ; un résumé du nombre de tâches planifiées et faites par jour sur les 30 derniers jours. <strong>Il ne contient jamais votre expérience (XP), votre série de jours (streak), vos badges, ni le montant d'un objectif financier</strong> : Claude ne voit que ce qui l'aide à planifier, jamais votre progression ni votre argent. Cet instantané remplace le précédent à chaque envoi (une seule copie est conservée par appareil, jamais un historique), et est supprimé automatiquement si vous désactivez cette fonctionnalité, si vous régénérez votre jeton, ou après 7 jours sans nouvel envoi. Vous pouvez l'effacer immédiatement à tout moment depuis l'onglet Claude, avec le bouton « Effacer maintenant ».</p>
@@ -295,7 +296,7 @@
       <li>Droit d'accès à vos données personnelles</li>
       <li>Droit de rectification de vos données</li>
       <li>Droit à l'effacement, supprimez toutes vos données en désinstallant l'app. Pour supprimer également la sauvegarde cloud : sur Android, désactivez Auto Backup dans <em>Paramètres → Système → Sauvegarde</em> puis supprimez les données depuis votre compte Google Drive ; sur iOS, gérez vos sauvegardes depuis <em>Réglages → [votre nom] → iCloud</em>.</li>
-      <li>Données du Connecteur Claude, désactivez-le et révoquez votre jeton à tout moment depuis l'onglet Claude de l'application ; les ordres en transit sur notre serveur sont de toute façon supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés)</li>
+      <li>Données du Connecteur Claude, désactivez-le et révoquez votre jeton à tout moment depuis l'onglet Claude de l'application ; les ordres et les objectifs en transit sur notre serveur sont de toute façon supprimés automatiquement au plus tard 90 jours après leur récupération (30 jours s'ils n'ont jamais été récupérés), et la cible d'un objectif en est effacée dès que l'application l'a reçu</li>
       <li>Données de la Lecture par Claude, désactivez-la à tout moment depuis l'onglet Claude de l'application, ou effacez l'instantané immédiatement avec le bouton « Effacer maintenant » ; il est de toute façon supprimé automatiquement après 7 jours sans nouvel envoi</li>
       <li>Données du parrainage, vous pouvez cesser de l'utiliser à tout moment ; un parrainage sans paiement est effacé après 90 jours, un parrainage payé, acquis ou annulé après 13 mois, et vous pouvez demander l'effacement de votre code en écrivant à contact@fervia.be en l'indiquant</li>
       <li>Droit à la portabilité de vos données, utilisez la fonction de sauvegarde manuelle (export JSON) depuis les paramètres de l'app</li>
@@ -343,7 +344,7 @@
 </div>
 
 <footer>
-  TimeCoach · Politique de Confidentialité · 31 octobre 2026 · Fervia
+  TimeCoach · Politique de Confidentialité · 4 novembre 2026 · Fervia
 </footer>
 
 </body>
