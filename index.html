@@ -74,7 +74,8 @@ section { position: relative; }
   letter-spacing: .06em; text-transform: uppercase; color: var(--acc-texte); }
 .tiret::before { content: ""; width: 2px; height: 14px; border-radius: 1px; background: var(--acc); }
 h1, h2, h3 { margin: 0; font-weight: 800; color: var(--encre); text-wrap: balance; }
-h2 { font-size: 52px; line-height: 1.06; letter-spacing: -0.04em; max-width: 16ch; }
+/* Geist est plus serrée que Manrope : tracking des titres desserré d'un cran (−0,045 em collait les lettres en 68 px) */
+h2 { font-size: 52px; line-height: 1.06; letter-spacing: -0.032em; max-width: 16ch; }
 h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 .gain-txt { color: var(--gain-texte); }
 .sous { margin: 20px 0 0; max-width: 56ch; color: var(--sec); font-size: 18px; }
@@ -117,7 +118,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 .heros { overflow: hidden; padding: 72px 0 40px;
   background: radial-gradient(640px 520px at 76% 40%, var(--lueur), transparent 70%), var(--fond); }
 .heros-grille { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
-.heros h1 { font-size: 68px; line-height: 1.02; letter-spacing: -0.045em; max-width: 12ch; }
+.heros h1 { font-size: 68px; line-height: 1.02; letter-spacing: -0.036em; max-width: 12ch; }
 .heros .sous { font-size: 19px; max-width: 50ch; }
 .heros-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 36px; }
 .confiance { margin: 22px 0 0; font: 400 14px/1.5 var(--mono); color: var(--ter); white-space: nowrap; }
@@ -241,7 +242,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 .expert small { display: block; font: 400 12px/1.3 var(--mono); color: var(--ter); white-space: nowrap; }
 
 /* ─── aperçu ─── */
-.apercu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1040px; margin: 0 auto; }
+.apercu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .apercu figure { margin: 0; }
 .apercu figcaption { margin-top: 14px; font: 500 13px/1.4 var(--mono); color: var(--sec); text-align: center; }
 .apercu figcaption span { display: block; color: var(--ter); font-weight: 400; }
@@ -365,14 +366,14 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   .mosaique { grid-template-columns: 1fr; grid-template-areas: "gami" "profils" "experts"; }
   .claude .deux { grid-template-columns: 1fr; }
   .gami-capture { min-height: 0; } .gami-capture .cadre img { height: auto; aspect-ratio: 1179 / 1300; }
-  .apercu { grid-template-columns: repeat(4, 220px); max-width: none; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -40px; padding: 0 40px 8px; }
+  .apercu { grid-template-columns: repeat(4, 220px); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -40px; padding: 0 40px 8px; scroll-padding: 0 40px; }
   .apercu figure { scroll-snap-align: start; }
 }
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .wrap { padding: 0 20px; }
   .bloc { padding: 80px 0; }
-  h2 { font-size: 34px; line-height: 1.1; letter-spacing: -0.035em; }
+  h2 { font-size: 34px; line-height: 1.1; letter-spacing: -0.028em; }
   h3 { font-size: 21px; }
   .sous { font-size: 16.5px; }
   .entete { margin-bottom: 36px; }
@@ -380,7 +381,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   .nav .bouton { min-height: 44px; padding: 0 14px; }
   .heros { padding: 40px 0 24px; background: radial-gradient(360px 320px at 50% 74%, var(--lueur), transparent 70%), var(--fond); }
   .heros-grille { gap: 36px; }
-  .heros h1 { font-size: 42px; line-height: 1.04; letter-spacing: -0.04em; }
+  .heros h1 { font-size: 42px; line-height: 1.04; letter-spacing: -0.032em; }
   .heros .sous { font-size: 16.5px; }
   .heros-actions { margin-top: 28px; }
   .heros-actions .badges { width: 100%; }
@@ -392,7 +393,10 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   .console .telephone { width: 212px; top: 26px; border-radius: 34px; padding: 6px; }
   .console .telephone img { border-radius: 28px; }
   .etiq { font-size: 13px; padding: 7px 11px 7px 9px; }
-  .etiq.e1 { left: -6px; top: 92px; } .etiq.e2 { right: -6px; top: 196px; } .etiq.e3 { left: -6px; top: 340px; }
+  /* au téléphone les étiquettes cachaient la capture : elles passent en rangée sous la console */
+  .scene { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 8px; }
+  .scene .console { flex: 0 0 100%; }
+  .etiq, .etiq.e1, .etiq.e2, .etiq.e3 { position: static; box-shadow: 0 6px 18px var(--ombre); }
   .regle { margin-top: 36px; } .regle-chiffres span:nth-child(even) { display: none; }
   .releves { grid-template-columns: 1fr; gap: 14px; }
   .releve { padding: 24px 22px; }
@@ -405,7 +409,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   .tuile { padding: 26px 22px; }
   .profils-grille { grid-template-columns: repeat(2, 1fr); }
   .rangee { margin: 18px -22px 0; padding: 0 22px 4px; scroll-padding: 0 22px; }
-  .apercu { grid-template-columns: repeat(4, 200px); margin: 0 -20px; padding: 0 20px 8px; gap: 14px; }
+  .apercu { grid-template-columns: repeat(4, 200px); margin: 0 -20px; padding: 0 20px 8px; gap: 14px; scroll-padding: 0 20px; }
   .iphone-carte { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
   .iphone-carte h2 { font-size: 28px; }
   .claude-scene { grid-template-columns: 1fr; }
