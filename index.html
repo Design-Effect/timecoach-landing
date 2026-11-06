@@ -5,16 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TimeCoach : le coach productivité qui te relance quand tu lâches</title>
 <meta name="description" content="Rappels précis, gamification utile, 7 profils et Connecteur Claude : dépose et gère tes tâches depuis Claude. 14 jours Premium offerts.">
-<link rel="icon" type="image/png" href="timecoachicon512.png">
-<link rel="apple-touch-icon" href="timecoachicon512.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#F5F8F8">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_BE">
 <meta property="og:site_name" content="TimeCoach">
 <meta property="og:title" content="TimeCoach : le coach productivité qui te relance quand tu lâches">
 <meta property="og:description" content="Rappels précis, gamification utile, 7 profils et Connecteur Claude : dépose et gère tes tâches depuis Claude. 14 jours Premium offerts.">
-<link rel="preload" href="fonts/Manrope_800ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="fonts/Manrope_500Medium.ttf" as="font" type="font/ttf" crossorigin>
+<meta property="og:url" content="https://design-effect.github.io/timecoach-landing/">
+<meta property="og:image" content="https://design-effect.github.io/timecoach-landing/images/og-timecoach-2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TimeCoach 2.0 : la nouvelle icône et l’accueil de l’app sur un téléphone">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/Geist_800ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Geist_500Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>
   (function () {
     var reduit = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -24,12 +31,13 @@
   })();
 </script>
 <style>
-@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_500Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
-@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_600SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
-@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_700Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
-@font-face { font-family: 'Manrope'; src: url('fonts/Manrope_800ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Geist'; src: url('fonts/Geist_500Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Geist'; src: url('fonts/Geist_600SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Geist'; src: url('fonts/Geist_700Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Geist'; src: url('fonts/Geist_800ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
 
-/* tout en clair (JETONS-v3.md, thème clair) : retour d'AbduLlah du 30/10 sur la v1 de nuit */
+/* tout en clair (constants/jetons.ts de l'app 2.0, thème clair) : retour d'AbduLlah du 30/10 sur la v1 de nuit.
+   Seule la console reste nuit, comme dans l'app : c'est la signature de la v3 (jetons console et nuit de jetons.ts). */
 :root {
   --fond: #F5F8F8; --fond-2: #EAF2F1; --carte: #FFFFFF; --carte-p: #F0F6F5; --lueur: #DCE9E8;
   --filet: #D8E4E4; --filet-f: #B9CDCD; --piste: #DCE9E8;
@@ -40,12 +48,14 @@
   --ambre: #A86500; --rouge: #C4321F;
   --ombre: rgba(18, 50, 58, .10);
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
-  --mono: 'Manrope', system-ui, sans-serif;
+  --console: #0A2027; --console-lueur: #16404A; --nuit-filet: #2E4D55; --nuit-piste: #23464E;
+  --nuit-texte: #ECF3F2; --nuit-sec: #C6D7D7; --nuit-ter: #95AEB0; --nuit-gain: #4ADE80; --nuit-agir: #7AD6C9;
+  --mono: 'Geist', system-ui, sans-serif;
   --large: 1200px;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--fond); color: var(--encre); font: 500 17px/1.6 'Manrope', system-ui, sans-serif;
+body { margin: 0; background: var(--fond); color: var(--encre); font: 500 17px/1.6 'Geist', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased; }
 img { display: block; max-width: 100%; }
 a { color: inherit; }
@@ -74,7 +84,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 
 /* boutons */
 .bouton { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px;
-  border-radius: 14px; border: 0; background: var(--acc); color: var(--encre-acc); font: 700 16px/1 'Manrope', sans-serif;
+  border-radius: 14px; border: 0; background: var(--acc); color: var(--encre-acc); font: 700 16px/1 'Geist', sans-serif;
   text-decoration: none; cursor: pointer; transition: transform 120ms var(--ease); }
 .bouton .fleche { transition: transform 160ms var(--ease); }
 .bouton:active, .lien-sec:active, .badge-store:active, .fleche-rangee:active, .bascule button:active { transform: scale(0.97); }
@@ -93,8 +103,11 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   border-bottom: 1px solid var(--filet); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
 .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 21px; letter-spacing: -0.03em; }
-.logo img { width: 36px; height: 36px; border-radius: 9px; }
-.logo em { font-style: normal; color: var(--gain-texte); }
+.logo img { width: 36px; height: 36px; border-radius: 9px; box-shadow: 0 0 0 1px rgba(18, 50, 58, .08); }
+/* le mot-titre de l'app : dégradé agir vers gain (nomDegradeDebut / nomDegradeFin du thème clair) */
+.logo span { color: var(--acc-texte); background: linear-gradient(90deg, var(--acc-texte) 0, var(--acc-texte) 40%, var(--gain-texte) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.logo em { font-style: normal; }
 .nav-liens { display: flex; gap: 28px; margin-left: auto; font-size: 15px; font-weight: 600; }
 .nav-liens a { text-decoration: none; color: var(--sec); }
 .nav .bouton { min-height: 44px; padding: 0 18px; font-size: 15px; }
@@ -110,7 +123,25 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 .confiance { margin: 22px 0 0; font: 400 14px/1.5 var(--mono); color: var(--ter); white-space: nowrap; }
 .confiance b { font-weight: 600; color: var(--gain-texte); }
 @media (max-width: 640px) { .confiance .sep { display: none; } }
-.scene { position: relative; justify-self: center; width: 460px; max-width: 100%; }
+.scene { position: relative; justify-self: center; width: 480px; max-width: 100%; }
+/* la console de l'app : panneau nuit, lueur au centre, quadrillage à 3,5 %, liseré clair en haut (DIRECTION v3, « Matière ») */
+.console { position: relative; height: 640px; border-radius: 36px; overflow: hidden;
+  background:
+    radial-gradient(70% 52% at 50% 46%, var(--console-lueur), transparent 72%),
+    repeating-linear-gradient(0deg, rgba(236, 243, 242, .035) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(236, 243, 242, .035) 0 1px, transparent 1px 28px),
+    var(--console);
+  box-shadow: inset 0 1px 0 rgba(236, 243, 242, .14), 0 40px 90px rgba(10, 32, 39, .28); }
+.console .cadran { position: absolute; left: 50%; top: 50%; width: 452px; margin: 0; translate: -50% -50%; }
+.console .grad { stroke: var(--nuit-filet); } .console .grad.heure { stroke: var(--nuit-ter); } .console .grad.quart { stroke: var(--nuit-sec); }
+.console .echo, .console .piste { stroke: var(--nuit-piste); } .console .eclair { stroke: var(--nuit-gain); }
+.console .aiguille { stroke: var(--nuit-gain); } .console .moyeu { fill: var(--nuit-gain); } .console .moyeu-creux { fill: var(--console); }
+/* le téléphone : la capture 2.0 porte déjà la barre d'état et l'îlot, le cadre n'ajoute que la tranche */
+.telephone { border-radius: 42px; padding: 7px; background: #0E2A31;
+  box-shadow: 0 0 0 1px rgba(18, 50, 58, .22), 0 30px 70px var(--ombre); }
+.telephone img { width: 100%; height: auto; border-radius: 35px; }
+.console .telephone { position: absolute; left: 50%; top: 32px; width: 270px; translate: -50% 0;
+  box-shadow: 0 0 0 1px rgba(236, 243, 242, .16), 0 40px 80px rgba(2, 12, 15, .55); }
 .cadran { position: relative; width: 400px; aspect-ratio: 1; margin: 0 auto; }
 .cadran > .cadran-svg, .trotteuse, .trotteuse svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .grad { stroke: var(--filet-f); } .grad.heure { stroke: var(--ter); } .grad.quart { stroke: var(--sec); }
@@ -128,13 +159,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   box-shadow: 0 10px 30px var(--ombre); white-space: nowrap; }
 .etiq .ic { color: var(--acc-texte); }
 .etiq.gain { background: var(--vert-doux); border-color: var(--filet); color: var(--gain-texte); } .etiq.gain .ic { color: var(--gain-texte); }
-.etiq.e1 { left: 0; top: 54px; } .etiq.e2 { right: -6px; top: 150px; } .etiq.e3 { left: 6px; top: 318px; }
-.preuve-mini { display: flex; align-items: center; gap: 14px; margin: 26px auto 0; width: max-content; max-width: 100%;
-  padding: 10px 16px 10px 10px; border-radius: 18px; background: var(--carte); border: 1px solid var(--filet); }
-.preuve-mini img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; }
-.preuve-mini .ecran { object-position: 50% 18%; } .preuve-mini .montre { object-position: 70% 52%; border-radius: 50%; }
-.preuve-mini span { font: 400 13px/1.45 var(--mono); color: var(--ter); max-width: 24ch; }
-.preuve-mini span b { color: var(--sec); font-weight: 500; }
+.etiq.e1 { left: -28px; top: 120px; } .etiq.e2 { right: -28px; top: 236px; } .etiq.e3 { left: -28px; top: 430px; }
 /* la règle graduée sous le héros : l'instrument, fixe */
 .regle { height: 28px; margin-top: 64px; border-bottom: 1px solid var(--filet);
   background:
@@ -161,15 +186,11 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 .liste li .ic { margin-top: 3px; color: var(--acc-texte); }
 .marques { margin: 30px 0 0; padding-top: 20px; border-top: 1px solid var(--filet); font: 500 14px/1.5 var(--mono); color: var(--ter); letter-spacing: .04em; }
 .marques span { color: var(--sec); }
-.photos { position: relative; height: 560px; }
-.photo-ecran { position: absolute; left: 6%; top: 0; width: 290px; height: 560px; border-radius: 34px; overflow: hidden;
-  border: 1px solid var(--filet-f); box-shadow: 0 30px 70px var(--ombre); }
-.photo-ecran img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
-.photo-montre { position: absolute; right: 2%; bottom: 10px; width: 250px; height: 250px; border-radius: 50%; overflow: hidden;
-  border: 6px solid var(--carte); box-shadow: 0 30px 70px var(--ombre); }
-.photo-montre img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 54%; transform: scale(1.5); }
-.photo-legende { position: absolute; right: 2%; top: 60px; font: 400 13px/1.5 var(--mono); color: var(--ter); text-align: right; }
-.photo-legende b { display: block; font: 600 34px/1 var(--mono); color: var(--gain-texte); margin-bottom: 6px; letter-spacing: -0.02em; }
+.photos { position: relative; display: flex; justify-content: center; align-items: center; gap: 36px; padding: 24px 0;
+  border-radius: 28px; background: radial-gradient(60% 60% at 40% 50%, var(--lueur), transparent 75%); }
+.photos .telephone { width: 290px; flex: none; }
+.photo-legende { margin: 0; font: 500 14px/1.5 var(--mono); color: var(--ter); }
+.photo-legende b { display: block; font: 700 34px/1 var(--mono); color: var(--gain-texte); margin-bottom: 8px; letter-spacing: -0.03em; }
 
 /* ─── fonctions (mosaïque) ─── */
 .mosaique { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "gami profils" "gami experts"; gap: 20px; }
@@ -220,7 +241,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 .expert small { display: block; font: 400 12px/1.3 var(--mono); color: var(--ter); white-space: nowrap; }
 
 /* ─── aperçu ─── */
-.apercu { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.apercu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1040px; margin: 0 auto; }
 .apercu figure { margin: 0; }
 .apercu figcaption { margin-top: 14px; font: 500 13px/1.4 var(--mono); color: var(--sec); text-align: center; }
 .apercu figcaption span { display: block; color: var(--ter); font-weight: 400; }
@@ -275,7 +296,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 /* ─── prix ─── */
 .bascule { display: inline-flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--filet); margin: 0 auto 40px; }
 .bascule button { min-height: 44px; padding: 0 18px; border: 0; border-radius: 10px; background: transparent; color: var(--sec);
-  font: 700 15px/1 'Manrope', sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: transform 120ms var(--ease); }
+  font: 700 15px/1 'Geist', sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: transform 120ms var(--ease); }
 .bascule button[aria-pressed="true"] { background: var(--carte); color: var(--encre); box-shadow: inset 0 0 0 1px var(--filet-f), 0 2px 6px var(--ombre); }
 .bascule .offert { padding: 3px 7px; border-radius: 6px; background: var(--gain-plein); color: var(--encre-gain); font: 600 11.5px/1.2 var(--mono); }
 .prix-centre { text-align: center; }
@@ -313,8 +334,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 .faq-cols .entete { position: sticky; top: 110px; margin: 0; }
 /* ─── appel final et pied ─── */
 .final { text-align: center; padding: 128px 0; background: radial-gradient(560px 380px at 50% 30%, var(--lueur), transparent 70%), var(--fond); }
-.final .cadran { width: 132px; margin-bottom: 36px; }
-.final .cadran .val { font-size: 26px; }
+.icone-finale { width: 96px; height: 96px; margin: 0 auto 36px; border-radius: 22px; box-shadow: 0 0 0 1px rgba(18, 50, 58, .10), 0 24px 50px var(--ombre); }
 .final h2 { margin: 0 auto; max-width: 18ch; font-size: 56px; }
 .final .sous { margin: 18px auto 34px; }
 .final .badges { justify-content: center; }
@@ -345,7 +365,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   .mosaique { grid-template-columns: 1fr; grid-template-areas: "gami" "profils" "experts"; }
   .claude .deux { grid-template-columns: 1fr; }
   .gami-capture { min-height: 0; } .gami-capture .cadre img { height: auto; aspect-ratio: 1179 / 1300; }
-  .apercu { grid-template-columns: repeat(5, 220px); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -40px; padding: 0 40px 8px; }
+  .apercu { grid-template-columns: repeat(4, 220px); max-width: none; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -40px; padding: 0 40px 8px; }
   .apercu figure { scroll-snap-align: start; }
 }
 @media (max-width: 640px) {
@@ -366,25 +386,26 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   .heros-actions .badges { width: 100%; }
   .badge-store, .badge-store img { height: 46px; }
   .confiance { font-size: 12.5px; white-space: normal; } .confiance b { display: block; margin-bottom: 2px; }
-  .scene { width: 340px; }
-  .cadran { width: 280px; }
-  .cadran .val { font-size: 56px; }
+  .scene { width: 100%; max-width: 360px; }
+  .console { height: 500px; border-radius: 30px; }
+  .console .cadran { width: 352px; }
+  .console .telephone { width: 212px; top: 26px; border-radius: 34px; padding: 6px; }
+  .console .telephone img { border-radius: 28px; }
   .etiq { font-size: 13px; padding: 7px 11px 7px 9px; }
-  .etiq.e1 { left: -2px; top: 26px; } .etiq.e2 { right: -4px; top: 112px; } .etiq.e3 { left: 2px; top: 222px; }
-  .preuve-mini { display: none; }
+  .etiq.e1 { left: -6px; top: 92px; } .etiq.e2 { right: -6px; top: 196px; } .etiq.e3 { left: -6px; top: 340px; }
   .regle { margin-top: 36px; } .regle-chiffres span:nth-child(even) { display: none; }
   .releves { grid-template-columns: 1fr; gap: 14px; }
   .releve { padding: 24px 22px; }
   .releve .mesure { font-size: 36px; margin-top: 18px; }
   .deux { gap: 44px; }
-  .photos { height: 440px; }
-  .photo-ecran { left: 0; width: 220px; height: 430px; border-radius: 28px; }
-  .photo-montre { right: 0; width: 170px; height: 170px; bottom: 0; }
-  .photo-legende { display: none; }
+  .photos { gap: 18px; padding: 8px 0; }
+  .photos .telephone { width: 210px; border-radius: 34px; padding: 6px; }
+  .photos .telephone img { border-radius: 28px; }
+  .photo-legende { font-size: 12.5px; } .photo-legende b { font-size: 24px; }
   .tuile { padding: 26px 22px; }
   .profils-grille { grid-template-columns: repeat(2, 1fr); }
   .rangee { margin: 18px -22px 0; padding: 0 22px 4px; scroll-padding: 0 22px; }
-  .apercu { grid-template-columns: repeat(5, 200px); margin: 0 -20px; padding: 0 20px 8px; gap: 14px; }
+  .apercu { grid-template-columns: repeat(4, 200px); margin: 0 -20px; padding: 0 20px 8px; gap: 14px; }
   .iphone-carte { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
   .iphone-carte h2 { font-size: 28px; }
   .claude-scene { grid-template-columns: 1fr; }
@@ -417,13 +438,13 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs><linearGradient id="tc-gain" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16793A"/><stop offset="1" stop-color="#1A8F45"/></linearGradient></defs>
+  <defs><linearGradient id="tc-gain" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16793A"/><stop offset="1" stop-color="#1A8F45"/></linearGradient><linearGradient id="tc-gain-nuit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2EB860"/><stop offset="1" stop-color="#4ADE80"/></linearGradient></defs>
 </svg>
 
 <!-- ═══ navigation ═══ -->
 <header class="nav">
   <div class="wrap">
-    <a href="#heros" class="logo"><img src="timecoachicon512.png" alt="" width="36" height="36"><span>Time<em>Coach</em></span></a>
+    <a href="#heros" class="logo"><img src="images/logo-v3-96.png" alt="" width="36" height="36"><span>Time<em>Coach</em></span></a>
     <nav class="nav-liens" aria-label="Sections">
       <a href="#solution">Fonctions</a><a href="#claude">Claude</a><a href="#tarifs">Tarifs</a><a href="#faq">Questions</a>
     </nav>
@@ -437,7 +458,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   <div class="wrap">
     <div class="heros-grille">
       <div class="heros-texte">
-        <p class="tiret">Disponible sur iPhone et Android</p>
+        <p class="tiret">Version 2.0 · iPhone et Android</p>
         <h1>Le coach productivité qui te <span class="gain-txt">relance</span> quand tu lâches.</h1>
         <p class="sous">Rappels précis qui ne ratent jamais sur Xiaomi/Samsung, gamification basée sur tes vraies tâches, et un Connecteur Claude pour déposer et gérer tes tâches depuis l’app Claude. Pour celles et ceux qui en ont marre des to-do listes oubliées.</p>
         <div class="heros-actions">
@@ -451,22 +472,15 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
       </div>
 
       <div class="scene">
-        <div class="cadran" role="img" aria-label="Le cadran de TimeCoach : score du jour à 50 %, 3 tâches sur 6">
-          <svg class="cadran-svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><line class="grad quart" x1="200.00" y1="11.00" x2="200.00" y2="1.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="220.33" y1="6.57" x2="220.74" y2="2.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="240.44" y1="9.75" x2="241.25" y2="5.94" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="260.10" y1="15.02" x2="261.31" y2="11.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="279.11" y1="22.32" x2="280.70" y2="18.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="295.25" y1="35.02" x2="299.40" y2="27.83" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="314.32" y1="42.65" x2="316.62" y2="39.49" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="330.15" y1="55.46" x2="332.76" y2="52.56" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="344.54" y1="69.85" x2="347.44" y2="67.24" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="357.35" y1="85.68" x2="360.51" y2="83.38" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="364.98" y1="104.75" x2="372.17" y2="100.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="377.68" y1="120.89" x2="381.25" y2="119.30" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="384.98" y1="139.90" x2="388.69" y2="138.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="390.25" y1="159.56" x2="394.06" y2="158.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="393.43" y1="179.67" x2="397.31" y2="179.26" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="389.00" y1="200.00" x2="399.00" y2="200.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="393.43" y1="220.33" x2="397.31" y2="220.74" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="390.25" y1="240.44" x2="394.06" y2="241.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="384.98" y1="260.10" x2="388.69" y2="261.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="377.68" y1="279.11" x2="381.25" y2="280.70" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="364.98" y1="295.25" x2="372.17" y2="299.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="357.35" y1="314.32" x2="360.51" y2="316.62" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="344.54" y1="330.15" x2="347.44" y2="332.76" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="330.15" y1="344.54" x2="332.76" y2="347.44" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="314.32" y1="357.35" x2="316.62" y2="360.51" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="295.25" y1="364.98" x2="299.40" y2="372.17" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="279.11" y1="377.68" x2="280.70" y2="381.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="260.10" y1="384.98" x2="261.31" y2="388.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="240.44" y1="390.25" x2="241.25" y2="394.06" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="220.33" y1="393.43" x2="220.74" y2="397.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="200.00" y1="389.00" x2="200.00" y2="399.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="179.67" y1="393.43" x2="179.26" y2="397.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="159.56" y1="390.25" x2="158.75" y2="394.06" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="139.90" y1="384.98" x2="138.69" y2="388.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="120.89" y1="377.68" x2="119.30" y2="381.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="104.75" y1="364.98" x2="100.60" y2="372.17" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="85.68" y1="357.35" x2="83.38" y2="360.51" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="69.85" y1="344.54" x2="67.24" y2="347.44" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="55.46" y1="330.15" x2="52.56" y2="332.76" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="42.65" y1="314.32" x2="39.49" y2="316.62" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="35.02" y1="295.25" x2="27.83" y2="299.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="22.32" y1="279.11" x2="18.75" y2="280.70" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="15.02" y1="260.10" x2="11.31" y2="261.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="9.75" y1="240.44" x2="5.94" y2="241.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="6.57" y1="220.33" x2="2.69" y2="220.74" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="11.00" y1="200.00" x2="1.00" y2="200.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="6.57" y1="179.67" x2="2.69" y2="179.26" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="9.75" y1="159.56" x2="5.94" y2="158.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="15.02" y1="139.90" x2="11.31" y2="138.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="22.32" y1="120.89" x2="18.75" y2="119.30" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="35.02" y1="104.75" x2="27.83" y2="100.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="42.65" y1="85.68" x2="39.49" y2="83.38" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="55.46" y1="69.85" x2="52.56" y2="67.24" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="69.85" y1="55.46" x2="67.24" y2="52.56" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="85.68" y1="42.65" x2="83.38" y2="39.49" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="104.75" y1="35.02" x2="100.60" y2="27.83" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="120.89" y1="22.32" x2="119.30" y2="18.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="139.90" y1="15.02" x2="138.69" y2="11.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="159.56" y1="9.75" x2="158.75" y2="5.94" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="179.67" y1="6.57" x2="179.26" y2="2.69" stroke-width="1.1" stroke-linecap="round"/><circle class="echo" cx="200.0" cy="200.0" r="187.00" fill="none" stroke-width="1"/><circle class="piste" cx="200.0" cy="200.0" r="175.00" fill="none" stroke-width="14.0"/><circle class="arc" data-c="1099.56" data-p="0.5000" cx="200.0" cy="200.0" r="175.00" fill="none" stroke="url(#tc-gain)" stroke-width="14.0" stroke-linecap="round" stroke-dasharray="1099.56" stroke-dashoffset="549.78" transform="rotate(-90 200.0 200.0)"/><g class="eclairs"><line class="eclair" data-h="0" x1="200.00" y1="11.50" x2="200.00" y2="0.60" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="1" x1="294.25" y1="36.75" x2="299.70" y2="27.31" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="2" x1="363.25" y1="105.75" x2="372.69" y2="100.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="3" x1="388.50" y1="200.00" x2="399.40" y2="200.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="4" x1="363.25" y1="294.25" x2="372.69" y2="299.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="5" x1="294.25" y1="363.25" x2="299.70" y2="372.69" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="6" x1="200.00" y1="388.50" x2="200.00" y2="399.40" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="7" x1="105.75" y1="363.25" x2="100.30" y2="372.69" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="8" x1="36.75" y1="294.25" x2="27.31" y2="299.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="9" x1="11.50" y1="200.00" x2="0.60" y2="200.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="10" x1="36.75" y1="105.75" x2="27.31" y2="100.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="11" x1="105.75" y1="36.75" x2="100.30" y2="27.31" stroke-width="2.6" stroke-linecap="round"/></g></svg><div class="trotteuse" aria-hidden="true"><svg viewBox="0 0 400 400" focusable="false"><line class="aiguille" x1="200.0" y1="240.00" x2="200.0" y2="2" stroke-width="2" stroke-linecap="round"/><circle class="moyeu" cx="200.0" cy="200.0" r="5"/><circle class="moyeu-creux" cx="200.0" cy="200.0" r="2"/></svg></div>
-          <div class="centre" aria-hidden="true">
-            <span class="lib">Score du jour</span>
-            <span class="val"><b data-score>50</b><small>%</small></span>
-            <span class="taches">3/6 tâches</span>
-          </div>
+        <div class="console">
+        <div class="cadran" aria-hidden="true">
+          <svg class="cadran-svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><line class="grad quart" x1="200.00" y1="11.00" x2="200.00" y2="1.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="220.33" y1="6.57" x2="220.74" y2="2.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="240.44" y1="9.75" x2="241.25" y2="5.94" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="260.10" y1="15.02" x2="261.31" y2="11.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="279.11" y1="22.32" x2="280.70" y2="18.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="295.25" y1="35.02" x2="299.40" y2="27.83" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="314.32" y1="42.65" x2="316.62" y2="39.49" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="330.15" y1="55.46" x2="332.76" y2="52.56" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="344.54" y1="69.85" x2="347.44" y2="67.24" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="357.35" y1="85.68" x2="360.51" y2="83.38" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="364.98" y1="104.75" x2="372.17" y2="100.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="377.68" y1="120.89" x2="381.25" y2="119.30" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="384.98" y1="139.90" x2="388.69" y2="138.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="390.25" y1="159.56" x2="394.06" y2="158.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="393.43" y1="179.67" x2="397.31" y2="179.26" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="389.00" y1="200.00" x2="399.00" y2="200.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="393.43" y1="220.33" x2="397.31" y2="220.74" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="390.25" y1="240.44" x2="394.06" y2="241.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="384.98" y1="260.10" x2="388.69" y2="261.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="377.68" y1="279.11" x2="381.25" y2="280.70" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="364.98" y1="295.25" x2="372.17" y2="299.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="357.35" y1="314.32" x2="360.51" y2="316.62" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="344.54" y1="330.15" x2="347.44" y2="332.76" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="330.15" y1="344.54" x2="332.76" y2="347.44" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="314.32" y1="357.35" x2="316.62" y2="360.51" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="295.25" y1="364.98" x2="299.40" y2="372.17" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="279.11" y1="377.68" x2="280.70" y2="381.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="260.10" y1="384.98" x2="261.31" y2="388.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="240.44" y1="390.25" x2="241.25" y2="394.06" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="220.33" y1="393.43" x2="220.74" y2="397.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="200.00" y1="389.00" x2="200.00" y2="399.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="179.67" y1="393.43" x2="179.26" y2="397.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="159.56" y1="390.25" x2="158.75" y2="394.06" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="139.90" y1="384.98" x2="138.69" y2="388.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="120.89" y1="377.68" x2="119.30" y2="381.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="104.75" y1="364.98" x2="100.60" y2="372.17" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="85.68" y1="357.35" x2="83.38" y2="360.51" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="69.85" y1="344.54" x2="67.24" y2="347.44" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="55.46" y1="330.15" x2="52.56" y2="332.76" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="42.65" y1="314.32" x2="39.49" y2="316.62" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="35.02" y1="295.25" x2="27.83" y2="299.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="22.32" y1="279.11" x2="18.75" y2="280.70" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="15.02" y1="260.10" x2="11.31" y2="261.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="9.75" y1="240.44" x2="5.94" y2="241.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="6.57" y1="220.33" x2="2.69" y2="220.74" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="11.00" y1="200.00" x2="1.00" y2="200.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="6.57" y1="179.67" x2="2.69" y2="179.26" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="9.75" y1="159.56" x2="5.94" y2="158.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="15.02" y1="139.90" x2="11.31" y2="138.69" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="22.32" y1="120.89" x2="18.75" y2="119.30" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="35.02" y1="104.75" x2="27.83" y2="100.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="42.65" y1="85.68" x2="39.49" y2="83.38" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="55.46" y1="69.85" x2="52.56" y2="67.24" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="69.85" y1="55.46" x2="67.24" y2="52.56" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="85.68" y1="42.65" x2="83.38" y2="39.49" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="104.75" y1="35.02" x2="100.60" y2="27.83" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="120.89" y1="22.32" x2="119.30" y2="18.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="139.90" y1="15.02" x2="138.69" y2="11.31" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="159.56" y1="9.75" x2="158.75" y2="5.94" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="179.67" y1="6.57" x2="179.26" y2="2.69" stroke-width="1.1" stroke-linecap="round"/><circle class="echo" cx="200.0" cy="200.0" r="187.00" fill="none" stroke-width="1"/><circle class="piste" cx="200.0" cy="200.0" r="175.00" fill="none" stroke-width="14.0"/><circle class="arc" data-c="1099.56" data-p="0.6300" cx="200.0" cy="200.0" r="175.00" fill="none" stroke="url(#tc-gain-nuit)" stroke-width="14.0" stroke-linecap="round" stroke-dasharray="1099.56" stroke-dashoffset="406.84" transform="rotate(-90 200.0 200.0)"/><g class="eclairs"><line class="eclair" data-h="0" x1="200.00" y1="11.50" x2="200.00" y2="0.60" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="1" x1="294.25" y1="36.75" x2="299.70" y2="27.31" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="2" x1="363.25" y1="105.75" x2="372.69" y2="100.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="3" x1="388.50" y1="200.00" x2="399.40" y2="200.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="4" x1="363.25" y1="294.25" x2="372.69" y2="299.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="5" x1="294.25" y1="363.25" x2="299.70" y2="372.69" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="6" x1="200.00" y1="388.50" x2="200.00" y2="399.40" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="7" x1="105.75" y1="363.25" x2="100.30" y2="372.69" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="8" x1="36.75" y1="294.25" x2="27.31" y2="299.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="9" x1="11.50" y1="200.00" x2="0.60" y2="200.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="10" x1="36.75" y1="105.75" x2="27.31" y2="100.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="11" x1="105.75" y1="36.75" x2="100.30" y2="27.31" stroke-width="2.6" stroke-linecap="round"/></g></svg><div class="trotteuse" aria-hidden="true"><svg viewBox="0 0 400 400" focusable="false"><line class="aiguille" x1="200.0" y1="240.00" x2="200.0" y2="2" stroke-width="2" stroke-linecap="round"/><circle class="moyeu" cx="200.0" cy="200.0" r="5"/><circle class="moyeu-creux" cx="200.0" cy="200.0" r="2"/></svg></div>
+        </div>
+        <div class="telephone"><img src="images/v2-01-accueil.webp" width="660" height="1434" fetchpriority="high" alt="Capture de TimeCoach 2.0 : l’accueil, le cadran du score à 63 %, 4 960 XP, une série de 12 jours et les tâches du jour avec leur gain d’XP"></div>
         </div>
         <span class="etiq gain e1"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>+140&nbsp;XP</span>
-        <span class="etiq e2"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>Niv.&nbsp;5</span>
+        <span class="etiq e2"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>Niv.&nbsp;4</span>
         <span class="etiq e3"><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>10h00 pile</span>
-        <div class="preuve-mini">
-          <img class="ecran" src="images/hero-phone.jpg" width="1000" height="2166" alt="Notification TimeCoach sur l’écran verrouillé d’un téléphone Android">
-          <img class="montre" src="images/hero-watch.jpg" width="1000" height="1334" alt="La même notification TimeCoach sur une montre connectée">
-          <span><b>Photos réelles</b><br>écran verrouillé et montre</span>
-        </div>
       </div>
     </div>
     <div class="regle" aria-hidden="true"></div>
@@ -521,16 +535,14 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
         <p class="sous" style="--i:2">On a passé des semaines à debugger les optimisations batterie d’Android. Channel HIGH, importance MAX, onboarding par marque. Résultat : tes rappels arrivent vraiment, pas avec 12 minutes de retard comme ailleurs.</p>
         <ul class="liste" style="--i:3">
           <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Notifications haute priorité (channel MAX), survivent aux optimisations batterie</li>
-          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Configuration guidée pour Xiaomi, Samsung, Huawei, Oppo</li>
-          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Double notif : préparation + heure pile, pour ne rien rater</li>
-          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Compatible avec ta smartwatch (Wear OS, Galaxy Watch)</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Configuration guidée pour Xiaomi, Samsung, Huawei, Oppo, Vivo</li>
+          <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Double notif : le rappel que tu choisis (de 30 min avant à la veille à 20 h) + l’heure pile</li>
         </ul>
-        <p class="marques" style="--i:4"><span>Xiaomi</span> · <span>Samsung</span> · <span>Huawei</span> · <span>Oppo</span> : guidage par marque</p>
+        <p class="marques" style="--i:4"><span>Xiaomi</span> · <span>Samsung</span> · <span>Huawei</span> · <span>Oppo</span> · <span>Vivo</span> : guidage par marque</p>
       </div>
       <div class="photos" data-rev>
-        <div class="photo-ecran" style="--i:0"><img src="images/hero-phone.jpg" width="1000" height="2166" alt="Notification TimeCoach qui arrive à l’heure sur l’écran verrouillé"></div>
-        <p class="photo-legende" style="--i:1"><b>17:15</b>Rappel à l’heure pile<br>sur l’écran verrouillé</p>
-        <div class="photo-montre" style="--i:2"><img src="images/hero-watch.jpg" width="1000" height="1334" alt="Notification TimeCoach sur une montre connectée"></div>
+        <div class="telephone" style="--i:0"><img src="images/v2-03-rappel.webp" width="660" height="1434" loading="lazy" alt="Capture de TimeCoach 2.0 : la feuille Nouvelle tâche, début à 09:00 et rappel 1 h avant sélectionné"></div>
+        <p class="photo-legende" style="--i:1"><b>1 h avant</b>Le rappel que tu choisis,<br>puis l’heure pile</p>
       </div>
     </div>
   </div>
@@ -543,7 +555,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
       <article class="tuile gami" style="--i:0">
         <span class="num">02 · Gamification</span>
         <h3>La gamification qui sert ta vie.</h3>
-        <p>XP, niveaux, streaks, 33 badges. Mais basés <strong>uniquement</strong> sur tes vraies tâches importantes. Pas sur boire de l’eau. La progression, mais sans la distraction.</p>
+        <p>XP, niveaux, séries, 33 badges. Mais basés <strong>uniquement</strong> sur tes vraies tâches importantes. Pas sur boire de l’eau. La progression, mais sans la distraction.</p>
         <div class="xp">
           <div class="xp-haut"><span><b>1100 XP</b> · Niv. 3 Efficace</span><span>Niv. 4 à 2500</span></div>
           <div class="jauge"><i style="--p:.44"></i></div>
@@ -556,8 +568,8 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
           <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Timer Pomodoro intégré + calendrier mensuel</li>
         </ul>
         <div class="gami-capture">
-          <div class="cadre"><img src="images/badges.jpg" width="800" height="1734" alt="Capture de TimeCoach : les badges, 8 sur 33 débloqués"></div>
-          <div class="cadre"><img src="images/xp-streak.jpg" width="800" height="1734" alt="Capture de TimeCoach : progression XP et bonus de streak"></div>
+          <div class="cadre"><img src="images/v2-07-accueil-sombre.webp" width="660" height="1434" loading="lazy" alt="Capture de TimeCoach 2.0 en thème sombre : la console de l’accueil, 4 960 XP, XP doublé, niveau 4 et série de 12 jours"></div>
+          <div class="cadre"><img src="images/v2-08-analyse-sombre.webp" width="660" height="1434" loading="lazy" alt="Capture de TimeCoach 2.0 en thème sombre : Analyse et progression, score du jour, série, total d’XP et niveau"></div>
         </div>
       </article>
 
@@ -609,7 +621,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   </div>
 </section>
 
-<!-- ═══ aperçu de l'app (captures 1.9.0) ═══ -->
+<!-- ═══ aperçu de l'app (captures 2.0.0) ═══ -->
 <section class="bloc apercu-bloc" style="padding-top: 24px">
   <div class="wrap">
     <div class="entete" data-rev>
@@ -618,11 +630,10 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
       <p class="sous">Une interface pensée pour être belle et motivante. Chaque profil avec ses objectifs et ses experts.</p>
     </div>
     <div class="apercu" data-rev>
-      <figure style="--i:0"><div class="cadre"><img src="images/accueil.jpg" width="800" height="1734" alt="Capture de TimeCoach : l’accueil, profil Entrepreneur, tâches du jour"></div><figcaption>Accueil<span>Ta journée, ton XP</span></figcaption></figure>
-      <figure style="--i:1"><div class="cadre"><img src="images/analyse.jpg" width="800" height="1734" alt="Capture de TimeCoach : analyse et progression, score du jour"></div><figcaption>Analyse<span>Score du jour, graphique</span></figcaption></figure>
-      <figure style="--i:2"><div class="cadre"><img src="images/conseils.jpg" width="800" height="1734" alt="Capture de TimeCoach : citations et sagesse"></div><figcaption>Conseils<span>Citations &amp; sagesse</span></figcaption></figure>
-      <figure style="--i:3"><div class="cadre"><img src="images/nouvelle-tache.jpg" width="800" height="1734" alt="Capture de TimeCoach : nouvelle tâche, priorité et récurrence"></div><figcaption>Nouvelle tâche<span>Priorité, objectif, récurrence</span></figcaption></figure>
-      <figure style="--i:4"><div class="cadre"><img src="images/calendrier.jpg" width="800" height="1734" alt="Capture de TimeCoach : le calendrier du mois"></div><figcaption>Calendrier<span>Ton mois d’un coup d’œil</span></figcaption></figure>
+      <figure style="--i:0"><div class="cadre"><img src="images/v2-01-accueil.webp" width="660" height="1434" loading="lazy" alt="Capture de TimeCoach 2.0 : l’accueil, le cadran du score et les tâches du jour avec leur gain d’XP"></div><figcaption>Accueil<span>Tes tâches, enfin simples</span></figcaption></figure>
+      <figure style="--i:1"><div class="cadre"><img src="images/v2-02-saisie.webp" width="660" height="1434" loading="lazy" alt="Capture de TimeCoach 2.0 : « demain 9h appeler le dentiste » tapé, le jour et l’heure repérés en pastilles"></div><figcaption>Nouvelle tâche<span>Écris-la comme tu la dis</span></figcaption></figure>
+      <figure style="--i:2"><div class="cadre"><img src="images/v2-04-objectif.webp" width="660" height="1434" loading="lazy" alt="Capture de TimeCoach 2.0 : l’objectif « Trouver mes 10 premiers clients », 3 sur 10, et ses tâches liées"></div><figcaption>Objectifs<span>Avance vers tes objectifs</span></figcaption></figure>
+      <figure style="--i:3"><div class="cadre"><img src="images/v2-05-analyse.webp" width="660" height="1434" loading="lazy" alt="Capture de TimeCoach 2.0 : Analyse et progression, les barres des 7 derniers jours"></div><figcaption>Analyse<span>Ta progression, jour après jour</span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -675,8 +686,8 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
             <p class="prochaine"><svg class="ic s16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>Elles arrivent à ta prochaine ouverture de l’app.</p>
           </div>
           <figure class="claude-capture" style="--i:1">
-            <div class="cadre"><img src="images/claude-connecte.jpg" width="800" height="1496" alt="Capture de l’onglet Claude de TimeCoach connecté : jeton actif et ce que Claude peut faire"></div>
-            <figcaption>L’onglet Claude, dans l’app 1.9.0</figcaption>
+            <div class="cadre"><img src="images/v2-06-claude.webp" width="660" height="1434" loading="lazy" alt="Capture de l’onglet Claude de TimeCoach 2.0 : connecté, le journal de ce que Claude a fait et ses autorisations action par action"></div>
+            <figcaption>L’onglet Claude, dans l’app 2.0</figcaption>
           </figure>
         </div>
       </div>
@@ -761,9 +772,10 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
           <ul>
             <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>3 tâches par jour</li>
             <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>1 objectif maximum</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Saisie en phrase libre</li>
             <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Timer Pomodoro</li>
             <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>2 conseils d’experts par jour</li>
-            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Système de XP, niveaux et streaks</li>
+            <li><svg class="ic s18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Système de XP, niveaux et séries</li>
           </ul>
           <a href="https://play.google.com/store/apps/details?id=com.designeffect.timecoach" target="_blank" rel="noopener" class="bouton store-auto">Télécharger gratuitement</a>
         </article>
@@ -823,7 +835,7 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
 <!-- ═══ appel final ═══ -->
 <section class="final">
   <div class="wrap" data-rev>
-    <div class="cadran" aria-hidden="true" style="--i:0"><svg class="cadran-svg" viewBox="0 0 132 132" aria-hidden="true" focusable="false"><line class="grad quart" x1="66.00" y1="11.00" x2="66.00" y2="1.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="72.32" y1="5.83" x2="72.73" y2="1.95" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="78.58" y1="6.82" x2="79.39" y2="3.01" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="84.70" y1="8.46" x2="85.90" y2="4.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="90.61" y1="10.73" x2="92.19" y2="7.17" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="94.25" y1="17.07" x2="98.40" y2="9.88" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="101.56" y1="17.05" x2="103.85" y2="13.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="106.48" y1="21.04" x2="109.09" y2="18.14" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="110.96" y1="25.52" x2="113.86" y2="22.91" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="114.95" y1="30.44" x2="118.10" y2="28.15" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="114.93" y1="37.75" x2="122.12" y2="33.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="121.27" y1="41.39" x2="124.83" y2="39.81" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="123.54" y1="47.30" x2="127.25" y2="46.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="125.18" y1="53.42" x2="128.99" y2="52.61" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="126.17" y1="59.68" x2="130.05" y2="59.27" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="121.00" y1="66.00" x2="131.00" y2="66.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="126.17" y1="72.32" x2="130.05" y2="72.73" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="125.18" y1="78.58" x2="128.99" y2="79.39" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="123.54" y1="84.70" x2="127.25" y2="85.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="121.27" y1="90.61" x2="124.83" y2="92.19" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="114.93" y1="94.25" x2="122.12" y2="98.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="114.95" y1="101.56" x2="118.10" y2="103.85" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="110.96" y1="106.48" x2="113.86" y2="109.09" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="106.48" y1="110.96" x2="109.09" y2="113.86" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="101.56" y1="114.95" x2="103.85" y2="118.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="94.25" y1="114.93" x2="98.40" y2="122.12" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="90.61" y1="121.27" x2="92.19" y2="124.83" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="84.70" y1="123.54" x2="85.90" y2="127.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="78.58" y1="125.18" x2="79.39" y2="128.99" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="72.32" y1="126.17" x2="72.73" y2="130.05" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="66.00" y1="121.00" x2="66.00" y2="131.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="59.68" y1="126.17" x2="59.27" y2="130.05" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="53.42" y1="125.18" x2="52.61" y2="128.99" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="47.30" y1="123.54" x2="46.10" y2="127.25" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="41.39" y1="121.27" x2="39.81" y2="124.83" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="37.75" y1="114.93" x2="33.60" y2="122.12" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="30.44" y1="114.95" x2="28.15" y2="118.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="25.52" y1="110.96" x2="22.91" y2="113.86" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="21.04" y1="106.48" x2="18.14" y2="109.09" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="17.05" y1="101.56" x2="13.90" y2="103.85" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="17.07" y1="94.25" x2="9.88" y2="98.40" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="10.73" y1="90.61" x2="7.17" y2="92.19" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="8.46" y1="84.70" x2="4.75" y2="85.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="6.82" y1="78.58" x2="3.01" y2="79.39" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="5.83" y1="72.32" x2="1.95" y2="72.73" stroke-width="1.1" stroke-linecap="round"/><line class="grad quart" x1="11.00" y1="66.00" x2="1.00" y2="66.00" stroke-width="2.2" stroke-linecap="round"/><line class="grad minute" x1="5.83" y1="59.68" x2="1.95" y2="59.27" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="6.82" y1="53.42" x2="3.01" y2="52.61" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="8.46" y1="47.30" x2="4.75" y2="46.10" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="10.73" y1="41.39" x2="7.17" y2="39.81" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="17.07" y1="37.75" x2="9.88" y2="33.60" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="17.05" y1="30.44" x2="13.90" y2="28.15" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="21.04" y1="25.52" x2="18.14" y2="22.91" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="25.52" y1="21.04" x2="22.91" y2="18.14" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="30.44" y1="17.05" x2="28.15" y2="13.90" stroke-width="1.1" stroke-linecap="round"/><line class="grad heure" x1="37.75" y1="17.07" x2="33.60" y2="9.88" stroke-width="1.7" stroke-linecap="round"/><line class="grad minute" x1="41.39" y1="10.73" x2="39.81" y2="7.17" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="47.30" y1="8.46" x2="46.10" y2="4.75" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="53.42" y1="6.82" x2="52.61" y2="3.01" stroke-width="1.1" stroke-linecap="round"/><line class="grad minute" x1="59.68" y1="5.83" x2="59.27" y2="1.95" stroke-width="1.1" stroke-linecap="round"/><circle class="echo" cx="66.0" cy="66.0" r="53.00" fill="none" stroke-width="1"/><circle class="piste" cx="66.0" cy="66.0" r="45.00" fill="none" stroke-width="6.0"/><circle class="arc" data-c="282.74" data-p="1.0000" cx="66.0" cy="66.0" r="45.00" fill="none" stroke="url(#tc-gain)" stroke-width="6.0" stroke-linecap="round" stroke-dasharray="282.74" stroke-dashoffset="0.00" transform="rotate(-90 66.0 66.0)"/><g class="eclairs"><line class="eclair" data-h="0" x1="66.00" y1="11.50" x2="66.00" y2="0.60" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="1" x1="93.25" y1="18.80" x2="98.70" y2="9.36" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="2" x1="113.20" y1="38.75" x2="122.64" y2="33.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="3" x1="120.50" y1="66.00" x2="131.40" y2="66.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="4" x1="113.20" y1="93.25" x2="122.64" y2="98.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="5" x1="93.25" y1="113.20" x2="98.70" y2="122.64" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="6" x1="66.00" y1="120.50" x2="66.00" y2="131.40" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="7" x1="38.75" y1="113.20" x2="33.30" y2="122.64" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="8" x1="18.80" y1="93.25" x2="9.36" y2="98.70" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="9" x1="11.50" y1="66.00" x2="0.60" y2="66.00" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="10" x1="18.80" y1="38.75" x2="9.36" y2="33.30" stroke-width="2.6" stroke-linecap="round"/><line class="eclair" data-h="11" x1="38.75" y1="18.80" x2="33.30" y2="9.36" stroke-width="2.6" stroke-linecap="round"/></g></svg><div class="trotteuse" aria-hidden="true"><svg viewBox="0 0 132 132" focusable="false"><line class="aiguille" x1="66.0" y1="79.20" x2="66.0" y2="2" stroke-width="2" stroke-linecap="round"/><circle class="moyeu" cx="66.0" cy="66.0" r="5"/><circle class="moyeu-creux" cx="66.0" cy="66.0" r="2"/></svg></div><div class="centre"><span class="val">100<small>%</small></span></div></div>
+    <img class="icone-finale" style="--i:0" src="images/logo-v3-192.png" width="96" height="96" alt="L’icône de TimeCoach : un chronomètre traversé par une flèche verte qui monte">
     <h2 style="--i:1">Prêt à enfin <span class="gain-txt">tenir</span> tes objectifs ?</h2>
     <p class="sous" style="--i:2">14 jours Premium offerts. Sans engagement. Annulable en un geste.</p>
     <div class="badges" style="--i:3">
@@ -884,7 +896,8 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
   }
 
   // Le geste signature : un seul tour de trotteuse, douze crans de 80 ms (SPEC-ANIMATIONS-v3 § 2), l'arc le suit
-  // jusqu'à 50 % (six crans), le chiffre avance avec lui ; puis les trois étiquettes, l'une après l'autre.
+  // jusqu'à 63 % (six crans), comme le score de la capture posée dessus ; puis les trois étiquettes, l'une après l'autre.
+  // Depuis la 2.0 le chiffre est celui de la capture : le cadran n'en porte plus (score vaut null).
   var heros = document.querySelector('.heros .cadran');
   var arc = heros.querySelector('.arc'), trot = heros.querySelector('.trotteuse'), score = heros.querySelector('[data-score]');
   var circ = +arc.dataset.c, p = +arc.dataset.p, CRAN = 80, DEPART = 200, TOUR = 12 * CRAN;
@@ -916,15 +929,16 @@ h3 { font-size: 24px; line-height: 1.2; letter-spacing: -0.025em; }
     });
   }
   function majScore(t) {
+    if (!score) return;
     var crans = Math.max(0, Math.min(6, Math.floor((t - DEPART + CRAN / 2) / CRAN)));
     score.textContent = Math.round(crans / 6 * p * 100);
   }
   if (anim) {
-    score.textContent = '0';
+    if (score) score.textContent = '0';
     var lancer = function () {
       tour();
       var t0 = performance.now();
-      (function suivre(t) { majScore(t - t0); if (t - t0 < DEPART + TOUR) requestAnimationFrame(suivre); else score.textContent = Math.round(p * 100); })(t0);
+      (function suivre(t) { majScore(t - t0); if (t - t0 < DEPART + TOUR) requestAnimationFrame(suivre); else if (score) score.textContent = Math.round(p * 100); })(t0);
     };
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(lancer, 60); }); else lancer();
   }
